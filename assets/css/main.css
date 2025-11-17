@@ -2147,30 +2147,46 @@ section,
   font-weight: 700;
 }
 
-.fees-table {
-  margin-top: 15px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+/* Desktop table (default) */
+.fees-table-responsive {
+  overflow-x: auto;
 }
 
-.fees-table th {
-  background: var(--accent-color);
-  color: #fff;
-  padding: 14px;
-  text-align: center;
+/* Mobile stacked style */
+@media (max-width: 767px) {
+  .fees-table thead {
+    display: none; /* Hide header on mobile */
+  }
+
+  .fees-table tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px;
+    background: #fff;
+  }
+
+  .fees-table td {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .fees-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Add labels using data-label attribute */
+  .fees-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--accent-color);
+  }
 }
 
-.fees-table td {
-  padding: 14px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  font-size: 15.5px;
-}
-
-.fees-table tr:last-child td {
-  border-bottom: none;
-}
 
 .register-btn {
   background: var(--accent-color);
