@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>APSC 2026 – Abstract Submission</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <div>
+        <h1>APSC 2026 – Abstract Submission</h1>
+        <p>Submit and manage your abstracts for the Asia Pacific Stroke Conference 2026.</p>
+      </div>
+      <button class="secondary-button" id="logoutButton">Logout</button>
+    </header>
+
+    <main class="page-main">
+      <section class="card">
+        <div class="dashboard-header">
+          <div>
+            <h2 class="card-title">Your Abstracts</h2>
+            <p class="card-subtitle">
+              You can create multiple abstracts and edit them until the submission deadline.
+            </p>
+          </div>
+          <div>
+            <button class="primary-button" id="newAbstractButton">New Abstract</button>
+          </div>
+        </div>
+
+        <div id="abstractCountBadge" class="badge">0 abstracts</div>
+
+        <div class="abstract-list" id="abstractList">
+          <!-- Filled by JS -->
+        </div>
+      </section>
+
+      <section class="card" id="abstractFormCard">
+        <h2 class="card-title" id="formTitle">New Abstract</h2>
+        <p class="card-subtitle">
+          Please complete all required fields before submitting your abstract.
+        </p>
+
+        <form id="abstractForm" novalidate>
+          <!-- Section 1 -->
+          <h3 class="card-title">Section 1 – Personal Information of Presenting Author</h3><br>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="title">Title <span class="required">*</span></label>
+              <select id="title" name="title" required>
+                <option value="">Select</option>
+                <option value="Dr">Dr</option>
+                <option value="Prof">Prof</option>
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="error-message" data-error-for="title"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="firstName">First Name <span class="required">*</span></label>
+              <input type="text" id="firstName" name="firstName" required />
+              <div class="error-message" data-error-for="firstName"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name <span class="required">*</span></label>
+              <input type="text" id="lastName" name="lastName" required />
+              <div class="error-message" data-error-for="lastName"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required readonly class="readonly-input" />
+              <div class="error-message" data-error-for="email"></div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="mobileNumber">Mobile Number (with country code) <span class="required">*</span></label>
+              <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="+94..." required />
+              <div class="error-message" data-error-for="mobileNumber"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="affiliation">Affiliation / Institution <span class="required">*</span></label>
+              <input type="text" id="affiliation" name="affiliation" required />
+              <div class="error-message" data-error-for="affiliation"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="department">Department</label>
+              <input type="text" id="department" name="department" />
+              <div class="error-message" data-error-for="department"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" />
+              <div class="error-message" data-error-for="city"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country <span class="required">*</span></label>
+              <input type="text" id="country" name="country" required />
+              <div class="error-message" data-error-for="country"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="designation">Designation / Position <span class="required">*</span></label>
+              <input type="text" id="designation" name="designation" required />
+              <div class="error-message" data-error-for="designation"></div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 2 -->
+          <h3 class="card-title">Section 2 – Presenter Information</h3><br>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="presentingAuthorName">Presenting Author’s Name <span class="required">*</span></label>
+              <input type="text" id="presentingAuthorName" name="presentingAuthorName" required />
+              <div class="error-message" data-error-for="presentingAuthorName"></div>
+            </div>
+            <div class="form-group">
+              <label for="correspondingAuthorName">Corresponding Author’s Name</label>
+              <input type="text" id="correspondingAuthorName" name="correspondingAuthorName" />
+              <div class="error-message" data-error-for="correspondingAuthorName"></div>
+            </div>
+            <div class="form-group">
+              <label for="correspondingAuthorEmail">Corresponding Author’s Email</label>
+              <input type="email" id="correspondingAuthorEmail" name="correspondingAuthorEmail" />
+              <div class="error-message" data-error-for="correspondingAuthorEmail"></div>
+            </div>
+            <div class="form-group">
+              <label>Is the presenting author a trainee or student?</label>
+              <select id="isTraineeOrStudent" name="isTraineeOrStudent">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+              <div class="error-message" data-error-for="isTraineeOrStudent"></div>
+            </div>
+            <div class="form-group">
+              <label>Consider for Young Investigator Award?</label>
+              <select id="considerForYoungInvestigatorAward" name="considerForYoungInvestigatorAward">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+              <div class="error-message" data-error-for="considerForYoungInvestigatorAward"></div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 3 -->
+          <h3 class="card-title">Section 3 – Abstract Details</h3><br>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="abstractTitle">Title of Abstract <span class="required">*</span></label>
+              <input type="text" id="abstractTitle" name="abstractTitle" required />
+              <div class="error-message" data-error-for="abstractTitle"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="preferredPresentationType">Preferred Presentation Type <span class="required">*</span></label>
+              <select id="preferredPresentationType" name="preferredPresentationType" required>
+                <option value="">Select</option>
+                <option value="Oral">Oral Presentation</option>
+                <option value="Poster">Poster Presentation</option>
+                <option value="Either">Either</option>
+              </select>
+              <div class="error-message" data-error-for="preferredPresentationType"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="scientificCategory">Scientific Category <span class="required">*</span></label>
+              <select id="scientificCategory" name="scientificCategory" required>
+                <option value="">Select</option>
+                <option value="Acute Stroke Management">Acute Stroke Management</option>
+                <option value="Stroke Prevention">Stroke Prevention</option>
+                <option value="Neuroimaging and Diagnostics">Neuroimaging and Diagnostics</option>
+                <option value="Rehabilitation and Recovery">Rehabilitation and Recovery</option>
+                <option value="Basic and Translational Research">Basic and Translational Research</option>
+                <option value="Health Systems and Policy">Health Systems and Policy</option>
+                <option value="Other">Other (please specify)</option>
+              </select>
+              <div class="error-message" data-error-for="scientificCategory"></div>
+            </div>
+
+            <div class="form-group full-width" id="otherCategoryGroup" style="display:none;">
+              <label for="otherScientificCategory">If "Other", please specify</label>
+              <input type="text" id="otherScientificCategory" name="otherScientificCategory" />
+              <div class="error-message" data-error-for="otherScientificCategory"></div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 4 -->
+          <h3 class="card-title">Section 4 – Abstract Content</h3><br>
+          <!-- <p class="help-text">
+            The abstract should be structured with the following subheadings: Background, Objectives, Methods, Results,
+            Conclusions. Maximum 300 words. :contentReference[oaicite:2]{index=2}
+          </p> -->
+          <div class="form-group full-width">
+            <label for="abstractText">Abstract Text <span class="required">*</span></label>
+            <textarea id="abstractText" name="abstractText" maxlength="6000"></textarea>
+            <div class="word-count">
+              <span id="abstractWordCount">0</span>/300 words
+            </div>
+            <div class="error-message" data-error-for="abstractText"></div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="keywordsInput">Keywords (up to 5)</label>
+            <textarea id="keywordsInput" name="keywords"
+              placeholder="Enter up to 5 keywords, separated by commas or line breaks"></textarea>
+            <div class="error-message" data-error-for="keywords"></div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 5 -->
+          <h3 class="card-title">Section 5 – Co-authors</h3><br>
+          <div class="form-group full-width">
+            <label for="coAuthors">
+              Co-authors<br />
+              <span class="help-text">
+                Use one entry per line in the format:
+                Full Name – Institution – Country – Email
+              </span>
+            </label>
+            <textarea id="coAuthors" name="coAuthors"></textarea>
+            <div class="error-message" data-error-for="coAuthors"></div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 6 -->
+          <h3 class="card-title">Section 6 – Declarations</h3><br>
+          <div class="consent-item">
+            <div class="consent-text">
+              <p>
+                I confirm that this abstract represents original work and has not been published or presented elsewhere.
+              </p>
+            </div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="isOriginalWork" />
+              <span>I agree</span>
+            </label>
+            <div class="error-message" data-error-for="isOriginalWork"></div>
+          </div>
+
+          <div class="consent-item">
+            <div class="consent-text">
+              <p>All authors have approved the submission and are aware of its content.</p>
+            </div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="allAuthorsApproved" />
+              <span>I agree</span>
+            </label>
+            <div class="error-message" data-error-for="allAuthorsApproved"></div>
+          </div>
+
+          <div class="consent-item">
+            <div class="consent-text">
+              <p>
+                I agree that the submitted abstract may be included in the APSC 2026 proceedings or website if accepted.
+              </p>
+            </div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="agreeToIncludeInProceedings" />
+              <span>I agree</span>
+            </label>
+            <div class="error-message" data-error-for="agreeToIncludeInProceedings"></div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 7 -->
+          <h3 class="card-title">Section 7 – File Upload (Optional)</h3><br>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="fileInput">Upload PDF/DOCX (optional, max 5 MB)</label>
+              <input type="file" id="fileInput" accept=".pdf,.docx" />
+              <small class="help-text" id="currentFileInfo"></small>
+              <div class="error-message" data-error-for="file"></div>
+            </div>
+            <div class="form-group hidden" id="attachmentOptionsGroup">
+              <label>Attachment options</label>
+              <div class="checkbox-label">
+                <input type="checkbox" id="removeFileCheckbox" />
+                <span>Remove existing attachment</span>
+              </div>
+            </div>
+
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Submit -->
+          <div class="form-actions-row">
+            <button type="submit" class="primary-button" id="saveAbstractButton">
+              Save Abstract
+            </button>
+            <button type="button" class="secondary-button" id="cancelEditButton">
+              Cancel
+            </button>
+            <div class="form-status" id="abstractFormStatus"></div>
+          </div>
+
+          <input type="hidden" id="abstractId" />
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="abstracts.js"></script>
+</body>
+
+</html>

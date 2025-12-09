@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registration Successful – APSC 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .success-icon {
+      font-size: 4.5rem;
+      color: #22d3ee;
+      margin-bottom: 1rem;
+      animation: popIn 0.6s ease-out;
+    }
+
+    .success-highlight {
+      font-size: 1.05rem;
+      background: rgba(34, 211, 238, 0.12);
+      border-left: 4px solid #22d3ee;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      line-height: 1.55;
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .fadeIn {
+      animation: fadeInAnim 0.9s ease forwards;
+    }
+
+    @keyframes fadeInAnim {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell fadeIn">
+    <header class="page-header">
+      <div>
+        <h1>Registration Successful</h1>
+        <p>Your payment has been completed</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="card fadeIn">
+        <div class="success-icon">✔</div>
+
+        <h2 class="card-title">Thank You for Registering!</h2>
+        <p class="card-subtitle">Your journey to APSC 2026 officially begins.</p>
+
+        <div class="success-highlight">
+          Your registration for <strong>APSC 2026</strong> has been successfully completed.
+          Your personal <strong>QR code</strong> is now ready for download.  
+          Please present it at the entrance for verification and entry.
+        </div>
+
+        <p>
+          For event updates and program details, visit  
+          <strong>apsc2026.lk</strong>.
+        </p>
+        <p>
+          Need help? Contact us at  
+          <strong>apsc2026.secretariat@gmail.com</strong>.
+        </p>
+
+        <div class="btn-row">
+          <a id="downloadPdfBtn" href="#" class="primary-button">Download QR PDF</a>
+          <a href="index.html" class="secondary-button">Back to Home</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

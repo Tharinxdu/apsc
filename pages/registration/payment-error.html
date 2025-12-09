@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Failed – APSC 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .error-icon {
+      font-size: 4.5rem;
+      color: #f97373;
+      margin-bottom: 1rem;
+      animation: shake 0.4s ease-out;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(-4px); }
+      25% { transform: translateX(4px); }
+      50% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .error-box {
+      border-left: 4px solid #f97373;
+      background: rgba(249, 115, 115, 0.12);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin: 1rem 0;
+    }
+
+    .fadeIn {
+      animation: fadeInAnim 0.9s ease forwards;
+    }
+
+    @keyframes fadeInAnim {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell fadeIn">
+    <header class="page-header">
+      <div>
+        <h1>Payment Error</h1>
+        <p>Your transaction was not completed</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="card fadeIn">
+        <div class="error-icon">⚠</div>
+
+        <h2 class="card-title">Oops! Something went wrong</h2>
+        <p class="card-subtitle">Your payment could not be processed.</p>
+
+        <div class="error-box">
+          The payment was <strong>cancelled, declined, or interrupted</strong>
+          before completion. Your registration has not been saved.
+        </div>
+
+        <p>
+          You may retry the registration now.  
+          If the issue continues, contact the Secretariat at  
+          <strong>apsc2026.secretariat@gmail.com</strong>.
+        </p>
+
+        <div class="btn-row">
+          <a href="index.html" class="primary-button">Retry Registration</a>
+          <a href="index.html" class="secondary-button">Back to Home</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

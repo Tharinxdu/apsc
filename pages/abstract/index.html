@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>APSC 2026 – Abstract Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <div>
+        <h1>APSC 2026 – Abstract Submission Portal</h1>
+        <p>Login or create an account to submit and manage your abstracts.</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="card auth-wrapper">
+        <div class="auth-tabs">
+          <button class="tab-button active" data-tab="loginTab">Login</button>
+          <button class="tab-button" data-tab="registerTab">Create Account</button>
+        </div>
+
+        <div id="loginTab" class="auth-tab">
+          <h2 class="card-title">Login</h2>
+          <p class="card-subtitle">Enter your email and password.</p>
+
+          <form id="loginForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="loginEmail">Email <span class="required">*</span></label>
+                <input type="email" id="loginEmail" name="email" required />
+                <div class="error-message" data-error-for="loginEmail"></div>
+              </div>
+              <div class="form-group full-width">
+                <label for="loginPassword">Password <span class="required">*</span></label>
+                <input type="password" id="loginPassword" name="password" required />
+                <div class="error-message" data-error-for="loginPassword"></div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Login</button>
+              <button type="button" class="link-button" id="forgotPasswordButton">
+                Forgot password?
+              </button>
+              <div class="form-status" id="loginStatus"></div>
+            </div>
+          </form>
+        </div>
+
+        <div id="registerTab" class="auth-tab hidden">
+          <h2 class="card-title">Create Account</h2>
+          <p class="card-subtitle">
+            Use a valid email address. You will use this account for all abstract submissions.
+          </p>
+
+          <form id="registerForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="registerEmail">Email <span class="required">*</span></label>
+                <input type="email" id="registerEmail" name="email" required />
+                <div class="error-message" data-error-for="registerEmail"></div>
+              </div>
+              <div class="form-group full-width">
+                <label for="registerPassword">Password <span class="required">*</span></label>
+                <input type="password" id="registerPassword" name="password" required />
+                <small class="help-text">Minimum 8 characters.</small>
+                <div class="error-message" data-error-for="registerPassword"></div>
+              </div>
+              <div class="form-group full-width">
+                <label for="registerConfirmPassword">Confirm Password <span class="required">*</span></label>
+                <input type="password" id="registerConfirmPassword" name="confirmPassword" required />
+                <div class="error-message" data-error-for="registerConfirmPassword"></div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Create Account</button>
+              <div class="form-status" id="registerStatus"></div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay hidden" id="forgotPasswordModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Reset Password</h3>
+        <button class="icon-button" id="closeForgotModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="help-text">
+          Enter your email and we will send you a link to reset your password.
+        </p>
+        <form id="forgotPasswordForm">
+          <div class="form-group full-width">
+            <label for="forgotEmail">Email</label>
+            <input type="email" id="forgotEmail" required />
+            <div class="error-message" data-error-for="forgotEmail"></div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Send reset link</button>
+            <div class="form-status" id="forgotStatus"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
