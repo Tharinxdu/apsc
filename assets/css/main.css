@@ -12,56 +12,85 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway", sans-serif;
-  --nav-font: "Raleway", sans-serif;
+  --default-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Plus Jakarta Sans", "Manrope", "Inter", "Raleway", sans-serif;
+  --nav-font: "Plus Jakarta Sans", "Inter", "Raleway", sans-serif;
 }
 
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+/* Global Colors */
 :root {
-  --background-color: #ffffff;
-  /* Background color for the entire website, including individual sections */
-  --default-color: #2f3138;
-  /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #0e1b4d;
-  /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #064e91;
-  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff;
-  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  /* Modern background system (more depth, less “plain white”) */
+  --background-color: #f3f6ff;          /* cooler, slightly deeper than before */
+  --alt-background-color: #eaf0ff;      /* alt canvas (soft blue tint) */
+  --surface-color: #ffffff;             /* cards */
+  --surface-soft: #f8fbff;              /* soft surfaces / inner panels */
+
+  /* Text */
+  --default-color: #1f2937;
+  --heading-color: #0b1b3a;
+  --muted-color: #5a677c;
+
+  /* Brand */
+  --accent-color: #1e63d6; /* modern premium blue */
+  --accent-strong: #0f4fc6;
   --contrast-color: #ffffff;
-  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+
+  /* Borders / elevation */
+  --border-color: rgba(12, 24, 51, 0.12);
+  --border-color-strong: rgba(12, 24, 51, 0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-xs: 0 1px 0 rgba(12, 24, 51, 0.04);
+  --shadow-sm: 0 8px 24px rgba(12, 24, 51, 0.08);
+  --shadow-md: 0 14px 40px rgba(12, 24, 51, 0.12);
+
+  --focus-ring: 0 0 0 4px rgba(30, 99, 214, 0.22);
+
+  --transition-fast: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition: 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Subtle pattern color (used for modern “canvas” effect) */
+  --dot-color: rgba(11, 27, 58, 0.05);
+  --glow-1: rgba(30, 99, 214, 0.12);
+  --glow-2: rgba(11, 27, 58, 0.08);
+  --glow-3: rgba(99, 102, 241, 0.08); /* gentle indigo tint */
 }
 
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+/* Nav Menu Colors */
 :root {
-  --nav-color: rgba(255, 255, 255, 0.65);
-  /* The default color of the main navmenu links */
+  --nav-color: rgba(255, 255, 255, 0.72);
   --nav-hover-color: #ffffff;
-  /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff;
-  /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff;
-  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #212529;
-  /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #f82249;
-  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-mobile-background-color: var(--surface-color);
+  --nav-dropdown-background-color: var(--surface-color);
+  --nav-dropdown-color: #0f172a;
+  --nav-dropdown-hover-color: var(--accent-color);
 }
 
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
-
+/* Color Presets */
 .light-background {
-  --background-color: #f2f2f3;
+  --background-color: #eef3ff;
+  --alt-background-color: #e7efff;
   --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: #000820;
-  --default-color: #ffffff;
+  --background-color: #050b1d;
+  --default-color: rgba(255, 255, 255, 0.92);
   --heading-color: #ffffff;
-  --surface-color: #001553;
+  --surface-color: rgba(255, 255, 255, 0.06);
   --contrast-color: #ffffff;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-color-strong: rgba(255, 255, 255, 0.18);
+
+  --dot-color: rgba(255, 255, 255, 0.06);
+  --glow-1: rgba(30, 99, 214, 0.20);
+  --glow-2: rgba(255, 255, 255, 0.10);
+  --glow-3: rgba(99, 102, 241, 0.16);
 }
 
 /* Smooth scroll */
@@ -70,23 +99,50 @@
 }
 
 /*--------------------------------------------------------------
-# General Styling & Shared Classes
+# Base / A11y / Motion
 --------------------------------------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-color), white 70%);
+  color: var(--heading-color);
+}
+
 body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  /* Modern “marvelous” background canvas (depth + texture) */
+  background-image:
+    radial-gradient(1200px 640px at 18% -10%, var(--glow-1), transparent 62%),
+    radial-gradient(900px 560px at 86% 8%, var(--glow-2), transparent 58%),
+    radial-gradient(800px 520px at 50% 110%, rgba(30, 99, 214, 0.06), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0)),
+    radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: auto, auto, auto, auto, 26px 26px;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: 0.3s;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
 }
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);
-  text-decoration: none;
+  color: color-mix(in srgb, var(--accent-color), black 12%);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent-color), transparent 35%);
 }
 
 h1,
@@ -97,10 +153,39 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
+  letter-spacing: -0.02em;
 }
 
-/* Pulsating Play Button
-------------------------------*/
+p {
+  color: color-mix(in srgb, var(--default-color), transparent 8%);
+}
+
+/* Visible focus for keyboard users */
+:where(a, button, input, textarea, select, .btn, [role="button"], [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 10px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Pulsating Play Button
+--------------------------------------------------------------*/
 .pulsating-play-btn {
   width: 94px;
   height: 94px;
@@ -171,15 +256,15 @@ h6 {
     transform: scale(0.6, 0.6);
     opacity: 1;
   }
-
   100% {
     transform: scale(1, 1);
     opacity: 0;
   }
 }
 
-/* PHP Email Form Messages
-------------------------------*/
+/*--------------------------------------------------------------
+# PHP Email Form Messages
+--------------------------------------------------------------*/
 .php-email-form .error-message {
   display: none;
   background: #df1529;
@@ -188,6 +273,7 @@ h6 {
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
+  border-radius: var(--radius-md);
 }
 
 .php-email-form .sent-message {
@@ -198,6 +284,7 @@ h6 {
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
+  border-radius: var(--radius-md);
 }
 
 .php-email-form .loading {
@@ -206,6 +293,9 @@ h6 {
   text-align: center;
   padding: 15px;
   margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
 }
 
 .php-email-form .loading:before {
@@ -224,7 +314,6 @@ h6 {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
@@ -234,13 +323,18 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgba(0, 0, 0, 0);
+  --background-color: rgba(1, 8, 33, 0.18);
   --heading-color: #ffffff;
+
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 20px 0;
-  transition: all 0.5s;
+  padding: 18px 0;
+  transition: all var(--transition);
   z-index: 997;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 /* Logo Area */
@@ -248,54 +342,61 @@ h6 {
   line-height: 1;
   display: flex;
   align-items: center;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0.95) 70%,
-      rgba(255, 255, 255, 0.6) 100%);
-  border-radius: 8px;
-  padding: 8px 14px;
+
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.96) 70%,
+    rgba(255, 255, 255, 0.72) 100%
+  );
+  border-radius: 12px;
+  padding: 10px 14px;
   backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
 }
 
 .header .logo img {
-  max-height: 60px;
+  max-height: 56px;
   margin-right: 10px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
 }
 
 .header .logo img:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .header .logo h1 {
   font-size: 30px;
   margin: 0;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--heading-color);
+  letter-spacing: -0.03em;
 }
 
 /* CTA Button */
 .header .cta-btn,
 .header .cta-btn:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   font-size: 14px;
-  padding: 8px 25px;
+  padding: 10px 26px;
   margin: 0 0 0 30px;
-  border-radius: 50px;
-  transition: 0.3s;
+  border-radius: 999px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: 0 10px 26px rgba(30, 99, 214, 0.28);
 }
 
 .header .cta-btn:hover,
 .header .cta-btn:focus:hover {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(30, 99, 214, 0.34);
 }
 
 /* Responsive Ordering */
 @media (max-width: 1200px) {
   .header .logo {
     order: 1;
-    padding: 6px 10px;
+    padding: 8px 10px;
   }
 
   .header .btn-getstarted {
@@ -309,20 +410,16 @@ h6 {
   }
 
   .header .logo img {
-    max-height: 45px;
+    max-height: 44px;
   }
 }
 
-/* Header Shadow on Scroll */
+/* Header Shadow + Background on Scroll */
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  --background-color: rgba(1, 8, 33, 0.86);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
-
-/* Global Header Background on Scroll */
-.scrolled .header {
-  --background-color: rgba(1, 8, 33, 0.82);
-}
-
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -345,12 +442,12 @@ h6 {
     position: relative;
   }
 
-  .navmenu>ul>li {
+  .navmenu > ul > li {
     white-space: nowrap;
-    padding: 15px 14px;
+    padding: 14px 14px;
   }
 
-  .navmenu>ul>li:last-child {
+  .navmenu > ul > li:last-child {
     padding-right: 0;
   }
 
@@ -358,45 +455,47 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-color);
     font-size: 15px;
-    padding: 0 2px;
+    padding: 2px 2px;
     font-family: var(--nav-font);
-    font-weight: 600;
+    font-weight: 650;
     display: flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: 0.3s;
+    transition: color var(--transition-fast);
     position: relative;
+    letter-spacing: -0.01em;
   }
 
   .navmenu a i,
   .navmenu a:focus i {
     font-size: 12px;
     line-height: 0;
-    margin-left: 5px;
-    transition: 0.3s;
+    margin-left: 6px;
+    transition: transform var(--transition-fast);
   }
 
-  .navmenu>ul>li>a:before {
+  .navmenu > ul > li > a:before {
     content: "";
     position: absolute;
     height: 2px;
-    bottom: -6px;
+    bottom: -8px;
     left: 0;
-    background-color: var(--accent-color);
+    background-color: color-mix(in srgb, var(--accent-color), white 10%);
     visibility: hidden;
     width: 0px;
-    transition: all 0.3s ease-in-out 0s;
+    transition: width var(--transition-fast), visibility var(--transition-fast);
+    border-radius: 99px;
   }
 
   .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
+  .navmenu li:hover > a:before,
   .navmenu .active:before {
     visibility: visible;
     width: 100%;
   }
 
-  .navmenu li:hover>a,
+  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
@@ -412,34 +511,34 @@ h6 {
     left: 14px;
     top: 130%;
     opacity: 0;
-    transition: 0.3s;
-    border-radius: 4px;
+    transition: opacity var(--transition-fast), top var(--transition-fast);
+    border-radius: 12px;
     z-index: 99;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
   }
 
   .navmenu .dropdown ul li {
-    min-width: 200px;
+    min-width: 220px;
   }
 
   .navmenu .dropdown ul a {
-    padding: 10px 20px;
+    padding: 10px 18px;
     font-size: 15px;
     text-transform: none;
     color: var(--nav-dropdown-color);
-  }
-
-  .navmenu .dropdown ul a i {
-    font-size: 12px;
+    font-weight: 600;
   }
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
+  .navmenu .dropdown ul li:hover > a {
     color: var(--nav-dropdown-hover-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 94%);
   }
 
-  .navmenu .dropdown:hover>ul {
+  .navmenu .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -451,7 +550,7 @@ h6 {
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover>ul {
+  .navmenu .dropdown .dropdown:hover > ul {
     opacity: 1;
     top: 0;
     left: -100%;
@@ -467,7 +566,7 @@ h6 {
     line-height: 0;
     margin-right: 10px;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color var(--transition-fast);
   }
 
   .navmenu {
@@ -479,30 +578,39 @@ h6 {
     display: none;
     list-style: none;
     position: absolute;
-    inset: 60px 20px 20px 20px;
+    inset: 60px 16px 16px 16px;
     padding: 10px 0;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 14px;
     background-color: var(--nav-dropdown-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
     overflow-y: auto;
-    transition: 0.3s;
+    transition: var(--transition);
     z-index: 9998;
   }
 
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
-    padding: 10px 20px;
+    padding: 12px 18px;
     font-family: var(--nav-font);
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 650;
     display: flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: 0.3s;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    border-radius: 10px;
+    margin: 4px 10px;
+  }
+
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-dropdown-hover-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 93%);
   }
 
   .navmenu a i,
@@ -515,8 +623,8 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    transition: 0.3s;
+    border-radius: 999px;
+    transition: var(--transition-fast);
     background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
   }
 
@@ -524,12 +632,6 @@ h6 {
   .navmenu a:focus i:hover {
     background-color: var(--accent-color);
     color: var(--contrast-color);
-  }
-
-  .navmenu a:hover,
-  .navmenu .active,
-  .navmenu .active:focus {
-    color: var(--nav-dropdown-hover-color);
   }
 
   .navmenu .active i,
@@ -543,17 +645,19 @@ h6 {
     position: static;
     display: none;
     z-index: 99;
-    padding: 10px 0;
-    margin: 10px 20px;
-    background-color: var(--nav-dropdown-background-color);
-    transition: all 0.5s ease-in-out;
+    padding: 8px 0;
+    margin: 10px 18px 10px 18px;
+    background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 45%);
+    transition: all var(--transition);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
   }
 
   .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1);
+    background-color: rgba(33, 37, 41, 0.06);
   }
 
-  .navmenu .dropdown>.dropdown-active {
+  .navmenu .dropdown > .dropdown-active {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
   }
@@ -576,11 +680,11 @@ h6 {
     position: fixed;
     overflow: hidden;
     inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
+    background: rgba(2, 6, 23, 0.72);
+    transition: var(--transition);
   }
 
-  .mobile-nav-active .navmenu>ul {
+  .mobile-nav-active .navmenu > ul {
     display: block;
   }
 }
@@ -596,8 +700,14 @@ h6 {
 }
 
 .footer .footer-top {
-  background-color: color-mix(in srgb, var(--background-color), white 5%);
-  padding-top: 50px;
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(30, 99, 214, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(11, 27, 58, 0.08), transparent 60%),
+    radial-gradient(var(--dot-color) 1px, transparent 1px),
+    color-mix(in srgb, var(--background-color), white 3%);
+  background-size: auto, auto, 26px 26px, auto;
+  padding-top: 56px;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer .footer-about .logo {
@@ -613,19 +723,20 @@ h6 {
 .footer .footer-about .logo span {
   color: var(--heading-color);
   font-family: var(--heading-font);
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .footer .footer-about p {
   font-size: 14px;
-  font-family: var(--heading-font);
+  font-family: var(--default-font);
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
 }
 
 .footer h4 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 750;
   position: relative;
   padding-bottom: 12px;
   margin-bottom: 15px;
@@ -635,11 +746,12 @@ h6 {
   content: "";
   position: absolute;
   display: block;
-  width: 20px;
+  width: 24px;
   height: 2px;
   background: var(--accent-color);
   bottom: 0;
   left: 0;
+  border-radius: 99px;
 }
 
 .footer .footer-links {
@@ -653,9 +765,10 @@ h6 {
 }
 
 .footer .footer-links ul i {
-  padding-right: 2px;
+  padding-right: 6px;
   font-size: 12px;
   line-height: 0;
+  color: color-mix(in srgb, var(--accent-color), black 15%);
 }
 
 .footer .footer-links ul li {
@@ -669,9 +782,9 @@ h6 {
 }
 
 .footer .footer-links ul a {
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 28%);
   display: inline-block;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .footer .footer-links ul a:hover {
@@ -679,11 +792,13 @@ h6 {
 }
 
 .footer .footer-contact p {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
 }
 
 .footer .copyright {
-  padding: 30px 0;
+  padding: 28px 0;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer .copyright p {
@@ -693,25 +808,35 @@ h6 {
 .footer .credits {
   margin-top: 5px;
   font-size: 13px;
+  color: color-mix(in srgb, var(--default-color), transparent 28%);
 }
 
 .footer .social-links a {
   font-size: 18px;
-  display: inline-block;
-  background: color-mix(in srgb, var(--default-color), transparent 90%);
-  color: var(--contrast-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 35%);
+  color: color-mix(in srgb, var(--heading-color), transparent 10%);
   line-height: 1;
-  padding: 8px 0;
-  margin-right: 4px;
-  border-radius: 4px;
+
+  margin-right: 6px;
+  border-radius: 12px;
   text-align: center;
-  width: 36px;
-  height: 36px;
-  transition: 0.3s;
+  width: 40px;
+  height: 40px;
+
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
 }
 
 .footer .social-links a:hover {
   background: var(--accent-color);
+  color: var(--contrast-color);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(30, 99, 214, 0.22);
   text-decoration: none;
 }
 
@@ -744,7 +869,6 @@ h6 {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
@@ -760,11 +884,13 @@ h6 {
   right: 15px;
   bottom: -15px;
   z-index: 99999;
-  background-color: var(--accent-color);
-  width: 44px;
-  height: 44px;
-  border-radius: 50px;
-  transition: all 0.4s;
+
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  transition: all var(--transition);
+  box-shadow: 0 18px 40px rgba(30, 99, 214, 0.22);
 }
 
 .scroll-top i {
@@ -774,7 +900,8 @@ h6 {
 }
 
 .scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 52px rgba(30, 99, 214, 0.28);
   color: var(--contrast-color);
 }
 
@@ -800,11 +927,13 @@ h6 {
   --background-color: #000000;
   --heading-color: var(--contrast-color);
   --default-color: var(--contrast-color);
+
   color: var(--default-color);
   background-color: var(--background-color);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   padding: 160px 0 80px 0;
   text-align: center;
   position: relative;
@@ -812,15 +941,16 @@ h6 {
 
 .page-title:before {
   content: "";
-  background-color: color-mix(in srgb, var(--background-color), transparent 50%);
+  background-color: color-mix(in srgb, var(--background-color), transparent 45%);
   position: absolute;
   inset: 0;
 }
 
 .page-title h1 {
-  font-size: 42px;
-  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
   margin-bottom: 10px;
+  letter-spacing: -0.03em;
 }
 
 .page-title .breadcrumbs ol {
@@ -831,14 +961,14 @@ h6 {
   padding: 0;
   margin: 0;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-.page-title .breadcrumbs ol li+li {
+.page-title .breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
-.page-title .breadcrumbs ol li+li::before {
+.page-title .breadcrumbs ol li + li::before {
   content: "/";
   display: inline-block;
   padding-right: 10px;
@@ -846,23 +976,62 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Global Sections
+# Global Sections (UPDATED: Modern background canvas per-section)
 --------------------------------------------------------------*/
 section,
 .section {
   color: var(--default-color);
+
+  /* Modern layered background (not plain white) */
   background-color: var(--background-color);
-  padding: 60px 0;
+  background-image:
+    radial-gradient(1000px 600px at 18% -10%, var(--glow-1), transparent 62%),
+    radial-gradient(900px 560px at 86% 12%, var(--glow-2), transparent 58%),
+    radial-gradient(780px 520px at 50% 112%, rgba(30, 99, 214, 0.06), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0)),
+    radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: auto, auto, auto, auto, 26px 26px;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+
+  padding: clamp(56px, 6vw, 84px) 0;
   scroll-margin-top: 92px;
   overflow: clip;
+
+  /* subtle separators (UX polish) */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 @media (max-width: 1199px) {
-
   section,
   .section {
     scroll-margin-top: 76px;
   }
+}
+
+/* Alternate sections get a slightly different tint, automatically */
+section:nth-of-type(even) {
+  background-image:
+    radial-gradient(1000px 600px at 85% -10%, var(--glow-1), transparent 62%),
+    radial-gradient(900px 560px at 12% 18%, var(--glow-2), transparent 58%),
+    radial-gradient(760px 520px at 50% 112%, var(--glow-3), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0)),
+    radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: auto, auto, auto, auto, 26px 26px;
+  background-position: 0 0, 0 0, 0 0, 0 0, 13px 13px;
+}
+
+/* Dark sections get a matching modern background */
+section.dark-background,
+.section.dark-background {
+  background-color: var(--background-color);
+  background-image:
+    radial-gradient(1100px 650px at 20% -10%, var(--glow-1), transparent 62%),
+    radial-gradient(900px 600px at 90% 10%, var(--glow-3), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
+    radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: auto, auto, auto, 26px 26px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /*--------------------------------------------------------------
@@ -870,33 +1039,39 @@ section,
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 52px;
   position: relative;
 }
 
 .section-title h2 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  font-weight: 850;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
   position: relative;
+  letter-spacing: -0.03em;
 }
 
 .section-title h2:after {
   content: "";
   position: absolute;
   display: block;
-  width: 50px;
+  width: 56px;
   height: 3px;
   background: var(--accent-color);
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
+  border-radius: 99px;
 }
 
 .section-title p {
   margin-bottom: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*--------------------------------------------------------------
@@ -906,7 +1081,7 @@ section,
   width: 100%;
   min-height: 100vh;
   position: relative;
-  padding: 100px 0 0 0;
+  padding: 110px 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -921,14 +1096,18 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  filter: saturate(1.05) contrast(1.05);
 }
 
+/* Better contrast overlay: layered gradient */
 .hero:before {
   content: "";
-  background: color-mix(in srgb, #0008204f, #00000000 30%);
   position: absolute;
   inset: 0;
   z-index: 2;
+  background:
+    radial-gradient(900px 520px at 30% 10%, rgba(30, 99, 214, 0.22), transparent 60%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.72) 0%, rgba(2, 6, 23, 0.55) 45%, rgba(2, 6, 23, 0.82) 100%);
 }
 
 .hero .container {
@@ -938,29 +1117,51 @@ section,
 
 .hero h2 {
   margin: 0;
-  font-size: 80px;
-  font-weight: 700;
+  font-size: clamp(2.25rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  text-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
 }
 
+/* .hero h2 span {
+  color: color-mix(in srgb, var(--accent-color), white 14%);
+} */
+
+/* Make ONLY the "2026" inside the hero title use a modern display font.
+   Assumes your markup is: ... <span>2026</span> ... */
 .hero h2 span {
-  color: var(--accent-color);
+  font-family: "Space Grotesk", "Sora", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 1.08em;
+  line-height: 1;
 }
+
+/* Optional: if you want it to feel more “premium” */
+.hero h2 span {
+  text-transform: none;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "ss01" 1, "ss02" 1;
+  color: color-mix(in srgb, var(--accent-color), white 14%);
+}
+
 
 .hero p {
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin: 10px 0 0 0;
-  font-size: 24px;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 12px 0 0 0;
+  font-size: clamp(1rem, 2.1vw, 1.5rem);
+  line-height: 1.45;
+  max-width: 55ch;
 }
 
 @media (max-width: 768px) {
-  .hero h2 {
-    font-size: 32px;
-    line-height: 36px;
+  .hero {
+    padding-top: 92px;
   }
 
   .hero p {
-    font-size: 18px;
-    line-height: 24px;
+    max-width: 40ch;
   }
 }
 
@@ -984,14 +1185,14 @@ section,
 
 .hero .about-info h2 {
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 800;
   margin-bottom: 10px;
   color: #fff;
 }
 
 .hero .about-info h3 {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 800;
   text-transform: uppercase;
   margin-bottom: 10px;
   color: #fff;
@@ -1009,58 +1210,72 @@ section,
 .hero-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .btn-hero {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 12px 32px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: var(--heading-font);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 750;
+  font-family: var(--nav-font);
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
   text-decoration: none;
+  will-change: transform;
 }
 
-/* Primary button - Register Now */
 .btn-register {
-  background-color: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   color: var(--contrast-color);
-  border: 2px solid var(--accent-color);
+  border: 1px solid color-mix(in srgb, var(--accent-color), black 8%);
+  box-shadow: 0 14px 34px rgba(30, 99, 214, 0.30);
 }
 
 .btn-register:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 44px rgba(30, 99, 214, 0.36);
   color: var(--contrast-color);
 }
 
-/* Secondary button - Submit Abstract */
 .btn-abstract {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.08);
   color: var(--contrast-color);
-  border: 2px solid var(--contrast-color);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-abstract:hover {
-  background-color: var(--contrast-color);
-  color: var(--accent-color);
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.42);
+  color: var(--contrast-color);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .btn-hero {
-    padding: 10px 24px;
+    padding: 11px 22px;
     font-size: 14px;
   }
 
   .hero-buttons {
     flex-direction: column;
     gap: 12px;
+    width: min(360px, 92vw);
+  }
+
+  .hero-buttons .btn-hero {
+    width: 100%;
   }
 }
-
 
 /*--------------------------------------------------------------
 # Speakers Section
@@ -1073,19 +1288,21 @@ section,
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-md);
 }
 
 .speakers .member .member-info {
   position: absolute;
   padding: 15px 0;
   inset: auto 0 -44px 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.62);
   transition: 0.4s;
+  backdrop-filter: blur(6px);
 }
 
 .speakers .member .member-info-content h4 {
   color: var(--contrast-color);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 4px;
   font-size: 16px;
 }
@@ -1095,7 +1312,7 @@ section,
 }
 
 .speakers .member .member-info-content h4 a:hover {
-  color: var(--accent-color);
+  color: color-mix(in srgb, var(--accent-color), white 12%);
 }
 
 .speakers .member .member-info-content span {
@@ -1110,8 +1327,8 @@ section,
 }
 
 .speakers .member .social a {
-  transition: color 0.3s;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  transition: color var(--transition-fast);
+  color: color-mix(in srgb, var(--default-color), transparent 24%);
   margin: 0 4px;
   display: inline-block;
 }
@@ -1133,7 +1350,7 @@ section,
 # Schedule Section
 --------------------------------------------------------------*/
 .schedule {
-  --background-color: color-mix(in srgb, var(--alt-background-color), transparent 95%);
+  --background-color: color-mix(in srgb, var(--alt-background-color), transparent 0%);
 }
 
 .schedule .nav-tabs {
@@ -1150,12 +1367,19 @@ section,
 }
 
 .schedule .nav-tabs a {
-  border: none;
-  border-radius: 50px;
-  font-weight: 600;
-  background-color: var(--heading-color);
+  border: 1px solid color-mix(in srgb, var(--heading-color), transparent 82%);
+  border-radius: 999px;
+  font-weight: 750;
+  background-color: color-mix(in srgb, var(--heading-color), transparent 0%);
   color: var(--contrast-color);
   padding: 10px 100px;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+}
+
+.schedule .nav-tabs a:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (max-width: 991px) {
@@ -1178,7 +1402,9 @@ section,
 
 .schedule .nav-tabs a.active {
   background-color: var(--accent-color);
+  border-color: color-mix(in srgb, var(--accent-color), black 10%);
   color: var(--contrast-color);
+  box-shadow: 0 14px 34px rgba(30, 99, 214, 0.26);
 }
 
 .schedule .sub-heading {
@@ -1186,6 +1412,7 @@ section,
   font-size: 18px;
   font-style: italic;
   margin: 0 auto 30px auto;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
 }
 
 @media (min-width: 991px) {
@@ -1202,12 +1429,19 @@ section,
   border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
   padding-top: 15px;
   padding-bottom: 15px;
-  transition: background-color ease-in-out 0.3s;
+  transition: background-color var(--transition-fast);
+  border-radius: 12px;
+}
+
+.schedule .schedule-item:hover {
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 35%);
 }
 
 .schedule .schedule-item time {
   padding-bottom: 5px;
   display: inline-block;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
+  font-weight: 600;
 }
 
 .schedule .schedule-item .speaker {
@@ -1217,6 +1451,7 @@ section,
   border-radius: 50%;
   float: left;
   margin: 0 10px 10px 0;
+  border: 2px solid color-mix(in srgb, var(--accent-color), transparent 55%);
 }
 
 .schedule .schedule-item .speaker img {
@@ -1228,20 +1463,20 @@ section,
 
 .schedule .schedule-item h4 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 750;
   margin-bottom: 5px;
 }
 
 .schedule .schedule-item h4 span {
   font-style: italic;
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
-  font-weight: normal;
+  color: color-mix(in srgb, var(--default-color), transparent 45%);
+  font-weight: 500;
   font-size: 16px;
 }
 
 .schedule .schedule-item p {
   font-style: italic;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 28%);
   margin-bottom: 0;
 }
 
@@ -1250,41 +1485,42 @@ section,
 --------------------------------------------------------------*/
 .messages .message-card {
   background-color: var(--surface-color);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
-  padding: 30px 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  padding: 30px 22px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
 }
 
 .messages .message-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
 }
 
 .message-img {
   width: 150px;
   height: 150px;
   object-fit: cover;
-  border: 4px solid var(--accent-color);
+  border: 4px solid color-mix(in srgb, var(--accent-color), white 8%);
 }
 
 .message-card h4 {
-  font-weight: 700;
+  font-weight: 850;
   color: var(--heading-color);
 }
 
 .message-card .position {
-  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  color: color-mix(in srgb, var(--default-color), transparent 38%);
   font-style: italic;
   font-size: 14px;
 }
 
 .message-card .message-text {
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
   font-size: 15px;
   margin-bottom: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   height: 90px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1292,35 +1528,41 @@ section,
 
 .btn-read-more {
   color: var(--accent-color);
-  font-weight: 600;
+  font-weight: 750;
   text-decoration: none;
-  border: 2px solid var(--accent-color);
-  padding: 8px 20px;
-  border-radius: 50px;
-  transition: all 0.3s ease;
+  border: 1px solid color-mix(in srgb, var(--accent-color), black 8%);
+  padding: 9px 18px;
+  border-radius: 999px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+  background: transparent;
 }
 
 .btn-read-more:hover {
   background: var(--accent-color);
   color: var(--contrast-color);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(30, 99, 214, 0.22);
 }
 
 /* Modal customization */
 .modal-content {
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-lg);
+  background: var(--surface-color);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .modal-title {
-  font-size: 22px;
+  font-size: 20px;
   color: var(--heading-color);
+  letter-spacing: -0.02em;
 }
 
 .modal-body {
   font-size: 15.5px;
-  line-height: 1.8;
-  color: #333;
+  line-height: 1.9;
+  color: color-mix(in srgb, var(--default-color), transparent 8%);
   text-align: justify;
 }
 
@@ -1329,42 +1571,41 @@ section,
 }
 
 .modal-body em {
-  color: #555;
+  color: color-mix(in srgb, var(--default-color), transparent 22%);
   font-style: italic;
 }
 
 #presidentModal strong,
-#presidentModal .modal-body strong {
-  color: #000 !important;
-  font-weight: 700;
-}
-
+#presidentModal .modal-body strong,
 #vpModal strong,
 #vpModal .modal-body strong {
   color: #000 !important;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /*--------------------------------------------------------------
 # Key Information / Quick Facts Section
 --------------------------------------------------------------*/
 .key-info {
-  background: #f8fbff;
+  /* Let the global section canvas show through (no plain white block) */
+  background: transparent;
   padding: 60px 0;
 }
 
 .key-info .info-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 30px 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
+  border-radius: var(--radius-lg);
+  padding: 30px 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
   height: 100%;
 }
 
 .key-info .info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
 }
 
 .key-info .icon {
@@ -1373,31 +1614,31 @@ section,
 }
 
 .key-info h4 {
-  font-weight: 700;
+  font-weight: 850;
   font-size: 18px;
   color: var(--heading-color);
   margin-bottom: 10px;
 }
 
 .key-info p {
-  color: #555;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
   font-size: 15px;
   min-height: 60px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .key-info .read-more {
   display: inline-block;
   color: var(--accent-color);
-  font-weight: 600;
+  font-weight: 750;
   text-decoration: none;
   margin-top: 10px;
-  transition: all 0.3s ease;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .key-info .read-more i {
   margin-left: 4px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
 }
 
 .key-info .read-more:hover {
@@ -1418,21 +1659,23 @@ section,
 # Highlights Section
 --------------------------------------------------------------*/
 .highlights {
-  background: #f8fbff;
+  background: transparent;
   padding: 60px 0;
 }
 
 .highlight-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
   height: 100%;
 }
 
 .highlight-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
 }
 
 .highlight-card .icon {
@@ -1441,16 +1684,16 @@ section,
 }
 
 .highlight-card h4 {
-  font-weight: 700;
+  font-weight: 850;
   color: var(--heading-color);
   margin-bottom: 15px;
 }
 
 .highlight-card p,
 .highlight-card li {
-  color: #555;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .highlight-card ul {
@@ -1465,22 +1708,22 @@ section,
 .highlight-card .flags img {
   width: 32px;
   height: 22px;
-  border-radius: 3px;
-  border: 1px solid #ddd;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 78%);
 }
 
 .highlight-card .read-more {
   display: inline-block;
   color: var(--accent-color);
-  font-weight: 600;
+  font-weight: 750;
   text-decoration: none;
   margin-top: 10px;
-  transition: all 0.3s ease;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .highlight-card .read-more i {
   margin-left: 4px;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
 }
 
 .highlight-card .read-more:hover {
@@ -1495,33 +1738,44 @@ section,
 # Cultural & Heritage Gallery
 --------------------------------------------------------------*/
 .culture-gallery {
-  background: var(--surface-color);
+  /* Updated: not plain white; keep it clean but “premium” */
+  background:
+    radial-gradient(900px 520px at 15% 0%, rgba(30, 99, 214, 0.08), transparent 60%),
+    radial-gradient(900px 520px at 90% 10%, rgba(11, 27, 58, 0.06), transparent 60%),
+    radial-gradient(var(--dot-color) 1px, transparent 1px),
+    color-mix(in srgb, var(--surface-soft), var(--alt-background-color) 35%);
+  background-size: auto, auto, 26px 26px, auto;
+
   padding: 70px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .culture-gallery .section-title h2 {
-  font-weight: 700;
-  color: #222;
+  font-weight: 850;
+  color: var(--heading-color);
   margin-bottom: 10px;
 }
 
 .culture-gallery .section-title p {
-  color: #666;
+  color: color-mix(in srgb, var(--default-color), transparent 28%);
   font-size: 15px;
   margin-bottom: 40px;
 }
 
 .heritage-card {
   background: #fff;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
 }
 
 .heritage-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
 }
 
 .heritage-card img {
@@ -1531,7 +1785,7 @@ section,
 }
 
 .heritage-info {
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   padding: 12px 10px;
   text-align: center;
 }
@@ -1539,12 +1793,11 @@ section,
 .heritage-info h5 {
   color: #fff;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 750;
   margin: 0;
   text-transform: none;
 }
 
-/* Responsive adjustments */
 @media (max-width: 992px) {
   .heritage-card img {
     height: 180px;
@@ -1556,8 +1809,6 @@ section,
     height: 160px;
   }
 }
-
-
 
 /*--------------------------------------------------------------
 # Venue Section
@@ -1582,7 +1833,7 @@ section,
 
 .venue .venue-info:before {
   content: "";
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.52);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -1592,7 +1843,7 @@ section,
 
 .venue .venue-info h3 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 850;
   color: var(--contrast-color);
 }
 
@@ -1631,9 +1882,12 @@ section,
 .hotels .card {
   background-color: var(--surface-color);
   color: var(--default-color);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  border: 1px solid var(--border-color);
   position: relative;
-  border-radius: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
 }
 
 .hotels .card .card-img {
@@ -1647,7 +1901,7 @@ section,
 }
 
 .hotels .card h3 {
-  font-weight: 600;
+  font-weight: 800;
   font-size: 20px;
   margin-bottom: 5px;
   padding: 0 20px;
@@ -1655,7 +1909,7 @@ section,
 
 .hotels .card a {
   color: var(--heading-color);
-  transition: 0.3;
+  transition: color var(--transition-fast);
 }
 
 .hotels .card a:hover {
@@ -1674,13 +1928,19 @@ section,
 .hotels .card p {
   padding: 0 20px;
   margin-bottom: 20px;
-  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
   font-style: italic;
   font-size: 15px;
 }
 
+.hotels .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
+}
+
 .hotels .card:hover .card-img img {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 /*--------------------------------------------------------------
@@ -1769,13 +2029,14 @@ section,
 # Faq Section
 --------------------------------------------------------------*/
 .faq .faq-container .faq-item {
-  background-color: var(--surface-color);
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
   position: relative;
   padding: 20px;
   margin-bottom: 15px;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
-  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow-xs);
 }
 
 .faq .faq-container .faq-item:last-child {
@@ -1783,11 +2044,11 @@ section,
 }
 
 .faq .faq-container .faq-item h3 {
-  font-weight: 600;
+  font-weight: 750;
   font-size: 16px;
   line-height: 24px;
   margin: 0 30px 0 0;
-  transition: 0.3s;
+  transition: color var(--transition-fast);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1795,7 +2056,8 @@ section,
 
 .faq .faq-container .faq-item h3 .num {
   color: var(--accent-color);
-  padding-right: 5px;
+  padding-right: 6px;
+  font-weight: 850;
 }
 
 .faq .faq-container .faq-item h3:hover {
@@ -1813,6 +2075,7 @@ section,
 .faq .faq-container .faq-item .faq-content p {
   margin-bottom: 0;
   overflow: hidden;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
 }
 
 .faq .faq-container .faq-item .faq-toggle {
@@ -1830,8 +2093,8 @@ section,
 }
 
 .faq .faq-container .faq-active {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 97%);
-  border-color: color-mix(in srgb, var(--accent-color), transparent 80%);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 96%);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 75%);
 }
 
 .faq .faq-container .faq-active h3 {
@@ -1854,14 +2117,17 @@ section,
 # Buy Tickets Section
 --------------------------------------------------------------*/
 .buy-tickets .pricing-item {
-  background-color: var(--surface-color);
-  box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 8%);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   padding-bottom: 30px;
   position: relative;
+  overflow: hidden;
 }
 
 .buy-tickets .pricing-item h3 {
-  font-weight: 700;
+  font-weight: 850;
   margin-bottom: 0;
   font-size: 24px;
 }
@@ -1869,10 +2135,11 @@ section,
 .buy-tickets .pricing-item h4 {
   font-size: 48px;
   color: var(--accent-color);
-  font-weight: 400;
+  font-weight: 500;
   font-family: var(--heading-font);
   margin-bottom: 25px;
   text-align: center;
+  letter-spacing: -0.03em;
 }
 
 .buy-tickets .pricing-item h4 sup {
@@ -1880,14 +2147,14 @@ section,
 }
 
 .buy-tickets .pricing-item h4 span {
-  color: color-mix(in srgb, var(--default-color), transparent 60%);
+  color: color-mix(in srgb, var(--default-color), transparent 55%);
   font-size: 18px;
 }
 
 .buy-tickets .pricing-item ul {
   padding: 20px 0;
   list-style: none;
-  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
   text-align: left;
   line-height: 20px;
 }
@@ -1918,24 +2185,26 @@ section,
 
 .buy-tickets .buy-btn {
   color: var(--contrast-color);
-  background-color: var(--accent-color);
-  border: 2px solid var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border: 1px solid color-mix(in srgb, var(--accent-color), black 10%);
   display: inline-block;
   padding: 12px 40px;
-  border-radius: 4px;
-  transition: none;
-  font-size: 16px;
-  font-weight: 500;
-  transition: 0.3s;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
   font-family: var(--heading-font);
+  box-shadow: 0 12px 30px rgba(30, 99, 214, 0.24);
 }
 
 .buy-tickets .buy-btn:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 38px rgba(30, 99, 214, 0.30);
 }
 
 .buy-tickets .featured {
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .buy-tickets .featured h3,
@@ -1949,27 +2218,28 @@ section,
 }
 
 .buy-tickets .featured .buy-btn {
-  background: var(--accent-color);
+  background: transparent;
   color: var(--contrast-color);
-  border-color: var(--contrast-color);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: none;
 }
 
 .buy-tickets .featured .buy-btn:hover {
-  background: color-mix(in srgb, var(--accent-color) 90%, black 15%);
-  color: var(--contrast-color);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
 .contact .info-item {
-  background-color: var(--surface-color);
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 8%);
   padding: 20px 0 30px 0;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
 }
 
 .contact .info-item i {
-  font-size: 20px;
   color: var(--accent-color);
   width: 56px;
   height: 56px;
@@ -1977,16 +2247,19 @@ section,
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 4px;
-  transition: all 0.3s ease-in-out;
+
   border-radius: 50%;
   border: 2px dotted color-mix(in srgb, var(--accent-color), transparent 40%);
+  transition: all var(--transition-fast);
+}
+
+.contact .info-item:hover i {
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
 }
 
 .contact .info-item h3 {
-  font-size: 20px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 850;
   margin: 10px 0;
 }
 
@@ -1994,13 +2267,16 @@ section,
   padding: 0;
   margin-bottom: 0;
   font-size: 14px;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
 }
 
 .contact .php-email-form {
-  background-color: var(--surface-color);
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 6%);
   height: 100%;
   padding: 30px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 575px) {
@@ -2009,41 +2285,47 @@ section,
   }
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
+.contact .php-email-form input[type="text"],
+.contact .php-email-form input[type="email"],
 .contact .php-email-form textarea {
   font-size: 14px;
-  padding: 10px 15px;
+  padding: 12px 14px;
   box-shadow: none;
-  border-radius: 0;
+  border-radius: 12px;
   color: var(--default-color);
-  background-color: var(--surface-color);
-  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+  background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 25%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form input[type="text"]:focus,
+.contact .php-email-form input[type="email"]:focus,
 .contact .php-email-form textarea:focus {
-  border-color: var(--accent-color);
+  border-color: color-mix(in srgb, var(--accent-color), black 8%);
+  box-shadow: var(--focus-ring);
+  background-color: var(--surface-color);
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form input[type="text"]::placeholder,
+.contact .php-email-form input[type="email"]::placeholder,
 .contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
-  border-radius: 50px;
+  padding: 11px 30px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  border-radius: 999px;
+  font-weight: 750;
+  box-shadow: 0 12px 30px rgba(30, 99, 214, 0.22);
 }
 
-.contact .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+.contact .php-email-form button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 38px rgba(30, 99, 214, 0.28);
 }
 
 /*--------------------------------------------------------------
@@ -2051,7 +2333,7 @@ section,
 --------------------------------------------------------------*/
 .events .details h2 {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 850;
   margin-bottom: 10px;
 }
 
@@ -2063,19 +2345,21 @@ section,
   background: color-mix(in srgb, var(--default-color), transparent 92%);
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   line-height: 1;
-  display: inline-block;
-  text-align: center;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  text-align: center;
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .events .details .social a:hover {
   background: var(--accent-color);
   color: var(--contrast-color);
+  transform: translateY(-1px);
 }
 
 .events .details .social a i {
@@ -2105,23 +2389,25 @@ section,
 .abstract-card h3 {
   margin-top: 40px;
   margin-bottom: 15px;
-  font-weight: 700;
+  font-weight: 850;
 }
 
 .dates-table {
   margin-top: 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   width: 100%;
+  border: 1px solid var(--border-color);
 }
 
 .dates-table th {
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   color: #fff;
   padding: 14px;
-  font-size: 17px;
+  font-size: 16px;
   text-align: center;
+  letter-spacing: -0.01em;
 }
 
 .dates-table td {
@@ -2129,6 +2415,7 @@ section,
   background: #fff;
   font-size: 15.5px;
   border-bottom: 1px solid #eee;
+  color: color-mix(in srgb, var(--default-color), transparent 10%);
 }
 
 .dates-table tr:last-child td {
@@ -2144,7 +2431,7 @@ section,
 .registration-card h3 {
   margin-top: 40px;
   margin-bottom: 15px;
-  font-weight: 700;
+  font-weight: 850;
 }
 
 /* Desktop table (default) */
@@ -2155,16 +2442,17 @@ section,
 /* Mobile stacked style */
 @media (max-width: 767px) {
   .fees-table thead {
-    display: none; /* Hide header on mobile */
+    display: none;
   }
 
   .fees-table tr {
     display: block;
     margin-bottom: 15px;
-    border: 1px solid #eee;
-    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     padding: 12px;
     background: #fff;
+    box-shadow: var(--shadow-xs);
   }
 
   .fees-table td {
@@ -2179,27 +2467,27 @@ section,
     border-bottom: none;
   }
 
-  /* Add labels using data-label attribute */
   .fees-table td::before {
     content: attr(data-label);
-    font-weight: 600;
+    font-weight: 750;
     color: var(--accent-color);
   }
 }
 
-
 .register-btn {
-  background: var(--accent-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   color: #fff;
-  font-weight: 600;
+  font-weight: 750;
   padding: 12px 26px;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   display: inline-block;
-  transition: 0.3s;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: 0 12px 30px rgba(30, 99, 214, 0.24);
 }
 
 .register-btn:hover {
-  background: color-mix(in srgb, var(--accent-color), black 15%);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 38px rgba(30, 99, 214, 0.30);
   color: #fff;
 }
