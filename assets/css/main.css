@@ -1107,7 +1107,7 @@ section.dark-background,
   z-index: 2;
   background:
     radial-gradient(900px 520px at 30% 10%, rgba(30, 99, 214, 0.22), transparent 60%),
-    linear-gradient(180deg, rgba(2, 6, 23, 0.72) 0%, rgba(2, 6, 23, 0.55) 45%, rgba(2, 6, 23, 0.82) 100%);
+    linear-gradient(180deg, rgba(2, 6, 23, 0.72) 0%, rgba(2, 6, 23, 0.05) 45%, rgba(2, 6, 23, 0.82) 100%);
 }
 
 .hero .container {
@@ -1120,8 +1120,9 @@ section.dark-background,
   font-size: clamp(2.25rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.03;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   text-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+  word-spacing: clamp(0.2em, 0.35vw, 0.18em);
 }
 
 /* .hero h2 span {
@@ -1276,6 +1277,67 @@ section.dark-background,
     width: 100%;
   }
 }
+
+/* Hero: Save the Date */
+.hero-save-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin: 14px 0 6px;
+  padding: 10px 14px;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: clamp(0.70rem, 0.55vw, 0.90rem);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .hero-save-label {
+    background: rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Optional: add a subtle calendar icon using Bootstrap Icons (no HTML change needed) */
+.hero-save-label::before {
+  content: "\F215"; /* bi-calendar-event */
+  font-family: "bootstrap-icons";
+  font-weight: normal;
+  font-size: 1.05em;
+  opacity: 0.95;
+}
+
+/* Date line - strong but elegant */
+.hero-save-date {
+  margin: 0 0 6px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.05rem, 1.05vw, 1.35rem);
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Mobile polish */
+@media (max-width: 575.98px) {
+  .hero-save-label {
+    padding: 9px 12px;
+    letter-spacing: 0.10em;
+  }
+  .hero-save-date {
+    font-size: clamp(1rem, 4.2vw, 1.25rem);
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Speakers Section
@@ -2489,5 +2551,285 @@ section.dark-background,
 .register-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 16px 38px rgba(30, 99, 214, 0.30);
+  color: #fff;
+}
+
+/* ===== Registration page (UPDATED) ===== */
+
+.registration-page .page-title--registration {
+  position: relative;
+  isolation: isolate;
+  background-image: url("assets/img/caraousal1.png");
+  background-size: cover;
+  background-position: center;
+  padding: 120px 0 80px;
+  color: #fff;
+}
+
+.registration-page .page-title--registration .page-title__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 10, 100, 0.72) 0%,
+    rgba(3, 10, 100, 0.35) 55%,
+    rgba(3, 10, 100, 0.65) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.registration-page .page-title--registration .page-title__inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section spacing */
+.registration-page .registration-section {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
+/* Card */
+.registration-page .registration-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(3, 10, 100, 0.08);
+  box-shadow: 0 10px 30px rgba(3, 10, 100, 0.06);
+}
+
+@media (min-width: 768px) {
+  .registration-page .registration-card {
+    padding: 36px;
+  }
+}
+
+.registration-page .registration-header {
+  margin-bottom: 18px;
+}
+
+.registration-page .registration-header a {
+  color: #0d6efd;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(13, 110, 253, 0.35);
+}
+
+.registration-page .registration-header a:hover {
+  border-bottom-color: rgba(13, 110, 253, 0.85);
+}
+
+/* Divider */
+.registration-page .registration-divider {
+  height: 1px;
+  background: rgba(3, 10, 100, 0.10);
+  margin: 22px 0;
+}
+
+/* ===== Table wrapper (better looking) ===== */
+.registration-page .fees-table-responsive {
+  width: 100%;
+  overflow: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(3, 10, 100, 0.10);
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(3, 10, 100, 0.06);
+}
+
+/* nicer scrollbars (optional, safe) */
+.registration-page .fees-table-responsive::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+.registration-page .fees-table-responsive::-webkit-scrollbar-track {
+  background: rgba(3, 10, 100, 0.05);
+  border-radius: 999px;
+}
+.registration-page .fees-table-responsive::-webkit-scrollbar-thumb {
+  background: rgba(3, 10, 100, 0.22);
+  border-radius: 999px;
+}
+.registration-page .fees-table-responsive::-webkit-scrollbar-thumb:hover {
+  background: rgba(3, 10, 100, 0.32);
+}
+
+/* ===== Table (modern + clean) ===== */
+.registration-page .fees-table {
+  width: 100%;
+  min-width: 1120px; /* more breathing room for headers */
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* header rows */
+.registration-page .fees-table thead th {
+  color: #0b135c;
+  font-weight: 800;
+  padding: 16px 16px;
+  border-bottom: 1px solid rgba(3, 10, 100, 0.12);
+  vertical-align: middle;
+  background: rgba(3, 10, 100, 0.06);
+}
+
+/* top header band */
+.registration-page .fees-table thead tr:first-child th {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 10, 100, 0.12) 0%,
+    rgba(3, 10, 100, 0.08) 100%
+  );
+  font-size: 15.5px;
+  letter-spacing: 0.2px;
+}
+
+/* second header row can wrap a bit (prevents awkward truncation) */
+.registration-page .fees-table thead tr:nth-child(2) th {
+  white-space: normal;
+  font-weight: 700;
+  color: rgba(11, 19, 92, 0.92);
+}
+
+/* sticky header inside scroll container */
+.registration-page .fees-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+/* cell borders (vertical separators) */
+.registration-page .fees-table thead th,
+.registration-page .fees-table td,
+.registration-page .fees-table tbody th {
+  border-right: 1px solid rgba(3, 10, 100, 0.08);
+}
+
+.registration-page .fees-table thead th:last-child,
+.registration-page .fees-table td:last-child,
+.registration-page .fees-table tbody th:last-child {
+  border-right: none;
+}
+
+/* body cells */
+.registration-page .fees-table td,
+.registration-page .fees-table tbody th {
+  padding: 16px 16px;
+  border-bottom: 1px solid rgba(3, 10, 100, 0.10);
+  color: #111827;
+  background: #fff;
+  vertical-align: middle;
+}
+
+/* column sizing */
+.registration-page .fees-col-category {
+  min-width: 340px;
+}
+
+/* align money columns nicely */
+.registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(2),
+.registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(3),
+.registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(4) {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* sticky first column for easier reading (desktop/scroll) */
+.registration-page .fees-table thead th.fees-col-category {
+  left: 0;
+  z-index: 4;
+}
+.registration-page .fees-table tbody tr td:first-child,
+.registration-page .fees-table tbody tr th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+}
+
+/* keep sticky first column looking correct on zebra rows */
+.registration-page .fees-table tbody tr:not(.fees-group):nth-child(even) td {
+  background: rgba(3, 10, 100, 0.018);
+}
+.registration-page .fees-table tbody tr:not(.fees-group):nth-child(even) td:first-child {
+  background: rgba(3, 10, 100, 0.018);
+}
+
+/* group rows (section headers in tbody) */
+.registration-page .fees-table .fees-group th {
+  background: rgba(3, 10, 100, 0.08);
+  color: #030a64;
+  font-weight: 900;
+  letter-spacing: 0.15px;
+  padding: 14px 16px;
+  text-transform: none;
+  border-top: 1px solid rgba(3, 10, 100, 0.12);
+  border-bottom: 1px solid rgba(3, 10, 100, 0.12);
+}
+
+/* hover */
+.registration-page .fees-table tbody tr:not(.fees-group):hover td {
+  background: rgba(13, 110, 253, 0.04);
+}
+.registration-page .fees-table tbody tr:not(.fees-group):hover td:first-child {
+  background: rgba(13, 110, 253, 0.04);
+}
+
+/* rounded corners for the whole table block */
+.registration-page .fees-table thead tr:first-child th:first-child {
+  border-top-left-radius: 18px;
+}
+.registration-page .fees-table thead tr:first-child th:last-child {
+  border-top-right-radius: 18px;
+}
+.registration-page .fees-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 18px;
+}
+.registration-page .fees-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 18px;
+}
+
+/* Small section titles */
+.registration-page .section-title-sm {
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #0b135c;
+}
+
+.registration-page .section-text {
+  margin: 0;
+  color: rgba(17, 24, 39, 0.85);
+  line-height: 1.7;
+}
+
+.registration-page .section-text a {
+  color: #0d6efd;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(13, 110, 253, 0.35);
+}
+
+.registration-page .section-text a:hover {
+  border-bottom-color: rgba(13, 110, 253, 0.85);
+}
+
+/* Button */
+.registration-page .register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1f5eff 0%, #0b3fb7 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(3, 10, 100, 0.22);
+}
+
+.registration-page .register-btn:hover {
+  filter: brightness(1.03);
   color: #fff;
 }

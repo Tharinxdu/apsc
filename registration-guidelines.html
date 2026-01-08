@@ -54,7 +54,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="cta-btn d-none d-sm-block" href="index.html#buy-tickets">Register now</a>
+            <a class="cta-btn d-none d-sm-block" href="https://portal.apsc2026.lk/registration">Register now</a>
 
         </div>
     </header>
@@ -83,7 +83,7 @@
                 <div class="registration-card p-4 p-md-5 shadow-sm rounded-3">
 
                     <!-- INTRO -->
-                    <h2 class="fw-bold mb-3">Registration Information</h2>
+                    <!-- <h2 class="fw-bold mb-3">Registration Information</h2>
                     <p>
                         Please complete the registration form to secure your participation in the Asia Pacific Stroke
                         Conference 2026.
@@ -96,52 +96,93 @@
                             target="_blank">Click here</a>
                     </p>
 
-                    <hr class="my-4">
+                    <hr class="my-4"> -->
 
 
                     <!-- REGISTRATION FEES -->
                     <h3>Registration Fees</h3>
-                    <p>The following fee structure is <strong>subject to final confirmation</strong> by the organizing
-                        committee.</p>
+                    <p class="mb-0">
+                        Registration fee depends on the
+                        <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups"
+                            target="_blank" rel="noopener">
+                            World Bank Country Classification
+                        </a>.
+                    </p>
+                    <br>
 
                     <!-- Sample Fee Table (You can adjust later when final fees arrive) -->
-                    <div class="table-responsive fees-table-responsive">
-                        <table class="table fees-table">
+                    <div class="fees-table-responsive" role="region" aria-label="Registration fees table" tabindex="0">
+                        <table class="fees-table" aria-label="APSC 2026 registration fees">
                             <thead>
                                 <tr>
-                                    <th>Category</th>
-                                    <th>Low-Income Countries</th>
-                                    <th>Middle-Income Countries</th>
-                                    <th>High-Income Countries</th>
+                                    <th rowspan="2" class="fees-col-category">Category</th>
+                                    <th colspan="2" class="text-center">Online Registration</th>
+                                    <th class="text-center">Onsite Registration</th>
+                                </tr>
+                                <tr>
+                                    <th>Early Bird (1 March to 31 August 2026)</th>
+                                    <th>Regular (1 September – 28 November 2026)</th>
+                                    <th>Fee currency Sri Lankan Rupees (LKR) (Cash only)</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr class="fees-group">
+                                    <th colspan="4">Upper Middle to High Income Countries</th>
+                                </tr>
                                 <tr>
-                                    <td data-label="Category">Consultants / Specialists</td>
-                                    <td data-label="Low-Income Countries">USD 120</td>
-                                    <td data-label="Middle-Income Countries">USD 180</td>
-                                    <td data-label="High-Income Countries">USD 250</td>
+                                    <td>Physician</td>
+                                    <td>USD 250</td>
+                                    <td>USD 300</td>
+                                    <td>LKR 100,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-physician</td>
+                                    <td>USD 100</td>
+                                    <td>USD 150</td>
+                                    <td>LKR 60,000</td>
                                 </tr>
 
+                                <tr class="fees-group">
+                                    <th colspan="4">Low to Lower Middle Income Countries</th>
+                                </tr>
                                 <tr>
-                                    <td data-label="Category">Medical Officers</td>
-                                    <td data-label="Low-Income Countries">USD 80</td>
-                                    <td data-label="Middle-Income Countries">USD 120</td>
-                                    <td data-label="High-Income Countries">USD 160</td>
+                                    <td>Physician</td>
+                                    <td>USD 100</td>
+                                    <td>USD 150</td>
+                                    <td>LKR 60,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-physician</td>
+                                    <td>USD 50</td>
+                                    <td>USD 75</td>
+                                    <td>LKR 30,000</td>
                                 </tr>
 
+                                <tr class="fees-group">
+                                    <th colspan="4">Local Participants (working or living in Sri Lanka)</th>
+                                </tr>
                                 <tr>
-                                    <td data-label="Category">Nurses / Allied Health Professionals</td>
-                                    <td data-label="Low-Income Countries">USD 50</td>
-                                    <td data-label="Middle-Income Countries">USD 80</td>
-                                    <td data-label="High-Income Countries">USD 120</td>
+                                    <td>Physician</td>
+                                    <td>USD 30</td>
+                                    <td>USD 50</td>
+                                    <td>LKR 30,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Non Physician</td>
+                                    <td>USD 20</td>
+                                    <td>USD 30</td>
+                                    <td>LKR 18,000</td>
                                 </tr>
 
+                                <tr class="fees-group">
+                                    <th colspan="4">Day Registration for Rehabilitation Programme on 28th November 2026
+                                    </th>
+                                </tr>
                                 <tr>
-                                    <td data-label="Category">Students / Trainees</td>
-                                    <td data-label="Low-Income Countries">USD 30</td>
-                                    <td data-label="Middle-Income Countries">USD 50</td>
-                                    <td data-label="High-Income Countries">USD 80</td>
+                                    <td>Physician/ Non Physician/ Allied Health</td>
+                                    <td>USD 15</td>
+                                    <td>USD 40</td>
+                                    <td>LKR 24,000</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -152,14 +193,9 @@
 
 
                     <!-- PAYMENT -->
-                    <h3>Payment Instructions</h3>
-                    <p>
-                        All registration fees must be paid in <strong>USD only</strong>.
-                        Upon completing the registration form, you will be directed to the payment portal.
-                    </p>
-
-                    <p>
-                        Your registration will be confirmed only after the payment is successfully processed.
+                    <h3>Payment</h3>
+                    <p class="section-text">
+                        Please note that onsite registration is available in Sri Lankan Rupees (LKR) only, in cash.
                     </p>
 
                     <hr class="my-4">
@@ -167,35 +203,25 @@
 
                     <!-- CANCELLATION POLICY -->
                     <h3>Cancellation Policy</h3>
-                    <p>All cancellations must be communicated via email to the Conference Secretariat.</p>
-
-                    <ul>
-                        <li>
-                            Refunds are available for cancellation requests received on or before
-                            <strong>31 August 2026</strong>.
-                        </li>
-                        <li>
-                            A cancellation fee of <strong>30%</strong> will be deducted to cover administrative costs.
-                        </li>
-                        <li>
-                            No refunds will be issued for cancellations received after 31 August 2026.
-                        </li>
-                        <li>
-                            No refunds for no-shows.
-                        </li>
-                    </ul>
-
-                    <p>
-                        All refund procedures will be handled through the official online registration system after the
-                        conference.
+                    <p class="section-text">
+                        All cancellations must be notified by email to the Conference Secretariat. Refunds will be made
+                        when written
+                        notice of cancellation is received by the secretariat at
+                        <a href="mailto:apsc2026.secretariat@gmail.com">apsc2026.secretariat@gmail.com</a> on or before
+                        31 August 2026.
+                        A cancellation charge of 30% of fees paid will be deducted to cover administrative costs prior
+                        to making refunds.
+                        All refund procedures will be done by the secretariat via the online registration system after
+                        the conference.
+                        Cancellations made after 1 September 2026 will not be refunded, nor will refunds be provided for
+                        no-shows.
                     </p>
-
                     <hr class="my-4">
 
 
                     <!-- BUTTON -->
                     <div class="text-center mt-4">
-                        <a href="#" class="register-btn">Proceed to Registration</a>
+                        <a href="https://portal.apsc2026.lk/registration" class="register-btn">Proceed to Registration</a>
                     </div>
 
                 </div>
