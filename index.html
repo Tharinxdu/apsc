@@ -1,1384 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>The Asia Pacific Stroke Conference 2026</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming Soon</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    :root{
+      --bg0:#050816;
+      --bg1:#0b1020;
 
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.14);
 
-  <!-- Favicons -->
-  <link href="assets/img/APSO Logo.png" rel="icon">
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+      --accent: rgba(30,99,214,.55);
+      --shadow: 0 30px 80px rgba(0,0,0,.48);
+    }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+      background:
+        radial-gradient(900px 520px at 18% 12%, rgba(30,99,214,.24), transparent 55%),
+        radial-gradient(900px 520px at 85% 18%, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      display:grid;
+      place-items:center;
+      padding: 28px 16px;
+    }
 
-  <!-- =======================================================
-  * Template Name: TheEvent
-  * Template URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    .wrap{
+      width: min(980px, 96vw);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow:hidden;
+      position:relative;
+      padding: clamp(26px, 4.2vw, 54px);
+      text-align:center;
+    }
+
+    /* subtle inner shine + depth */
+    .wrap::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 280px at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(700px 250px at 50% 45%, rgba(30,99,214,.18), transparent 70%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .content{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap: 18px;
+      justify-items:center;
+    }
+
+    /* LOGOS */
+    .logos{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      position:relative;
+      padding: 6px;
+    }
+
+    .logo-card{
+      background: rgba(255,255,255,.96);      /* key change: white card for visibility */
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: 18px;
+      padding: 14px 18px;
+      box-shadow:
+        0 12px 26px rgba(0,0,0,.28),
+        0 0 0 1px rgba(0,0,0,.06) inset;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width: 150px;
+    }
+
+    .logo-card img{
+      height: 74px;                 /* bigger logos */
+      width: auto;
+      object-fit: contain;
+      display:block;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    @media (max-width: 560px){
+      .logo-card{ min-width: 130px; padding: 12px 14px; }
+      .logo-card img{ height: 60px; }
+    }
+
+    h1{
+      margin: 6px 0 0;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    p{
+      margin: 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.6vw, 1.22rem);
+      line-height: 1.65;
+    }
+
+    .sub{
+      margin-top: 4px;
+      color: var(--muted2);
+      font-size: 0.98rem;
+    }
+
+    /* Small footer-like chip (optional but nice) */
+    .chip{
+      margin-top: 10px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.74);
+      font-weight: 700;
+      letter-spacing: .02em;
+      font-size: 0.92rem;
+    }
+
+    .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: rgba(30,99,214,.95);
+      box-shadow: 0 0 0 6px rgba(30,99,214,.18);
+    }
+  </style>
 </head>
 
-<body class="index-page">
+<body>
+  <main class="wrap" role="main" aria-label="Coming soon page">
+    <div class="content">
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <div class="logos" aria-label="Organization logos">
+        <div class="logo-card">
+          <img src="assets/img/APSO Logo.png" alt="APSO Logo">
+        </div>
+        <div class="logo-card">
+          <img src="assets/img/ASN Logo.png" alt="ASN Logo">
+        </div>
+        <div class="logo-card">
+          <img src="assets/img/NSASL Logo.png" alt="NSASL Logo">
+        </div>
+      </div>
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/APSO Logo.png" alt="">
-        <img src="assets/img/ASN Logo.png" alt="">
-        <img src="assets/img/NSASL Logo.png" alt="">
-        <!-- Uncomment the line below if you also wish to use an text logo -->
-        <!-- <h1 class="sitename">TheEvent</h1>  -->
-      </a>
+      <h1>Coming Soon</h1>
+      <p>We’re working on the new website. Please check back soon.</p>
+      <div class="sub">Thank you for your patience.</div>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home<br></a></li>
-          <li><a href="./registration-guidelines.html" class="active">Registration<br></a></li>
-          <li><a href="./abstract-guidelines.html" class="active">Abstract<br></a></li>
-          <li><a href="#hero" class="active">Scientific Program<br></a></li>
-          <li class="dropdown">
-            <a href="#"><span>General Information</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-
-              <li><a href="travel.html">Travel Information</a></li>
-              <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
-
-              <!-- <li class="dropdown">
-                <a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
-                </ul>
-              </li> -->
-
-            </ul>
-          </li>
-          <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                    class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li> -->
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="cta-btn d-none d-sm-block" href="https://portal.apsc2026.lk/registration" target="_blank">Register now</a>
+      <div class="chip" aria-label="Status">
+        <span class="dot"></span>
+        Website under construction
+      </div>
 
     </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
-
-      <img src="assets/img/caraousal4.png" alt="" data-aos="fade-in" class="">
-
-      <div class="container d-flex flex-column align-items-center text-center mt-auto">
-        <h2 data-aos="fade-up" data-aos-delay="100" class="">THE ASIA PACIFIC<br>STROKE CONFERENCE <span>2026</span>
-        </h2>
-        <p data-aos="fade-up" data-aos-delay="200" class="hero-save-label">Save the date</p>
-        <p data-aos="fade-up" data-aos-delay="200" class="hero-save-date">26-28 November 2026</p>
-        <!-- <div data-aos="fade-up" data-aos-delay="300" class="">
-          <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn mt-3"></a>
-        </div> -->
-        <div class="hero-buttons d-flex flex-wrap justify-content-center gap-3 mt-4" data-aos="fade-up"
-          data-aos-delay="300">
-          <a href="https://portal.apsc2026.lk/registration" class="btn-hero btn-register" target="_blank">Register Now</a>
-          <a href="https://portal.apsc2026.lk" class="btn-hero btn-abstract" target="_blank">Submit Abstract</a>
-        </div>
-      </div>
-
-      <div class=" mt-auto position-relative">
-
-        <!-- <div class="container position-relative" data-aos="fade-up">
-          <div class="row">
-            <div class="col-lg-6">
-              <h2>About The Event</h2>
-              <p>Sed nam ut dolor qui repellendus iusto odit. Possimus inventore eveniet accusamus error amet eius aut
-                accusantium et. Non odit consequatur repudiandae sequi ea odio molestiae. Enim possimus sunt inventore in
-                est ut optio sequi unde.</p>
-            </div>
-            <div class="col-lg-3">
-              <h3>Where</h3>
-              <p>Downtown Conference Center, New York</p>
-            </div>
-            <div class="col-lg-3">
-              <h3>When</h3>
-              <p>Monday to Wednesday<br>10-12 December</p>
-            </div>
-          </div>
-        </div> -->
-      </div>
-
-    </section><!-- /Hero Section -->
-
-
-    <!-- President Modal -->
-    <div class="modal fade" id="presidentModal" tabindex="-1" aria-labelledby="presidentModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold" id="presidentModalLabel">Message from the President of NSASL</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4">
-            <div class="text-center mb-4">
-              <img src="assets/img/president.jpg" alt="President"
-                class="img-fluid rounded-circle border border-3 border-primary mb-3"
-                style="width: 120px; height: 120px; object-fit: cover;">
-              <h5 class="fw-semibold mb-0">Dr. Gamini Pathirana</h5>
-              <p class="text-muted mb-0">President, National Stroke Association of Sri Lanka (NSASL) <br> Chair, Asia
-                Pacific Stroke Conference 2026</p>
-            </div>
-
-            <p class="president-text">
-              It is a great privilege and honour to host the <strong>Asia Pacific Stroke Conference (APSC)
-                2026</strong>, scheduled
-              to take place from <strong>26th to 28th November 2026</strong> at <strong>Block 2 of the Bandaranaike
-                Memorial International Conference Hall (BMICH)</strong>
-              in the vibrant city of <strong>Colombo, Sri Lanka</strong>.<br><br>
-
-              The conference theme, <em>“Enhancing Stroke Management: Overcoming Challenges and Fostering Regional
-                Synergies,”</em>
-              reflects our shared commitment to advancing stroke care across the Asia–Pacific region. APSC 2026 will
-              bring together
-              leading international and regional experts to present the latest scientific developments and to explore
-              innovative,
-              context-specific strategies addressing the diverse needs of our communities.<br><br>
-
-              Often celebrated as the <strong>“Pearl of the Indian Ocean,”</strong> Sri Lanka provides an inspiring
-              setting for this
-              important gathering. The island seamlessly blends modern infrastructure with centuries of rich culture and
-              heritage.
-              From Colombo, delegates can easily explore iconic destinations such as the ancient cities of
-              <strong>Sigiriya</strong>
-              and <strong>Anuradhapura</strong>, the mist-covered tea plantations of <strong>Nuwara Eliya</strong>, or
-              the country’s
-              renowned golden beaches. November is one of the most pleasant times to visit Sri Lanka, offering a
-              tropical yet
-              comfortable climate ideal for both professional engagement and leisure.<br><br>
-
-              APSC 2026 is the annual regional meeting of the <strong>Asia Pacific Stroke Organisation (APSO)</strong>
-              and will be
-              hosted in Colombo by the <strong>National Stroke Association of Sri Lanka (NSASL)</strong>. We are deeply
-              grateful to
-              APSO for entrusting Sri Lanka with this prestigious meeting, and for its continued guidance, support, and
-              commitment in
-              organising this landmark event.<br><br>
-
-              This conference will be conducted as a fully <strong>in-person meeting</strong>, designed to promote
-              meaningful
-              face-to-face interactions and networking. The scientific programme will feature plenary lectures, focused
-              symposia, and
-              interactive workshops, offering participants valuable opportunities to learn from world-class faculty and
-              to exchange
-              ideas with colleagues from across the region.<br><br>
-
-              Colombo is easily accessible via <strong>Bandaranaike International Airport</strong>, with convenient
-              transport links to
-              the city and the conference venue. A wide range of hotels, dining options, and cultural attractions will
-              ensure a
-              comfortable and memorable stay for all delegates.<br><br>
-
-              Our organising team is committed to delivering APSC 2026 as both a landmark scientific event and a warm
-              introduction to
-              <strong>Sri Lankan hospitality</strong>. We look forward to welcoming you to Colombo for three days of
-              learning,
-              collaboration, and friendship.<br><br>
-
-              Discover Sri Lanka—where ancient heritage meets modern medicine.
-            </p>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Vice President Modal -->
-    <div class="modal fade" id="vpModal" tabindex="-1" aria-labelledby="vpModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold" id="vpModalLabel">Message from the President of APSO</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4">
-            <div class="text-center mb-4">
-              <img src="assets/img/president2.jpg" alt="Vice President"
-                class="img-fluid rounded-circle border border-3 border-primary mb-3"
-                style="width: 120px; height: 120px; object-fit: cover;">
-              <h5 class="fw-semibold mb-0">Prof. Nijasri C. Suwanwela, M.D</h5>
-              <p class="text-muted mb-0">President, Asia Pacific Stroke Organisation (APSO)</p>
-            </div>
-
-            <p class="president-text">
-              On behalf of the <strong>Asia Pacific Stroke Organisation (APSO)</strong>, it is my great pleasure to
-              invite you to the
-              <strong>Asia Pacific Stroke Conference (APSC) 2026</strong>, to be held in <strong>Colombo, Sri
-                Lanka</strong>, from
-              <strong>26–28 November 2026</strong>.<br><br>
-
-              The Asia–Pacific region, home to more than half of the world’s population, bears the greatest burden of
-              stroke worldwide.
-              Yet, it is also a region of tremendous innovation, diversity, and resilience. APSC continues to serve as
-              the leading
-              scientific platform where clinicians, researchers, nurses, allied health professionals, and health
-              policymakers come
-              together to share discoveries, exchange experiences, and forge partnerships that advance stroke care and
-              prevention
-              across borders.<br><br>
-
-              As we gather in Colombo, the Scientific Committee has prepared an excellent and inspiring program that not
-              only showcases
-              the latest scientific advances but also offers practical, regionally relevant insights through interactive
-              sessions and
-              opportunities to strengthen collaboration across the Asia–Pacific. Together, we can shape a future where
-              stroke care is
-              more equitable, effective, and accessible for all.<br><br>
-
-              I warmly welcome you to join us in Colombo and be part of this meaningful journey for stroke in the
-              Asia–Pacific region.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Key Information / Quick Facts Section -->
-    <section id="key-info" class="key-info section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Quick facts about APSC 2026</h2>
-        <!-- <p>Quick facts about APSC 2026</p> -->
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4 justify-content-center">
-
-          <!-- Date & Venue -->
-          <div class="col-md-6 col-lg-3">
-            <div class="info-card text-center">
-              <div class="icon mb-3">
-                <i class="bi bi-calendar-check"></i>
-              </div>
-              <h4>Program at a glance</h4>
-              <p>26–28 November 2026<br>BMICH, Colombo, Sri Lanka</p>
-              <a href="#venue" class="read-more">More <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <!-- Registration Info -->
-          <div class="col-md-6 col-lg-3">
-            <div class="info-card text-center">
-              <div class="icon mb-3">
-                <i class="bi bi-person-badge"></i>
-              </div>
-              <h4>Registration Information</h4>
-              <p>Early Bird, Regular, Late & Onsite registration categories available.</p>
-              <a href="registration-guidelines.html" class="read-more">More <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <!-- Abstract Submission -->
-          <div class="col-md-6 col-lg-3">
-            <div class="info-card text-center">
-              <div class="icon mb-3">
-                <i class="bi bi-file-earmark-text"></i>
-              </div>
-              <h4>Abstract Information</h4>
-              <p>Submit your abstract before the deadline to share your research at APSC 2026.</p>
-              <a href="abstract-guidelines.html" class="read-more">More<i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <!-- Explore Sri Lanka -->
-          <div class="col-md-6 col-lg-3">
-            <div class="info-card text-center">
-              <div class="icon mb-3">
-                <i class="bi bi-geo-alt"></i>
-              </div>
-              <h4>Explore Sri Lanka</h4>
-              <p>Plan your trip, discover destinations, and travel tips for Sri Lanka.</p>
-              <a href="https://www.sltda.gov.lk/en" class="read-more" target="_blank" rel="noopener noreferrer">
-                Visit <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Presidents Section -->
-    <section id="messages" class="messages section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>President's Messages</h2>
-        <p>Welcome messages from the Presidents</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-
-          <!-- President Message -->
-          <div class="col-lg-6">
-            <div class="message-card d-flex flex-column align-items-center text-center p-4">
-              <img src="assets/img/president.jpg" alt="President" class="img-fluid rounded-circle mb-3 message-img">
-              <h4 class="fw-bold mb-1">Dr. Gamini Pathirana</h4>
-              <p class="position mb-3">President, National Stroke Association of Sri Lanka (NSASL) <br> Chair, Asia
-                Pacific Stroke Conference 2026</p>
-              <p class="message-text">
-                It is a privilege to invite you to the Asia Pacific Stroke Conference (APSC) 2026, which will be held
-                26–28 November 2026 in the vibrant city of Colombo, Sri Lanka...
-              </p>
-              <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#presidentModal">Read More</a>
-            </div>
-          </div>
-
-          <!-- Vice President Message -->
-          <div class="col-lg-6">
-            <div class="message-card d-flex flex-column align-items-center text-center p-4">
-              <img src="assets/img/president2.jpg" alt="Vice President"
-                class="img-fluid rounded-circle mb-3 message-img">
-              <h4 class="fw-bold mb-1">Prof. Nijasri C. Suwanwela, M.D</h4>
-              <p class="position mb-3">President, Asia Pacific Stroke Organisation (APSO) <br> .</p>
-              <p class="message-text">
-                On behalf of the Asia Pacific Stroke Organisation (APSO), it is my great pleasure to invite you to the
-                Asia
-                Pacific Stroke Conference (APSC) 2026, to be held in Colombo, Sri Lanka...
-              </p>
-              <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#vpModal">Read More</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Speakers Section -->
-    <!-- <section id="speakers" class="speakers section"> -->
-
-    <!-- Section Title -->
-    <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Event Speakers<br></h2>
-
-      </div> -->
-    <!-- End Section Title -->
-
-    <!-- <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <img src="assets/img/speakers/speaker-1.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4><a href="speaker-details.html">Walter White</a></h4>
-                  <span>Quas alias incidunt</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-    <!-- End Team Member -->
-
-    <!-- <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <img src="assets/img/speakers/speaker-2.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4><a href="speaker-details.html">Hubert Hirthe</a></h4>
-                  <span>Consequuntur odio aut</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-    <!-- End Team Member -->
-
-    <!-- <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <img src="assets/img/speakers/speaker-3.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4><a href="speaker-details.html">Amanda Jepson</a></h4>
-                  <span>Fugiat laborum et</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-    <!-- End Team Member -->
-
-    <!-- <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <img src="assets/img/speakers/speaker-4.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4><a href="speaker-details.html">William Anderson</a></h4>
-                  <span>Debitis iure vero</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-    <!-- End Team Member -->
-
-    <!-- </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Speakers Section -->
-
-    <!-- Schedule Section -->
-    <!-- <section id="schedule" class="schedule section"> -->
-
-    <!-- Section Title -->
-    <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Event Schedule<br></h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div> -->
-    <!-- End Section Title -->
-
-    <!-- <div class="container">
-
-        <ul class="nav nav-tabs" role="tablist" data-aos="fade-up" data-aos-delay="100">
-          <li class="nav-item">
-            <a class="nav-link active" href="#day-1" role="tab" data-bs-toggle="tab">Day 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#day-2" role="tab" data-bs-toggle="tab">Day 2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#day-3" role="tab" data-bs-toggle="tab">Day 3</a>
-          </li>
-        </ul>
-
-        <div class="tab-content row justify-content-center" data-aos="fade-up" data-aos-delay="200">
-
-          <h3 class="sub-heading">Voluptatem nulla veniam soluta et corrupti consequatur neque eveniet officia. Eius
-            necessitatibus voluptatem quis labore perspiciatis quia.</h3> -->
-
-    <!-- Schdule Day 1 -->
-    <!-- <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>09:30 AM</time></div>
-              <div class="col-md-10">
-                <h4>Registration</h4>
-                <p>Fugit voluptas iusto maiores temporibus autem numquam magnam.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>10:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-1-2.jpg" alt="Brenden Legros">
-                </div>
-                <h4>Keynote <span>Brenden Legros</span></h4>
-                <p>Facere provident incidunt quos voluptas.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>11:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-2-2.jpg" alt="Hubert Hirthe">
-                </div>
-                <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
-                <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>12:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-3-2.jpg" alt="Cole Emmerich">
-                </div>
-                <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
-                <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>02:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-4-2.jpg" alt="Jack Christiansen">
-                </div>
-                <h4>Qui non qui vel amet culpa sequi. <span>Jack Christiansen</span></h4>
-                <p>Nam ex distinctio voluptatem doloremque suscipit iusto.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>03:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-5.jpg" alt="Alejandrin Littel">
-                </div>
-                <h4>Quos ratione neque expedita asperiores. <span>Alejandrin Littel</span></h4>
-                <p>Eligendi quo eveniet est nobis et ad temporibus odio quo.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>04:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-6.jpg" alt="Willow Trantow">
-                </div>
-                <h4>Quo qui praesentium nesciunt <span>Willow Trantow</span></h4>
-                <p>Voluptatem et alias dolorum est aut sit enim neque veritatis.</p>
-              </div>
-            </div>
-
-          </div>-->
-
-    <!-- End Schdule Day 1 -->
-
-    <!-- Schdule Day 2 -->
-    <!-- <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>10:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-1-2.jpg" alt="Brenden Legros">
-                </div>
-                <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
-                <p>Facere provident incidunt quos voluptas.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>11:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-2-2.jpg" alt="Hubert Hirthe">
-                </div>
-                <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
-                <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>12:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-3-2.jpg" alt="Cole Emmerich">
-                </div>
-                <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
-                <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>02:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-4-2.jpg" alt="Jack Christiansen">
-                </div>
-                <h4>Qui non qui vel amet culpa sequi. <span>Jack Christiansen</span></h4>
-                <p>Nam ex distinctio voluptatem doloremque suscipit iusto.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>03:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-5.jpg" alt="Alejandrin Littel">
-                </div>
-                <h4>Quos ratione neque expedita asperiores. <span>Alejandrin Littel</span></h4>
-                <p>Eligendi quo eveniet est nobis et ad temporibus odio quo.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>04:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-6.jpg" alt="Willow Trantow">
-                </div>
-                <h4>Quo qui praesentium nesciunt <span>Willow Trantow</span></h4>
-                <p>Voluptatem et alias dolorum est aut sit enim neque veritatis.</p>
-              </div>
-            </div>
-
-          </div>-->
-
-    <!-- End Schdule Day 2  -->
-
-    <!-- Schdule Day 3 -->
-    <!-- <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>10:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-2-2.jpg" alt="Hubert Hirthe">
-                </div>
-                <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
-                <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>11:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-3-2.jpg" alt="Cole Emmerich">
-                </div>
-                <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
-                <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>12:00 AM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-1-2.jpg" alt="Brenden Legros">
-                </div>
-                <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
-                <p>Facere provident incidunt quos voluptas.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>02:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-4-2.jpg" alt="Jack Christiansen">
-                </div>
-                <h4>Qui non qui vel amet culpa sequi. <span>Jack Christiansen</span></h4>
-                <p>Nam ex distinctio voluptatem doloremque suscipit iusto.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>03:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-5.jpg" alt="Alejandrin Littel">
-                </div>
-                <h4>Quos ratione neque expedita asperiores. <span>Alejandrin Littel</span></h4>
-                <p>Eligendi quo eveniet est nobis et ad temporibus odio quo.</p>
-              </div>
-            </div>
-
-            <div class="row schedule-item">
-              <div class="col-md-2"><time>04:00 PM</time></div>
-              <div class="col-md-10">
-                <div class="speaker">
-                  <img src="assets/img/speakers/speaker-6.jpg" alt="Willow Trantow">
-                </div>
-                <h4>Quo qui praesentium nesciunt <span>Willow Trantow</span></h4>
-                <p>Voluptatem et alias dolorum est aut sit enim neque veritatis.</p>
-              </div>
-            </div>
-
-          </div>-->
-
-    <!-- End Schdule Day 3 -->
-
-    <!-- </div>
-
-      </div>
-    </section> -->
-    <!-- /Schedule Section -->
-
-    <!-- Venue Section -->
-    <!-- <section id="venue" class="venue section"> -->
-
-    <!-- Section Title -->
-    <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Event Venue<br></h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div> -->
-    <!-- End Section Title -->
-
-    <!-- <div class="container-fluid" data-aos="fade-up">
-
-        <div class="row g-0">
-          <div class="col-lg-6 venue-map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-              frameborder="0" style="border:0" allowfullscreen=""></iframe>
-          </div>
-
-          <div class="col-lg-6 venue-info">
-            <div class="row justify-content-center">
-              <div class="col-11 col-lg-8 position-relative">
-                <h3>Downtown Conference Center, New York</h3>
-                <p>Iste nobis eum sapiente sunt enim dolores labore accusantium autem. Cumque beatae ipsam. Est quae sit
-                  qui voluptatem corporis velit. Qui maxime accusamus possimus. Consequatur sequi et ea suscipit enim
-                  nesciunt quia velit.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="container-fluid venue-gallery-container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row g-0">
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-1.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-1.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-2.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-2.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-3.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-3.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-4.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-4.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-5.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-5.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-6.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-6.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-7.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="venue-gallery">
-              <a href="assets/img/venue-gallery/venue-gallery-8.jpg" class="glightbox" data-gall="venue-gallery">
-                <img src="assets/img/venue-gallery/venue-gallery-8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section> -->
-    <!-- /Venue Section -->
-
-
-    <!-- Cultural & Heritage Gallery Section -->
-    <section id="culture-gallery" class="culture-gallery section">
-      <div class="container text-center section-title" data-aos="fade-up">
-        <h2>Cultural & Heritage Gallery</h2>
-        <p>Experience Sri Lanka’s timeless wonders and vibrant traditions</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row justify-content-center g-4">
-
-          <!-- Card 1 -->
-          <div class="col-md-4 col-lg-2-4">
-            <div class="heritage-card">
-              <img src="assets/img/sigiriya.jpg" alt="Sigiriya">
-              <div class="heritage-info">
-                <h5>Sigiriya Rock Fortress</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="col-md-4 col-lg-2-4">
-            <div class="heritage-card">
-              <img src="assets/img/temple.jpg" alt="Temple of the Tooth">
-              <div class="heritage-info">
-                <h5>Temple of the Tooth, Kandy</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="col-md-4 col-lg-2-4">
-            <div class="heritage-card">
-              <img src="assets/img/tower.jpg" alt="Lotus Tower">
-              <div class="heritage-info">
-                <h5>Lotus Tower, Colombo</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="col-md-4 col-lg-2-4">
-            <div class="heritage-card">
-              <img src="assets/img/dancers.webp" alt="Traditional Dancers">
-              <div class="heritage-info">
-                <h5>Traditional Cultural Dances</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="col-md-4 col-lg-2-4">
-            <div class="heritage-card">
-              <img src="assets/img/bridge.jpg" alt="The Nine Arch Bridge">
-              <div class="heritage-info">
-                <h5>The Nine Arch Bridge</h5>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-
-    <!-- Highlights Section -->
-    <section id="highlights" class="highlights section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Highlights</h2>
-        <p>Discover what makes APSC 2026 an unmissable event</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-
-          <!-- Why Attend -->
-          <div class="col-lg-4 col-md-6">
-            <div class="highlight-card text-center p-4">
-              <div class="icon mb-3">
-                <i class="bi bi-people"></i>
-              </div>
-              <h4>Why Attend</h4>
-              <ul class="list-unstyled mt-3 mb-3">
-                <li><i class="bi bi-person-lines-fill me-2 text-accent"></i> Networking opportunities</li>
-                <li><i class="bi bi-mic-fill me-2 text-accent"></i> Renowned keynote speakers</li>
-                <li><i class="bi bi-heart-pulse-fill me-2 text-accent"></i> Cutting-edge stroke trials</li>
-              </ul>
-              <a href="#why-attend" class="read-more">More <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <!-- International Participation -->
-          <div class="col-lg-4 col-md-6">
-            <div class="highlight-card text-center p-4">
-              <div class="icon mb-3">
-                <i class="bi bi-globe"></i>
-              </div>
-              <h4>International Participation</h4>
-              <p>Join experts and delegates from across the Asia–Pacific region.</p>
-
-              <div class="flags d-flex justify-content-center flex-wrap gap-2 mt-3 mb-3">
-                <img src="https://flagcdn.com/w40/jp.png" alt="Japan" title="Japan">
-                <img src="https://flagcdn.com/w40/sg.png" alt="Singapore" title="Singapore">
-                <img src="https://flagcdn.com/w40/au.png" alt="Australia" title="Australia">
-                <img src="https://flagcdn.com/w40/in.png" alt="India" title="India">
-                <img src="https://flagcdn.com/w40/lk.png" alt="Sri Lanka" title="Sri Lanka">
-                <img src="https://flagcdn.com/w40/kr.png" alt="South Korea" title="South Korea">
-                <img src="https://flagcdn.com/w40/th.png" alt="Thailand" title="Thailand">
-                <img src="https://flagcdn.com/w40/ph.png" alt="Philippines" title="Philippines">
-              </div>
-
-              <a href="#international" class="read-more">More <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <!-- Scientific Program Overview -->
-          <div class="col-lg-4 col-md-12">
-            <div class="highlight-card text-center p-4">
-              <div class="icon mb-3">
-                <i class="bi bi-journal-text"></i>
-              </div>
-              <h4>Program Overview</h4>
-              <ul class="list-unstyled mt-3 mb-3">
-                <li><strong>Day 1:</strong> Opening Ceremony & Keynotes</li>
-                <li><strong>Day 2:</strong> Focused Symposia & Workshops</li>
-                <li><strong>Day 3:</strong> Case Discussions & Closing Remarks</li>
-              </ul>
-              <a href="#program" class="read-more">More <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Gallery Section -->
-    <!-- <section id="gallery" class="gallery section"> -->
-
-    <!-- Section Title -->
-    <!-- <div class="container section-title text-center" data-aos="fade-up">
-        <h2>Sri Lankan Culture & Heritage</h2>
-        <p>Experience Sri Lanka’s Rich Heritage Alongside Global Stroke Expertise</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "centeredSlides": true,
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 0
-                },
-                "768": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                },
-                "1200": {
-                  "slidesPerView": 5,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/sigiriya.jpg"><img src="assets/img/sigiriya.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/temple.jpg"><img src="assets/img/temple.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-3.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-3.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-4.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-4.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-5.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-5.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-6.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-6.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-7.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-7.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
-                href="assets/img/event-gallery/event-gallery-8.jpg"><img
-                  src="assets/img/event-gallery/event-gallery-8.jpg" class="img-fluid" alt=""></a></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div> -->
-
-    <!-- </section> -->
-    <!-- /Gallery Section -->
-
-    <!-- Sponsors Section -->
-    <!-- <section id="sponsors" class="sponsors section light-background">
-
-
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Sponsors</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-0 clients-wrap">
-
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-7.png" class="img-fluid" alt="">
-          </div>
-          <div class="col-xl-3 col-md-4 client-logo">
-            <img src="assets/img/clients/client-8.png" class="img-fluid" alt="">
-          </div>
-
-        </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Sponsors Section -->
-
-
-    <!-- Buy Tickets Section -->
-    <!-- <section id="buy-tickets" class="buy-tickets section light-background"> -->
-
-    <!-- Section Title -->
-    <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Buy Tickets<br></h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div> -->
-    <!-- End Section Title -->
-
-    <!-- <div class="container">
-
-        <div class="row gy-4 pricing-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h3>Standard Access</h3>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h4><sup>$</sup>150<span> / month</span></h4>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <ul>
-              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-              <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-            </ul>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-          </div> 
-        </div>-->
-    <!-- End Pricing Item -->
-
-    <!-- <div class="row gy-4 pricing-item featured mt-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h3>Premium Access<br></h3>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h4><sup>$</sup>250<span> / month</span></h4>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <ul>
-              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-              <li><i class="bi bi-check"></i> <strong>Nec feugiat nisl pretium</strong></li>
-              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-            </ul>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-          </div>
-        </div> -->
-    <!-- End Pricing Item -->
-
-    <!-- <div class="row gy-4 pricing-item mt-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h3>Pro Access<br></h3>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <h4><sup>$</sup>350<span> / month</span></h4>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <ul>
-              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-              <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-            </ul>
-          </div>
-          <div class="col-lg-3 d-flex align-items-center justify-content-center">
-            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-          </div>
-        </div> -->
-    <!-- End Pricing Item -->
-    <!-- 
-      </div>
-
-    </section> -->
-    <!-- /Buy Tickets Section -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Get in touch with the APSC 2026 Organizing Committee for inquiries and assistance.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="200">
-              <i class="bi bi-geo-alt"></i>
-              <h3>Address</h3>
-              <p>Colombo, Sri Lanka</p>
-            </div>
-          </div><!-- End Info Item -->
-
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="300">
-              <i class="bi bi-telephone"></i>
-              <h3>Call Us</h3>
-              <p>+94 11 123 4567</p>
-            </div>
-          </div> -->
-          <!-- End Info Item -->
-
-          <div class="col-lg-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="400">
-              <i class="bi bi-envelope"></i>
-              <h3>Email Us</h3>
-              <p>apsc2026.secretariat@gmail.com</p>
-            </div>
-          </div><!-- End Info Item -->
-
-        </div>
-
-        <div class="row gy-4 mt-1">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.163628545633!2d79.86108177500328!3d6.920719893071803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25979bfe9c3f1%3A0xe7b9c2e36dc68f65!2sBMICH%20(Bandaranaike%20Memorial%20International%20Conference%20Hall)!5e0!3m2!1sen!2slk!4v1736358239271!5m2!1sen!2slk"
-              frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-              data-aos-delay="400">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
-
   </main>
-
-  <footer id="footer" class="footer dark-background">
-
-    <div class="footer-top">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-6 footer-about">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <span class="sitename">APSC 2026</span>
-            </a>
-            <div class="footer-contact pt-3">
-              <p>Colombo</p>
-              <p>Sri Lanka</p>
-              <!-- <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p> -->
-              <p><strong>Email:</strong> <span>apsc2026.secretariat@gmail.com</span></p>
-            </div>
-          </div>
-
-          <!-- Quick Links -->
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#key-info">Key Information</a></li>
-              <li><a href="#culture-gallery">Gallery</a></li>
-              <li><a href="#highlights">Highlights</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <!-- Contact -->
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p><i class="bi bi-geo-alt me-2"></i>Colombo, Sri Lanka</p>
-            <p><i class="bi bi-envelope me-2"></i>apsc2026.secretariat@gmail.com</p>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-
-    <div class="copyright text-center">
-      <div
-        class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-        <div class="d-flex flex-column align-items-center align-items-lg-start">
-          <div>
-            © Copyright <strong><span>apsc2026</span></strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-            Designed by <a href="https://portfolio-rouge-six-72.vercel.app/" target="_blank">Tharinxdu</a>
-          </div>
-        </div>
-
-        <!-- <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-          <a href=""><i class="bi bi-twitter-x"></i></a>
-          <a href=""><i class="bi bi-facebook"></i></a>
-          <a href=""><i class="bi bi-instagram"></i></a>
-          <a href=""><i class="bi bi-linkedin"></i></a>
-        </div> -->
-
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
 </body>
-
 </html>
