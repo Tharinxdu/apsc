@@ -1106,8 +1106,8 @@ section.dark-background,
   inset: 0;
   z-index: 2;
   background:
-    radial-gradient(900px 520px at 30% 10%, rgba(30, 99, 214, 0.22), transparent 60%),
-    linear-gradient(180deg, rgba(2, 6, 23, 0.72) 0%, rgba(2, 6, 23, 0.05) 45%, rgba(2, 6, 23, 0.82) 100%);
+    radial-gradient(900px 520px at 30% 10%, rgba(30, 99, 214, 0), transparent 60%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.05) 45%, rgba(2, 6, 23, 0) 100%);
 }
 
 .hero .container {
@@ -1651,6 +1651,7 @@ section.dark-background,
 .key-info {
   /* Let the global section canvas show through (no plain white block) */
   background: transparent;
+  /* 74b2fbc2 */
   padding: 60px 0;
 }
 
@@ -2832,4 +2833,95 @@ section.dark-background,
 .registration-page .register-btn:hover {
   filter: brightness(1.03);
   color: #fff;
+}
+
+/* =========================================================
+   FIX: Mobile burger menu panel is too small (pill shape)
+   Make the menu a proper full panel with scroll
+========================================================= */
+@media (max-width: 1199px) {
+
+  /* the container should cover viewport */
+  .mobile-nav-active .navmenu {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9998 !important;
+  }
+
+  /* the actual panel */
+  .mobile-nav-active .navmenu > ul {
+    position: fixed !important;
+
+    /* give it real size */
+    top: 74px !important;          /* below header */
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 14px !important;
+
+    /* kill any “pill” sizing coming from template */
+    height: auto !important;
+    min-height: 240px !important;
+    max-height: none !important;
+
+    /* allow scrolling */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    /* make it look like a proper menu */
+    padding: 14px !important;
+    border-radius: 18px !important;
+
+    background: rgba(15, 23, 42, 0.96) !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45) !important;
+  }
+
+  /* make items readable and tappable */
+  .mobile-nav-active .navmenu a,
+  .mobile-nav-active .navmenu a:focus {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    color: #fff !important;
+    opacity: 1 !important;
+
+    padding: 12px 12px !important;
+    border-radius: 12px !important;
+    line-height: 1.2 !important;
+    font-size: 16px !important;
+    text-decoration: none !important;
+  }
+
+  .mobile-nav-active .navmenu a:hover {
+    background: rgba(255,255,255,0.08) !important;
+  }
+
+  /* dropdown submenu should not be absolute on mobile */
+  .mobile-nav-active .navmenu .dropdown ul {
+    position: static !important;
+    display: none !important;
+    margin: 8px 0 0 0 !important;
+    padding: 8px !important;
+
+    border-radius: 14px !important;
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
+
+    overflow: visible !important;
+  }
+
+  /* when opened by JS */
+  .mobile-nav-active .navmenu .dropdown > .dropdown-active {
+    display: block !important;
+  }
+
+  /* keep the X button clickable */
+  .mobile-nav-toggle {
+    position: fixed !important;
+    top: 18px !important;
+    right: 18px !important;
+    z-index: 9999 !important;
+  }
 }
