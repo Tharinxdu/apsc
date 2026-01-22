@@ -21,10 +21,14 @@
 /* Global Colors */
 :root {
   /* Modern background system (more depth, less “plain white”) */
-  --background-color: #f3f6ff;          /* cooler, slightly deeper than before */
-  --alt-background-color: #eaf0ff;      /* alt canvas (soft blue tint) */
-  --surface-color: #ffffff;             /* cards */
-  --surface-soft: #f8fbff;              /* soft surfaces / inner panels */
+  --background-color: #f3f6ff;
+  /* cooler, slightly deeper than before */
+  --alt-background-color: #eaf0ff;
+  /* alt canvas (soft blue tint) */
+  --surface-color: #ffffff;
+  /* cards */
+  --surface-soft: #f8fbff;
+  /* soft surfaces / inner panels */
 
   /* Text */
   --default-color: #1f2937;
@@ -32,7 +36,8 @@
   --muted-color: #5a677c;
 
   /* Brand */
-  --accent-color: #1e63d6; /* modern premium blue */
+  --accent-color: #1e63d6;
+  /* modern premium blue */
   --accent-strong: #0f4fc6;
   --contrast-color: #ffffff;
 
@@ -57,7 +62,8 @@
   --dot-color: rgba(11, 27, 58, 0.05);
   --glow-1: rgba(30, 99, 214, 0.12);
   --glow-2: rgba(11, 27, 58, 0.08);
-  --glow-3: rgba(99, 102, 241, 0.08); /* gentle indigo tint */
+  --glow-3: rgba(99, 102, 241, 0.08);
+  /* gentle indigo tint */
 }
 
 /* Nav Menu Colors */
@@ -256,6 +262,7 @@ p {
     transform: scale(0.6, 0.6);
     opacity: 1;
   }
+
   100% {
     transform: scale(1, 1);
     opacity: 0;
@@ -314,6 +321,7 @@ p {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -343,11 +351,9 @@ p {
   display: flex;
   align-items: center;
 
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.96) 70%,
-    rgba(255, 255, 255, 0.72) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.96) 70%,
+      rgba(255, 255, 255, 0.72) 100%);
   border-radius: 12px;
   padding: 10px 14px;
   backdrop-filter: blur(6px);
@@ -436,18 +442,19 @@ p {
     display: flex;
     list-style: none;
     align-items: center;
+    gap: 6px;
   }
 
   .navmenu li {
     position: relative;
   }
 
-  .navmenu > ul > li {
+  .navmenu>ul>li {
     white-space: nowrap;
-    padding: 14px 14px;
+    padding: 0;
   }
 
-  .navmenu > ul > li:last-child {
+  .navmenu>ul>li:last-child {
     padding-right: 0;
   }
 
@@ -455,16 +462,29 @@ p {
   .navmenu a:focus {
     color: var(--nav-color);
     font-size: 15px;
-    padding: 2px 2px;
+    padding: 10px 14px;
     font-family: var(--nav-font);
     font-weight: 650;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: color var(--transition-fast);
+    transition: background-color var(--transition-fast), color var(--transition-fast),
+      box-shadow var(--transition-fast), transform var(--transition-fast);
     position: relative;
     letter-spacing: -0.01em;
+    border-radius: 999px;
+    text-decoration: none;
+    border-bottom: 0;
+    background: transparent;
+  }
+
+  /* Remove underline indicator (fixes double-line hover bug) */
+  .navmenu>ul>li>a:before,
+  .navmenu a:before,
+  .navmenu a:after {
+    content: none !important;
+    display: none !important;
   }
 
   .navmenu a i,
@@ -475,32 +495,26 @@ p {
     transition: transform var(--transition-fast);
   }
 
-  .navmenu > ul > li > a:before {
-    content: "";
-    position: absolute;
-    height: 2px;
-    bottom: -8px;
-    left: 0;
-    background-color: color-mix(in srgb, var(--accent-color), white 10%);
-    visibility: hidden;
-    width: 0px;
-    transition: width var(--transition-fast), visibility var(--transition-fast);
-    border-radius: 99px;
+  .navmenu a:hover,
+  .navmenu li:hover>a {
+    color: var(--nav-hover-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 86%);
   }
 
-  .navmenu a:hover:before,
-  .navmenu li:hover > a:before,
-  .navmenu .active:before {
-    visibility: visible;
-    width: 100%;
-  }
-
-  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 78%);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    transform: translateY(-0.5px);
   }
 
+  .navmenu a:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent-color), white 35%);
+    outline-offset: 2px;
+  }
+
+  /* Dropdown */
   .navmenu .dropdown ul {
     margin: 0;
     padding: 10px 0;
@@ -529,16 +543,19 @@ p {
     text-transform: none;
     color: var(--nav-dropdown-color);
     font-weight: 600;
+    border-radius: 10px;
+    margin: 4px 8px;
+    background: transparent;
   }
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover > a {
+  .navmenu .dropdown ul li:hover>a {
     color: var(--nav-dropdown-hover-color);
-    background: color-mix(in srgb, var(--accent-color), transparent 94%);
+    background: color-mix(in srgb, var(--accent-color), transparent 92%);
   }
 
-  .navmenu .dropdown:hover > ul {
+  .navmenu .dropdown:hover>ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -550,7 +567,7 @@ p {
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover > ul {
+  .navmenu .dropdown .dropdown:hover>ul {
     opacity: 1;
     top: 0;
     left: -100%;
@@ -601,16 +618,20 @@ p {
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: background-color var(--transition-fast), color var(--transition-fast);
-    border-radius: 10px;
+    transition: background-color var(--transition-fast), color var(--transition-fast),
+      box-shadow var(--transition-fast);
+    border-radius: 12px;
     margin: 4px 10px;
+    text-decoration: none;
+    border-bottom: 0;
   }
 
   .navmenu a:hover,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-dropdown-hover-color);
-    background: color-mix(in srgb, var(--accent-color), transparent 93%);
+    background: color-mix(in srgb, var(--accent-color), transparent 90%);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
   }
 
   .navmenu a i,
@@ -657,7 +678,7 @@ p {
     background-color: rgba(33, 37, 41, 0.06);
   }
 
-  .navmenu .dropdown > .dropdown-active {
+  .navmenu .dropdown>.dropdown-active {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
   }
@@ -684,10 +705,11 @@ p {
     transition: var(--transition);
   }
 
-  .mobile-nav-active .navmenu > ul {
+  .mobile-nav-active .navmenu>ul {
     display: block;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Global Footer
@@ -869,6 +891,7 @@ p {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -944,7 +967,15 @@ p {
   background-color: color-mix(in srgb, var(--background-color), transparent 45%);
   position: absolute;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
+
+.page-title>.container {
+  position: relative;
+  z-index: 1;
+}
+
 
 .page-title h1 {
   font-size: clamp(2rem, 3vw, 2.75rem);
@@ -964,11 +995,11 @@ p {
   font-weight: 500;
 }
 
-.page-title .breadcrumbs ol li + li {
+.page-title .breadcrumbs ol li+li {
   padding-left: 10px;
 }
 
-.page-title .breadcrumbs ol li + li::before {
+.page-title .breadcrumbs ol li+li::before {
   content: "/";
   display: inline-block;
   padding-right: 10px;
@@ -1002,6 +1033,7 @@ section,
 }
 
 @media (max-width: 1199px) {
+
   section,
   .section {
     scroll-margin-top: 76px;
@@ -1086,132 +1118,171 @@ section.dark-background,
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .hero img {
   position: absolute;
   inset: 0;
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  filter: saturate(1.05) contrast(1.05);
+
+  /* brighter + modern */
+  filter: brightness(1.25) saturate(1.12) contrast(1.06);
+  transform: scale(1.03);
 }
 
-/* Better contrast overlay: layered gradient */
+/* 2) Lighter overlay (still keeps text readable) */
 .hero:before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   background:
-    radial-gradient(900px 520px at 30% 10%, rgba(30, 99, 214, 0), transparent 60%),
-    linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.05) 45%, rgba(2, 6, 23, 0) 100%);
+    radial-gradient(1100px 650px at 25% 15%, rgba(30, 99, 214, 0.28), transparent 62%),
+    radial-gradient(900px 520px at 85% 25%, rgba(59, 130, 246, 0.16), transparent 60%),
+    linear-gradient(180deg,
+      rgba(2, 6, 23, 0.4) 0%,
+      rgba(2, 6, 23, 0.22) 45%,
+      rgba(2, 6, 23, 0.14) 100%);
+}
+
+/* 3) Softer vignette (don’t darken too much) */
+.hero:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(1200px 700px at 50% 55%, transparent 45%, rgba(0, 0, 0, 0.30) 100%);
+  pointer-events: none;
 }
 
 .hero .container {
   position: relative;
   z-index: 3;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
+/* Title */
 .hero h2 {
   margin: 0;
-  font-size: clamp(2.25rem, 6vw, 5rem);
+  font-size: clamp(2.1rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.03;
   letter-spacing: -0.02em;
   text-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
-  word-spacing: clamp(0.2em, 0.35vw, 0.18em);
+  word-spacing: clamp(0.18em, 0.35vw, 0.22em);
 }
 
-/* .hero h2 span {
-  color: color-mix(in srgb, var(--accent-color), white 14%);
-} */
-
-/* Make ONLY the "2026" inside the hero title use a modern display font.
-   Assumes your markup is: ... <span>2026</span> ... */
+/* Make ONLY the "2026" use a modern display font */
 .hero h2 span {
   font-family: "Space Grotesk", "Sora", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: 0.02em;
   font-size: 1.08em;
   line-height: 1;
-}
 
-/* Optional: if you want it to feel more “premium” */
-.hero h2 span {
-  text-transform: none;
   font-variant-numeric: lining-nums;
   font-feature-settings: "ss01" 1, "ss02" 1;
   color: color-mix(in srgb, var(--accent-color), white 14%);
 }
 
-
+/* Base paragraph defaults in hero */
 .hero p {
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.88);
   margin: 12px 0 0 0;
   font-size: clamp(1rem, 2.1vw, 1.5rem);
   line-height: 1.45;
-  max-width: 55ch;
+  max-width: 62ch;
+  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
 }
 
-@media (max-width: 768px) {
-  .hero {
-    padding-top: 92px;
-  }
+/* =========================================================
+   Venue (replaces "Save the date")
+========================================================= */
 
-  .hero p {
-    max-width: 40ch;
-  }
-}
+/* Label pill */
+.hero-venue-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 
-.hero .about-info {
-  overflow: hidden;
-  position: relative;
-  padding: 60px 0 40px 0;
-  z-index: 2;
-  width: 100%;
-}
+  margin: 16px 0 8px;
+  padding: 10px 14px;
 
-.hero .about-info:before {
-  content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 50%);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
-.hero .about-info h2 {
-  font-size: 36px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.hero .about-info h3 {
-  font-size: 18px;
-  font-weight: 800;
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 850;
   text-transform: uppercase;
-  margin-bottom: 10px;
-  color: #fff;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.72rem, 0.6vw, 0.92rem);
+
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.hero .about-info p {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #fff;
+/* Optional: location pin icon using Bootstrap Icons */
+.hero-venue-label::before {
+  content: "\F3E7";
+  /* bi-geo-alt */
+  font-family: "bootstrap-icons";
+  font-weight: normal;
+  font-size: 1.05em;
+  opacity: 0.95;
 }
 
-/*--------------------------------------------------------------
-# Hero Section Buttons
---------------------------------------------------------------*/
+/* Venue name (strong, modern) */
+.hero-venue-name {
+  margin: 0 0 6px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.05rem, 1.15vw, 1.55rem);
+  max-width: 55ch;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.80));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: none;
+}
+
+/* Date line (secondary emphasis) */
+.hero-date {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.02rem, 1.05vw, 1.35rem);
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Fallback if blur not supported */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .hero-venue-label {
+    background: rgba(0, 0, 0, 0.38);
+  }
+}
+
+/* =========================================================
+   Buttons
+========================================================= */
+
 .hero-buttons {
   display: flex;
   justify-content: center;
   gap: 16px;
+  margin-top: 18px;
 }
 
 .btn-hero {
@@ -1222,13 +1293,13 @@ section.dark-background,
   padding: 12px 32px;
   border-radius: 999px;
   font-size: 15px;
-  font-weight: 750;
+  font-weight: 800;
   font-family: var(--nav-font);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast),
-    color var(--transition-fast), border-color var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   text-decoration: none;
   will-change: transform;
 }
@@ -1236,32 +1307,44 @@ section.dark-background,
 .btn-register {
   background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
   color: var(--contrast-color);
-  border: 1px solid color-mix(in srgb, var(--accent-color), black 8%);
-  box-shadow: 0 14px 34px rgba(30, 99, 214, 0.30);
+  border: 1px solid color-mix(in srgb, var(--accent-color), black 10%);
+  box-shadow: 0 16px 40px rgba(30, 99, 214, 0.34);
 }
 
 .btn-register:hover {
   transform: translateY(-1px);
-  box-shadow: 0 18px 44px rgba(30, 99, 214, 0.36);
+  box-shadow: 0 20px 54px rgba(30, 99, 214, 0.42);
   color: var(--contrast-color);
 }
 
 .btn-abstract {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.09);
   color: var(--contrast-color);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-abstract:hover {
   transform: translateY(-1px);
   background-color: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.42);
+  border-color: rgba(255, 255, 255, 0.40);
   color: var(--contrast-color);
 }
 
+/* =========================================================
+   Responsive polish
+========================================================= */
+
 @media (max-width: 768px) {
+  .hero {
+    padding-top: 92px;
+  }
+
+  .hero p {
+    max-width: 44ch;
+  }
+
   .btn-hero {
     padding: 11px 22px;
     font-size: 14px;
@@ -1270,7 +1353,7 @@ section.dark-background,
   .hero-buttons {
     flex-direction: column;
     gap: 12px;
-    width: min(360px, 92vw);
+    width: min(380px, 92vw);
   }
 
   .hero-buttons .btn-hero {
@@ -1278,64 +1361,26 @@ section.dark-background,
   }
 }
 
-/* Hero: Save the Date */
-.hero-save-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  margin: 14px 0 6px;
-  padding: 10px 14px;
-
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: clamp(0.70rem, 0.55vw, 0.90rem);
-
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
-  .hero-save-label {
-    background: rgba(0, 0, 0, 0.35);
-  }
-}
-
-/* Optional: add a subtle calendar icon using Bootstrap Icons (no HTML change needed) */
-.hero-save-label::before {
-  content: "\F215"; /* bi-calendar-event */
-  font-family: "bootstrap-icons";
-  font-weight: normal;
-  font-size: 1.05em;
-  opacity: 0.95;
-}
-
-/* Date line - strong but elegant */
-.hero-save-date {
-  margin: 0 0 6px;
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 650;
-  letter-spacing: 0.02em;
-  font-size: clamp(1.05rem, 1.05vw, 1.35rem);
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-}
-
-/* Mobile polish */
 @media (max-width: 575.98px) {
-  .hero-save-label {
+  .hero-venue-label {
     padding: 9px 12px;
-    letter-spacing: 0.10em;
+    letter-spacing: 0.12em;
   }
-  .hero-save-date {
-    font-size: clamp(1rem, 4.2vw, 1.25rem);
+
+  .hero-venue-name {
+    font-size: clamp(1.02rem, 4.2vw, 1.32rem);
+    max-width: 34ch;
   }
+
+  .hero-date {
+    font-size: clamp(0.98rem, 4vw, 1.2rem);
+  }
+}
+
+/* Keep legacy selectors safe if still used elsewhere */
+.hero-save-label,
+.hero-save-date {
+  display: none !important;
 }
 
 
@@ -2443,6 +2488,34 @@ section.dark-background,
   /* Add your styles here */
 }
 
+.travel-card {
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  padding: 30px 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
+}
+
+
+.policy-card {
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  padding: 30px 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
+}
+
+.abstract-card {
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  padding: 30px 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
+}
+
 .abstract-card ul li,
 .abstract-card p {
   font-size: 16px;
@@ -2502,59 +2575,6 @@ section.dark-background,
   overflow-x: auto;
 }
 
-/* Mobile stacked style */
-@media (max-width: 767px) {
-  .fees-table thead {
-    display: none;
-  }
-
-  .fees-table tr {
-    display: block;
-    margin-bottom: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 12px;
-    background: #fff;
-    box-shadow: var(--shadow-xs);
-  }
-
-  .fees-table td {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-    padding: 10px 8px;
-    border-bottom: 1px solid #f2f2f2;
-  }
-
-  .fees-table td:last-child {
-    border-bottom: none;
-  }
-
-  .fees-table td::before {
-    content: attr(data-label);
-    font-weight: 750;
-    color: var(--accent-color);
-  }
-}
-
-.register-btn {
-  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
-  color: #fff;
-  font-weight: 750;
-  padding: 12px 26px;
-  border-radius: 999px;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
-  box-shadow: 0 12px 30px rgba(30, 99, 214, 0.24);
-}
-
-.register-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 16px 38px rgba(30, 99, 214, 0.30);
-  color: #fff;
-}
-
 /* ===== Registration page (UPDATED) ===== */
 
 .registration-page .page-title--registration {
@@ -2570,12 +2590,10 @@ section.dark-background,
 .registration-page .page-title--registration .page-title__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(3, 10, 100, 0.72) 0%,
-    rgba(3, 10, 100, 0.35) 55%,
-    rgba(3, 10, 100, 0.65) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(3, 10, 100, 0.72) 0%,
+      rgba(3, 10, 100, 0.35) 55%,
+      rgba(3, 10, 100, 0.65) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -2642,14 +2660,17 @@ section.dark-background,
   height: 10px;
   width: 10px;
 }
+
 .registration-page .fees-table-responsive::-webkit-scrollbar-track {
   background: rgba(3, 10, 100, 0.05);
   border-radius: 999px;
 }
+
 .registration-page .fees-table-responsive::-webkit-scrollbar-thumb {
   background: rgba(3, 10, 100, 0.22);
   border-radius: 999px;
 }
+
 .registration-page .fees-table-responsive::-webkit-scrollbar-thumb:hover {
   background: rgba(3, 10, 100, 0.32);
 }
@@ -2657,7 +2678,8 @@ section.dark-background,
 /* ===== Table (modern + clean) ===== */
 .registration-page .fees-table {
   width: 100%;
-  min-width: 1120px; /* more breathing room for headers */
+  min-width: 1120px;
+  /* desktop scroll breathing room */
   border-collapse: separate;
   border-spacing: 0;
   font-size: 15px;
@@ -2676,23 +2698,21 @@ section.dark-background,
 
 /* top header band */
 .registration-page .fees-table thead tr:first-child th {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 10, 100, 0.12) 0%,
-    rgba(3, 10, 100, 0.08) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(3, 10, 100, 0.12) 0%,
+      rgba(3, 10, 100, 0.08) 100%);
   font-size: 15.5px;
   letter-spacing: 0.2px;
 }
 
-/* second header row can wrap a bit (prevents awkward truncation) */
+/* second header row can wrap */
 .registration-page .fees-table thead tr:nth-child(2) th {
   white-space: normal;
   font-weight: 700;
   color: rgba(11, 19, 92, 0.92);
 }
 
-/* sticky header inside scroll container */
+/* sticky header inside scroll container (desktop) */
 .registration-page .fees-table thead th {
   position: sticky;
   top: 0;
@@ -2741,6 +2761,7 @@ section.dark-background,
   left: 0;
   z-index: 4;
 }
+
 .registration-page .fees-table tbody tr td:first-child,
 .registration-page .fees-table tbody tr th:first-child {
   position: sticky;
@@ -2749,15 +2770,16 @@ section.dark-background,
   background: #fff;
 }
 
-/* keep sticky first column looking correct on zebra rows */
+/* zebra rows */
 .registration-page .fees-table tbody tr:not(.fees-group):nth-child(even) td {
   background: rgba(3, 10, 100, 0.018);
 }
+
 .registration-page .fees-table tbody tr:not(.fees-group):nth-child(even) td:first-child {
   background: rgba(3, 10, 100, 0.018);
 }
 
-/* group rows (section headers in tbody) */
+/* group rows */
 .registration-page .fees-table .fees-group th {
   background: rgba(3, 10, 100, 0.08);
   color: #030a64;
@@ -2773,6 +2795,7 @@ section.dark-background,
 .registration-page .fees-table tbody tr:not(.fees-group):hover td {
   background: rgba(13, 110, 253, 0.04);
 }
+
 .registration-page .fees-table tbody tr:not(.fees-group):hover td:first-child {
   background: rgba(13, 110, 253, 0.04);
 }
@@ -2781,12 +2804,15 @@ section.dark-background,
 .registration-page .fees-table thead tr:first-child th:first-child {
   border-top-left-radius: 18px;
 }
+
 .registration-page .fees-table thead tr:first-child th:last-child {
   border-top-right-radius: 18px;
 }
+
 .registration-page .fees-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 18px;
 }
+
 .registration-page .fees-table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 18px;
 }
@@ -2836,6 +2862,135 @@ section.dark-background,
 }
 
 /* =========================================================
+   MOBILE: stacked "card" table (NO HTML changes needed)
+   ========================================================= */
+@media (max-width: 767px) {
+
+  /* remove outer table container border/shadow so row cards look clean */
+  .registration-page .fees-table-responsive {
+    overflow: visible;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* convert table to stacked blocks */
+  .registration-page .fees-table {
+    min-width: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+    font-size: 15px;
+  }
+
+  .registration-page .fees-table thead {
+    display: none;
+  }
+
+  .registration-page .fees-table,
+  .registration-page .fees-table tbody,
+  .registration-page .fees-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  /* disable sticky behaviors on mobile (prevents weird overlaps) */
+  .registration-page .fees-table th,
+  .registration-page .fees-table td {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: auto !important;
+  }
+
+  /* group header rows become their own full-width pill */
+  .registration-page .fees-table tbody tr.fees-group {
+    margin: 18px 0 10px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .registration-page .fees-table tbody tr.fees-group th {
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(3, 10, 100, 0.12);
+    background: rgba(3, 10, 100, 0.08);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-weight: 900;
+  }
+
+  /* each data row becomes a card */
+  .registration-page .fees-table tbody tr:not(.fees-group) {
+    margin: 0 0 14px;
+    border: 1px solid rgba(3, 10, 100, 0.10);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 22px rgba(3, 10, 100, 0.06);
+  }
+
+  /* each cell becomes a label/value row */
+  .registration-page .fees-table tbody tr:not(.fees-group) td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 14px;
+    border-right: none;
+    border-bottom: 1px solid rgba(3, 10, 100, 0.08);
+    background: transparent;
+    /* card already has bg */
+    text-align: right;
+    white-space: normal;
+  }
+
+  .registration-page .fees-table tbody tr:not(.fees-group) td:last-child {
+    border-bottom: none;
+  }
+
+  /* labels (generated from column positions) */
+  .registration-page .fees-table tbody tr:not(.fees-group) td::before {
+    content: var(--fees-label);
+    flex: 0 0 auto;
+    max-width: 62%;
+    text-align: left;
+    font-weight: 800;
+    color: rgba(11, 19, 92, 0.92);
+    line-height: 1.35;
+  }
+
+  .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(1) {
+    --fees-label: "Category";
+    text-align: left;
+    font-weight: 800;
+    color: #0b135c;
+  }
+
+  .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(2) {
+    --fees-label: "Early Bird (Online)";
+    font-variant-numeric: tabular-nums;
+  }
+
+  .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(3) {
+    --fees-label: "Regular (Online)";
+    font-variant-numeric: tabular-nums;
+  }
+
+  .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(4) {
+    --fees-label: "Onsite (LKR)";
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* reduce hover effect on mobile */
+  .registration-page .fees-table tbody tr:not(.fees-group):hover td {
+    background: transparent;
+  }
+}
+
+/* =========================================================
    FIX: Mobile burger menu panel is too small (pill shape)
    Make the menu a proper full panel with scroll
 ========================================================= */
@@ -2849,11 +3004,12 @@ section.dark-background,
   }
 
   /* the actual panel */
-  .mobile-nav-active .navmenu > ul {
+  .mobile-nav-active .navmenu>ul {
     position: fixed !important;
 
     /* give it real size */
-    top: 74px !important;          /* below header */
+    top: 74px !important;
+    /* below header */
     left: 14px !important;
     right: 14px !important;
     bottom: 14px !important;
@@ -2873,8 +3029,8 @@ section.dark-background,
     border-radius: 18px !important;
 
     background: rgba(15, 23, 42, 0.96) !important;
-    border: 1px solid rgba(255,255,255,0.10) !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
   }
 
   /* make items readable and tappable */
@@ -2895,7 +3051,7 @@ section.dark-background,
   }
 
   .mobile-nav-active .navmenu a:hover {
-    background: rgba(255,255,255,0.08) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
   }
 
   /* dropdown submenu should not be absolute on mobile */
@@ -2906,14 +3062,14 @@ section.dark-background,
     padding: 8px !important;
 
     border-radius: 14px !important;
-    background: rgba(255,255,255,0.06) !important;
-    border: 1px solid rgba(255,255,255,0.10) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
 
     overflow: visible !important;
   }
 
   /* when opened by JS */
-  .mobile-nav-active .navmenu .dropdown > .dropdown-active {
+  .mobile-nav-active .navmenu .dropdown>.dropdown-active {
     display: block !important;
   }
 

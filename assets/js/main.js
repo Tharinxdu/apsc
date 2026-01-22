@@ -1,180 +1,393 @@
-/**
-* Template Name: TheEvent
-* Template URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-(function() {
+// FILE: assets/js/main.js
+(() => {
   "use strict";
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
-  function toggleScrolled() {
-    const selectBody = document.querySelector('body');
-    const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
+  const select = (el, all = false) => {
+    el = (el || "").trim();
+    if (!el) return null;
 
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
+    try {
+      return all ? Array.from(document.querySelectorAll(el)) : document.querySelector(el);
+    } catch {
+      return null; // guards invalid selectors like "#"
+    }
+  };
 
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+  const on = (type, el, listener, all = false) => {
+    const items = select(el, all);
+    if (!items) return;
+    if (all) items.forEach((i) => i.addEventListener(type, listener));
+    else items.addEventListener(type, listener);
+  };
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  const onscroll = (el, listener) => {
+    if (!el) return;
+    el.addEventListener("scroll", listener, { passive: true });
+  };
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
+  const clampPath = (pathname) => {
+    let p = pathname || "/";
+    if (!p.startsWith("/")) p = `/${p}`;
+
+    // Treat root as index.html
+    if (p === "/") return "/index.html";
+
+    // Normalize directory paths to /index.html
+    if (p.endsWith("/")) return `${p}index.html`;
+
+    return p;
+  };
+
+  const safeURL = (href) => {
+    try {
+      return new URL(href, window.location.href);
+    } catch {
+      return null;
+    }
+  };
+
+  const isHomePage = () => {
+    const p = window.location.pathname || "/";
+    return p === "/" || p.endsWith("/index.html");
+  };
+
+  const getNavLinks = () => {
+    const links = [
+      ...document.querySelectorAll(".navmenu a[href], #navmenu a[href], .navbar a[href], #navbar a[href]"),
+    ];
+
+    return links.filter((a) => {
+      const href = (a.getAttribute("href") || "").trim();
+      if (!href) return false;
+      if (href === "#" || href.toLowerCase().startsWith("javascript:")) return false;
+      return true;
+    });
+  };
+
+  const clearActive = () => {
+    const links = getNavLinks();
+    links.forEach((a) => a.classList.remove("active"));
+  };
+
+  const activateLink = (link) => {
+    if (!link) return;
+
+    clearActive();
+    link.classList.add("active");
+
+    // If inside dropdown, also mark the dropdown toggle as active
+    const dropdown = link.closest(".dropdown");
+    if (dropdown) {
+      const toggle = dropdown.querySelector(":scope > a[href]");
+      if (toggle) toggle.classList.add("active");
+    }
+  };
+
+  const activateFirstTopLink = () => {
+    const topLinks = [
+      ...document.querySelectorAll(
+        ".navmenu > ul > li > a[href], #navmenu > ul > li > a[href], .navbar > ul > li > a[href], #navbar > ul > li > a[href]"
+      ),
+    ];
+
+    const first = topLinks.find((a) => {
+      const href = (a.getAttribute("href") || "").trim();
+      if (!href) return false;
+      if (href === "#" || href.toLowerCase().startsWith("javascript:")) return false;
+      return true;
+    });
+
+    if (first) activateLink(first);
+  };
+
+  const setActiveByURL = () => {
+    const links = getNavLinks();
+    if (!links.length) return;
+
+    const currentPath = clampPath(window.location.pathname);
+    let best = null;
+    let bestScore = -1;
+
+    for (const a of links) {
+      const rawHref = (a.getAttribute("href") || "").trim();
+      const url = safeURL(rawHref);
+      if (!url) continue;
+
+      // Ignore pure hash links when deciding page-based active state
+      const isPureHash = rawHref.startsWith("#");
+      const linkPath = clampPath(url.pathname);
+
+      if (linkPath !== currentPath) continue;
+
+      // Prefer links without hash (Home should win over index.html#something)
+      const score = isPureHash ? 0 : url.hash ? 1 : 2;
+
+      // Prefer exact page link (no hash)
+      const exact = clampPath(url.pathname) === currentPath && !url.hash ? 3 : score;
+
+      if (exact > bestScore) {
+        best = a;
+        bestScore = exact;
       }
-    });
+    }
 
-  });
+    if (best) activateLink(best);
+  };
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
+  const setActiveByScroll = () => {
+    const links = getNavLinks();
+    if (!links.length) return;
 
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
+    // Only for in-page anchors that exist (either "#id" or "samepage#id")
+    const anchorLinks = links
+      .map((a) => {
+        const href = (a.getAttribute("href") || "").trim();
+        if (!href) return null;
+
+        // Pure anchor
+        if (href.startsWith("#")) {
+          if (href === "#") return null;
+          const section = select(href);
+          if (!section) return null;
+          return { a, section };
+        }
+
+        const url = safeURL(href);
+        if (!url || !url.hash || url.hash === "#") return null;
+
+        const currentPath = clampPath(window.location.pathname);
+        const linkPath = clampPath(url.pathname);
+        if (linkPath !== currentPath) return null;
+
+        const section = select(url.hash);
+        if (!section) return null;
+
+        return { a, section };
+      })
+      .filter(Boolean);
+
+    if (!anchorLinks.length) return;
+
+    const y = window.scrollY || 0;
+    const position = y + 140;
+
+    // At the very top: keep "Home" highlighted in a predictable way
+    if (isHomePage() && y < 10) {
+      activateFirstTopLink();
+      return;
+    }
+
+    let current = null;
+    let currentTop = -Infinity;
+
+    for (const item of anchorLinks) {
+      const top = item.section.offsetTop;
+      const bottom = top + item.section.offsetHeight;
+
+      if (position >= top && position < bottom) {
+        // choose the section with the greatest top (most specific)
+        if (top >= currentTop) {
+          current = item;
+          currentTop = top;
+        }
+      }
+    }
+
+    if (current) activateLink(current.a);
+  };
+
+  // Preloader (if exists)
+  const preloader = select("#preloader");
   if (preloader) {
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
       preloader.remove();
     });
   }
 
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
+  // Sticky header scrolled class (if template uses it)
+  const toggleScrolled = () => {
+    const body = document.body;
+    const header = select("#header");
+    if (!header) return;
 
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
-    }
-  }
-  scrollTop.addEventListener('click', (e) => {
+    const isScrolled = window.scrollY > 50;
+    body.classList.toggle("scrolled", isScrolled);
+    header.classList.toggle("scrolled", isScrolled);
+  };
+  window.addEventListener("load", toggleScrolled);
+  window.addEventListener("scroll", toggleScrolled, { passive: true });
+
+  // Scroll top button
+  const scrollTop = select(".scroll-top");
+  const toggleScrollTop = () => {
+    if (!scrollTop) return;
+    scrollTop.classList.toggle("active", window.scrollY > 200);
+  };
+  window.addEventListener("load", toggleScrollTop);
+  window.addEventListener("scroll", toggleScrollTop, { passive: true });
+
+  on("click", ".scroll-top", (e) => {
     e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Mobile nav toggle (BootstrapMade navmenu patterns)
+  on("click", ".mobile-nav-toggle", function (e) {
+    e.preventDefault();
+    document.body.classList.toggle("mobile-nav-active");
+    this.classList.toggle("bi-list");
+    this.classList.toggle("bi-x");
+  });
+
+  const closeMobileNavIfOpen = () => {
+    if (!document.body.classList.contains("mobile-nav-active")) return;
+
+    document.body.classList.remove("mobile-nav-active");
+
+    const toggle = select(".mobile-nav-toggle");
+    if (toggle) {
+      toggle.classList.add("bi-list");
+      toggle.classList.remove("bi-x");
+    }
+
+    // close any opened dropdown ULs
+    const opened = select(".navmenu .dropdown > ul.dropdown-active, #navmenu .dropdown > ul.dropdown-active", true);
+    if (opened) opened.forEach((ul) => ul.classList.remove("dropdown-active"));
+  };
+
+  // Close mobile nav when clicking outside (overlay area)
+  document.addEventListener("click", (e) => {
+    if (!document.body.classList.contains("mobile-nav-active")) return;
+    const insideNav = e.target.closest(".navmenu, #navmenu, .navbar, #navbar");
+    const isToggle = e.target.closest(".mobile-nav-toggle");
+    if (!insideNav && !isToggle) closeMobileNavIfOpen();
+  });
+
+  // ✅ Mobile dropdown toggle (FIXED: toggle .dropdown-active on the UL, not the LI)
+  on("click", ".navmenu .dropdown > a, #navmenu .dropdown > a, .navbar .dropdown > a, #navbar .dropdown > a", function (e) {
+    if (!document.body.classList.contains("mobile-nav-active")) return;
+
+    const parent = this.parentElement;
+    if (!parent) return;
+
+    const menu = parent.querySelector(":scope > ul");
+    if (!menu) return; // if it's not a real dropdown, do nothing
+
+    e.preventDefault();
+
+    // close sibling dropdowns (same level) for cleaner UX
+    const siblings = parent.parentElement
+      ? Array.from(parent.parentElement.children).filter((li) => li !== parent && li.classList && li.classList.contains("dropdown"))
+      : [];
+
+    siblings.forEach((sib) => {
+      const sibMenu = sib.querySelector(":scope > ul");
+      const sibToggle = sib.querySelector(":scope > a");
+      if (sibMenu) sibMenu.classList.remove("dropdown-active");
+      if (sibToggle) sibToggle.classList.remove("active");
+    });
+
+    menu.classList.toggle("dropdown-active");
+    this.classList.toggle("active", menu.classList.contains("dropdown-active"));
+  });
+
+  // Smooth scroll for in-page anchors
+  const scrollto = (hash) => {
+    if (!hash || hash === "#") return;
+
+    const target = select(hash);
+    if (!target) return;
+
+    const header = select("#header");
+    const headerHeight = header ? header.offsetHeight : 0;
+    const offset = header ? headerHeight + 12 : 80;
+
+    const elementPos = target.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+      top: elementPos - offset,
+      behavior: "smooth",
     });
-  });
+  };
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
+  on("click", ".navmenu a[href], #navmenu a[href], .navbar a[href], #navbar a[href]", function (e) {
+    const href = (this.getAttribute("href") || "").trim();
+    if (!href || href === "#") return;
 
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', aosInit);
+    // If mobile + dropdown toggle, let the dropdown handler handle it
+    if (document.body.classList.contains("mobile-nav-active")) {
+      const li = this.parentElement;
+      const hasDirectSubmenu = !!(li && li.classList && li.classList.contains("dropdown") && li.querySelector(":scope > ul"));
+      if (hasDirectSubmenu) return;
+    }
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+    // Handle pure in-page links
+    if (href.startsWith("#")) {
+      const target = select(href);
+      if (!target) return;
 
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
+      e.preventDefault();
+      closeMobileNavIfOpen();
+      activateLink(this);
+      scrollto(href);
+      return;
+    }
 
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
+    // Handle "same page + hash"
+    const url = safeURL(href);
+    if (!url || !url.hash || url.hash === "#") return;
 
-  window.addEventListener("load", initSwiper);
+    const currentPath = clampPath(window.location.pathname);
+    const linkPath = clampPath(url.pathname);
 
-  /**
-   * Frequently Asked Questions Toggle
-   */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
-    });
-  });
-
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
+    if (linkPath === currentPath && select(url.hash)) {
+      e.preventDefault();
+      closeMobileNavIfOpen();
+      activateLink(this);
+      scrollto(url.hash);
     }
   });
 
-  /**
-   * Navmenu Scrollspy
-   */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
+  // Init active state early + on load (prevents wrong item being stuck active)
+  document.addEventListener("DOMContentLoaded", () => {
+    setActiveByURL();
+    setActiveByScroll();
+  });
 
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
-  }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+  window.addEventListener("load", () => {
+    setActiveByURL();
+    setActiveByScroll();
+  });
 
+  window.addEventListener("popstate", () => {
+    setActiveByURL();
+    setActiveByScroll();
+  });
+
+  onscroll(window, () => {
+    setActiveByScroll();
+  });
+
+  // Optional libs (guarded so it never crashes if a lib is missing)
+  window.addEventListener("load", () => {
+    // AOS
+    if (window.AOS && typeof window.AOS.init === "function") {
+      window.AOS.init({
+        duration: 600,
+        easing: "ease-out",
+        once: true,
+        mirror: false,
+      });
+    }
+
+    // PureCounter
+    if (window.PureCounter) {
+      // eslint-disable-next-line no-new
+      new window.PureCounter();
+    }
+
+    // GLightbox
+    if (window.GLightbox) {
+      window.GLightbox({ selector: ".glightbox" });
+    }
+  });
 })();
