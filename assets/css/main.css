@@ -1695,13 +1695,13 @@ section.dark-background,
 --------------------------------------------------------------*/
 .key-info {
   /* Let the global section canvas show through (no plain white block) */
-  background: transparent;
+  background: #ffc10717;
   /* 74b2fbc2 */
   padding: 60px 0;
 }
 
 .key-info .info-card {
-  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
+  background: color-mix(in srgb, rgb(13 110 253 / 12%), var(--alt-background-color) 10%);
   border-radius: var(--radius-lg);
   padding: 30px 22px;
   box-shadow: var(--shadow-sm);
