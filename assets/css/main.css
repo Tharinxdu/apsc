@@ -328,7 +328,7 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Global Header
+# Global Header (UPDATED for 2 logos + mobile burger overlap fix)
 --------------------------------------------------------------*/
 .header {
   --background-color: rgba(1, 8, 33, 0.18);
@@ -345,11 +345,21 @@ p {
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
+/* Ensure header inner layout keeps logos + toggle from overlapping */
+.header .container,
+.header .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 /* Logo Area */
 .header .logo {
   line-height: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
 
   background: linear-gradient(to right,
       rgba(255, 255, 255, 0.96) 70%,
@@ -358,14 +368,29 @@ p {
   padding: 10px 14px;
   backdrop-filter: blur(6px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
+/* Both logos */
 .header .logo img {
   max-height: 56px;
-  margin-right: 10px;
+  width: auto;
+  height: auto;
+  margin-right: 0;
+  /* use gap instead */
   transition: transform var(--transition-fast);
+  display: block;
 }
 
+/* Slightly size down the 2nd logo (if present) */
+.header .logo img+img {
+  max-height: 50px;
+  opacity: 0.98;
+}
+
+/* Hover */
 .header .logo img:hover {
   transform: scale(1.04);
 }
@@ -389,6 +414,7 @@ p {
   border-radius: 999px;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
   box-shadow: 0 10px 26px rgba(30, 99, 214, 0.28);
+  flex: 0 0 auto;
 }
 
 .header .cta-btn:hover,
@@ -398,17 +424,36 @@ p {
   box-shadow: 0 14px 34px rgba(30, 99, 214, 0.34);
 }
 
+/* Mobile menu toggle (BootstrapMade commonly uses .mobile-nav-toggle) */
+.header .mobile-nav-toggle {
+  flex: 0 0 auto;
+  margin-left: auto;
+  z-index: 5;
+
+  width: 44px;
+  height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Responsive Ordering */
 @media (max-width: 1200px) {
   .header .logo {
     order: 1;
     padding: 8px 10px;
+
+    /* KEY: reserve room for burger so logos don't collide */
+    max-width: calc(100% - 58px);
+    overflow: hidden;
   }
 
   .header .btn-getstarted {
     order: 2;
     margin: 0 15px 0 0;
     padding: 6px 15px;
+    flex: 0 0 auto;
   }
 
   .header .navmenu {
@@ -417,6 +462,31 @@ p {
 
   .header .logo img {
     max-height: 44px;
+  }
+
+  .header .logo img+img {
+    max-height: 40px;
+  }
+
+  .header .mobile-nav-toggle {
+    order: 4;
+    margin-left: 8px;
+  }
+}
+
+/* Small phones: shrink more */
+@media (max-width: 576px) {
+  .header .logo {
+    gap: 3px;
+    max-width: calc(100% - 62px);
+  }
+
+  .header .logo img {
+    max-height: 36px;
+  }
+
+  .header .logo img+img {
+    max-height: 32px;
   }
 }
 
@@ -1029,7 +1099,7 @@ section,
   overflow: clip;
 
   /* subtle separators (UX polish) */
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgb(7 7 7 / 25%);
 }
 
 @media (max-width: 1199px) {
@@ -1107,7 +1177,7 @@ section.dark-background,
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section (UPDATED FULL CSS)
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
@@ -1121,6 +1191,10 @@ section.dark-background,
 
   overflow: hidden;
   isolation: isolate;
+
+  /* typography tokens */
+  --hero-font-heading: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --hero-font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .hero img {
@@ -1168,15 +1242,38 @@ section.dark-background,
   padding-right: 16px;
 }
 
-/* Title */
+/* Headings: SAME color + SAME base font family */
 .hero h2 {
+  font-family: var(--hero-font-heading);
+  color: rgba(255, 255, 255, 0.96);
+  text-transform: uppercase;
+
   margin: 0;
-  font-size: clamp(2.1rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.03;
   letter-spacing: -0.02em;
   text-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
   word-spacing: clamp(0.18em, 0.35vw, 0.22em);
+}
+
+/* APSC (short mark): compact + “logo-ish” */
+.hero .hero-title-short {
+  font-size: clamp(4rem, 8.2vw, 8.2rem);
+  letter-spacing: 0.08em;
+  /* logo spacing */
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: clamp(6px, 1.2vw, 14px);
+  opacity: 0.98;
+}
+
+/* Long title: main hierarchy, readable */
+.hero .hero-title-long {
+  font-size: clamp(2.8rem, 7.2vw, 5.2rem);
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  line-height: 1.05;
+  max-width: 18ch;
 }
 
 /* Make ONLY the "2026" use a modern display font */
@@ -1189,17 +1286,102 @@ section.dark-background,
 
   font-variant-numeric: lining-nums;
   font-feature-settings: "ss01" 1, "ss02" 1;
-  color: color-mix(in srgb, var(--accent-color), white 14%);
+  color: color-mix(in srgb, #00296f, white 16%);
 }
 
 /* Base paragraph defaults in hero */
 .hero p {
-  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--hero-font-body);
+  color: rgba(255, 255, 255, 0.92);
   margin: 12px 0 0 0;
   font-size: clamp(1rem, 2.1vw, 1.5rem);
   line-height: 1.45;
   max-width: 62ch;
-  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+
+  /* stronger readability on bright hero areas (no image change) */
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.55),
+    0 10px 26px rgba(0, 0, 0, 0.42),
+    0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* Venue + Date: SAME font + SAME color (not white), text-only, modern + prominent */
+.hero .hero-venue-name,
+.hero .hero-date {
+  font-family: var(--hero-font-body);
+  color: color-mix(in srgb, #ffc107, #fee7a2 100%);
+  letter-spacing: 0.012em;
+  line-height: 1.2;
+  max-width: min(72ch, 92vw);
+
+  /* “stroke” + shadow combo for high exposure backgrounds */
+  -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.28);
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.62),
+    0 14px 34px rgba(0, 0, 0, 0.48),
+    0 30px 90px rgba(0, 0, 0, 0.32);
+}
+
+/* Venue line 1 (primary) */
+.hero .hero-venue-name {
+  margin: 16px 0 0 0;
+  font-size: clamp(1.12rem, 2.6vw, 2.9rem);
+  font-weight: 900;
+}
+
+/* Venue full form (second line) — same style family, softer hierarchy */
+.hero .hero-venue-name+.hero-venue-name {
+  margin-top: 8px;
+  font-size: clamp(1.02rem, 2.15vw, 1.8rem);
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+/* Date line — same look as venue, but different “style” via spacing + tracking + subtle glow */
+.hero .hero-date {
+  margin-top: 14px;
+  font-size: clamp(1.12rem, 2.6vw, 1.75rem);
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.68),
+    0 14px 34px rgba(0, 0, 0, 0.52),
+    0 18px 60px rgba(30, 99, 214, 0.22),
+    0 34px 110px rgba(0, 0, 0, 0.34);
+}
+
+/* Optional: add a minimal divider feel without boxes */
+.hero .hero-venue-name+.hero-venue-name::after {
+  content: "";
+  display: block;
+  margin: 12px auto 0;
+  width: min(240px, 56vw);
+  height: 2px;
+  border-radius: 999px;
+
+  /* slightly stronger so it shows even on bright areas */
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 0, 0, 0.22),
+      rgba(255, 255, 255, 0.22),
+      rgba(0, 0, 0, 0.22),
+      transparent);
+  opacity: 0.95;
+  filter: blur(0.2px);
+}
+
+/* small-screen tuning */
+@media (max-width: 575px) {
+  .hero .hero-title-long {
+    max-width: 22ch;
+    line-height: 1.08;
+  }
+
+  .hero .hero-title-short {
+    letter-spacing: 0.16em;
+  }
 }
 
 /* =========================================================
@@ -1304,32 +1486,75 @@ section.dark-background,
   will-change: transform;
 }
 
-.btn-register {
-  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
-  color: var(--contrast-color);
-  border: 1px solid color-mix(in srgb, var(--accent-color), black 10%);
-  box-shadow: 0 16px 40px rgba(30, 99, 214, 0.34);
-}
-
-.btn-register:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 20px 54px rgba(30, 99, 214, 0.42);
-  color: var(--contrast-color);
-}
-
+/* Unified modern hero button (applies to BOTH) */
+.btn-register,
 .btn-abstract {
-  background-color: rgba(255, 255, 255, 0.09);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 22px;
+  border-radius: 999px;
+
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+
   color: var(--contrast-color);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border: 1px solid color-mix(in srgb, var(--accent-color), black 12%);
+
+  box-shadow:
+    0 16px 40px rgba(30, 99, 214, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
 
+/* Same hover for both: clearly clickable */
+.btn-register:hover,
 .btn-abstract:hover {
-  transform: translateY(-1px);
-  background-color: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.40);
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 60px rgba(30, 99, 214, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  filter: brightness(1.04) saturate(1.05);
   color: var(--contrast-color);
+}
+
+/* Active / pressed */
+.btn-register:active,
+.btn-abstract:active {
+  transform: translateY(0px) scale(0.985);
+  box-shadow:
+    0 12px 30px rgba(30, 99, 214, 0.34),
+    inset 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Keyboard accessibility */
+.btn-register:focus-visible,
+.btn-abstract:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), white 55%);
+  outline-offset: 4px;
+}
+
+/* Disabled (if you ever use it on <button>) */
+.btn-register:disabled,
+.btn-abstract:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+  box-shadow: none;
 }
 
 /* =========================================================
@@ -2507,6 +2732,21 @@ section.dark-background,
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
 }
 
+.abstract-guidelines-page .register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1f5eff 0%, #0b3fb7 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(3, 10, 100, 0.22);
+}
+
 .abstract-card {
   background: var(--surface-color);
   border-radius: var(--radius-lg);
@@ -2571,9 +2811,9 @@ section.dark-background,
 }
 
 /* Desktop table (default) */
-.fees-table-responsive {
+/* .fees-table-responsive {
   overflow-x: auto;
-}
+} */
 
 /* ===== Registration page (UPDATED) ===== */
 
@@ -2645,14 +2885,76 @@ section.dark-background,
   margin: 22px 0;
 }
 
-/* ===== Table wrapper (better looking) ===== */
-.registration-page .fees-table-responsive {
-  width: 100%;
-  overflow: auto;
-  border-radius: 18px;
+/* =========================================================
+   FEES TABLES — UPDATED (SEPARATE + TITLES CENTERED)
+   ========================================================= */
+
+.registration-page .fees-tables {
+  display: grid;
+  gap: 22px;
+  margin-top: 14px;
+}
+
+/* Card wrapper per table (makes tables feel separate) */
+.registration-page .fees-table-card {
+  position: relative;
+  border-radius: 22px;
+  padding: 18px;
   border: 1px solid rgba(3, 10, 100, 0.10);
-  background: #fff;
-  box-shadow: 0 10px 26px rgba(3, 10, 100, 0.06);
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.42) 100%);
+  box-shadow: 0 18px 44px rgba(3, 10, 100, 0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* subtle accent line */
+.registration-page .fees-table-card::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 10px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(13, 110, 253, 0.25), rgba(3, 10, 100, 0.18));
+  opacity: 0.9;
+}
+
+/* Title centered above each table */
+.registration-page .fees-table-card__head {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 10px 14px;
+}
+
+.registration-page .fees-table-title {
+  margin: 0;
+  max-width: 920px;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.25;
+  color: #030a64;
+  letter-spacing: 0.2px;
+}
+
+/* Desktop table (default) */
+.fees-table-responsive {
+  overflow: auto;
+  /* keep x-scroll + clip rounded corners */
+  border-radius: 18px;
+  border: 1px solid rgba(3, 10, 100, 0.12);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 12px 28px rgba(3, 10, 100, 0.08);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* focus ring for keyboard users (tabindex=0 container) */
+.registration-page .fees-table-responsive:focus {
+  outline: 3px solid rgba(13, 110, 253, 0.22);
+  outline-offset: 4px;
 }
 
 /* nicer scrollbars (optional, safe) */
@@ -2738,7 +3040,8 @@ section.dark-background,
   padding: 16px 16px;
   border-bottom: 1px solid rgba(3, 10, 100, 0.10);
   color: #111827;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.90);
+  /* less harsh than pure #fff */
   vertical-align: middle;
 }
 
@@ -2767,7 +3070,7 @@ section.dark-background,
   position: sticky;
   left: 0;
   z-index: 2;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 /* zebra rows */
@@ -2865,8 +3168,16 @@ section.dark-background,
    MOBILE: stacked "card" table (NO HTML changes needed)
    ========================================================= */
 @media (max-width: 767px) {
+  .registration-page .fees-table-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
 
-  /* remove outer table container border/shadow so row cards look clean */
+  .registration-page .fees-table-title {
+    font-size: 16.5px;
+  }
+
+  /* remove inner table container border/shadow so row cards look clean */
   .registration-page .fees-table-responsive {
     overflow: visible;
     border: none;
