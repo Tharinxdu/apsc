@@ -1265,15 +1265,45 @@ section.dark-background,
   line-height: 1;
   margin-bottom: clamp(6px, 1.2vw, 14px);
   opacity: 0.98;
+
+  text-shadow:
+    /* outline ring */
+    -1px -1px 0 rgba(0, 0, 0, .75),
+    0px -1px 0 rgba(0, 0, 0, .75),
+    1px -1px 0 rgba(0, 0, 0, .75),
+    -1px 0px 0 rgba(0, 0, 0, .75),
+    1px 0px 0 rgba(0, 0, 0, .75),
+    -1px 1px 0 rgba(0, 0, 0, .75),
+    0px 1px 0 rgba(0, 0, 0, .75),
+    1px 1px 0 rgba(0, 0, 0, .75),
+
+    /* depth */
+    0 2px 10px rgba(0, 0, 0, .50),
+    0 18px 50px rgba(0, 0, 0, .35);
 }
 
 /* Long title: main hierarchy, readable */
 .hero .hero-title-long {
-  font-size: clamp(2.8rem, 7.2vw, 5.2rem);
+  font-size: clamp(2.4rem, 6.2vw, 4.6rem);
   letter-spacing: -0.02em;
   font-weight: 900;
   line-height: 1.05;
   max-width: 18ch;
+
+  text-shadow:
+    /* outline ring */
+    -1px -1px 0 rgba(0, 0, 0, .75),
+    0px -1px 0 rgba(0, 0, 0, .75),
+    1px -1px 0 rgba(0, 0, 0, .75),
+    -1px 0px 0 rgba(0, 0, 0, .75),
+    1px 0px 0 rgba(0, 0, 0, .75),
+    -1px 1px 0 rgba(0, 0, 0, .75),
+    0px 1px 0 rgba(0, 0, 0, .75),
+    1px 1px 0 rgba(0, 0, 0, .75),
+
+    /* depth */
+    0 2px 10px rgba(0, 0, 0, .50),
+    0 18px 50px rgba(0, 0, 0, .35);
 }
 
 /* Make ONLY the "2026" use a modern display font */
@@ -1305,22 +1335,33 @@ section.dark-background,
     0 24px 70px rgba(0, 0, 0, 0.35);
 }
 
-/* Venue + Date: SAME font + SAME color (not white), text-only, modern + prominent */
 .hero .hero-venue-name,
 .hero .hero-date {
   font-family: var(--hero-font-body);
-  color: color-mix(in srgb, #ffc107, #fee7a2 100%);
+  color: color-mix(in srgb, #070fff, #c8e4f3 100%);
   letter-spacing: 0.012em;
   line-height: 1.2;
   max-width: min(72ch, 92vw);
 
-  /* “stroke” + shadow combo for high exposure backgrounds */
-  -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.28);
+  -webkit-text-stroke: 0;
+  /* optional */
+
   text-shadow:
-    0 2px 0 rgba(0, 0, 0, 0.62),
-    0 14px 34px rgba(0, 0, 0, 0.48),
-    0 30px 90px rgba(0, 0, 0, 0.32);
+    /* outline ring */
+    -1px -1px 0 rgba(0, 0, 0, .75),
+    0px -1px 0 rgba(0, 0, 0, .75),
+    1px -1px 0 rgba(0, 0, 0, .75),
+    -1px 0px 0 rgba(0, 0, 0, .75),
+    1px 0px 0 rgba(0, 0, 0, .75),
+    -1px 1px 0 rgba(0, 0, 0, .75),
+    0px 1px 0 rgba(0, 0, 0, .75),
+    1px 1px 0 rgba(0, 0, 0, .75),
+
+    /* depth */
+    0 2px 10px rgba(0, 0, 0, .50),
+    0 18px 50px rgba(0, 0, 0, .35);
 }
+
 
 /* Venue line 1 (primary) */
 .hero .hero-venue-name {
@@ -1346,10 +1387,19 @@ section.dark-background,
   text-transform: uppercase;
 
   text-shadow:
-    0 2px 0 rgba(0, 0, 0, 0.68),
-    0 14px 34px rgba(0, 0, 0, 0.52),
-    0 18px 60px rgba(30, 99, 214, 0.22),
-    0 34px 110px rgba(0, 0, 0, 0.34);
+    /* outline ring */
+    -1px -1px 0 rgba(0, 0, 0, .75),
+    0px -1px 0 rgba(0, 0, 0, .75),
+    1px -1px 0 rgba(0, 0, 0, .75),
+    -1px 0px 0 rgba(0, 0, 0, .75),
+    1px 0px 0 rgba(0, 0, 0, .75),
+    -1px 1px 0 rgba(0, 0, 0, .75),
+    0px 1px 0 rgba(0, 0, 0, .75),
+    1px 1px 0 rgba(0, 0, 0, .75),
+
+    /* depth */
+    0 2px 10px rgba(0, 0, 0, .50),
+    0 18px 50px rgba(0, 0, 0, .35);
 }
 
 /* Optional: add a minimal divider feel without boxes */
@@ -2660,6 +2710,125 @@ section.dark-background,
   transform: translateY(-1px);
   box-shadow: 0 16px 38px rgba(30, 99, 214, 0.28);
 }
+
+/* =========================================================
+   Contact: Split panels (Venue/Map + Contact/Form)
+   Add this at the END of your CSS
+========================================================= */
+
+.contact .contact-panel {
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 6%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  height: 100%;
+}
+
+@media (min-width: 992px) {
+  .contact .contact-panel {
+    padding: 22px;
+  }
+}
+
+.contact .contact-panel__head {
+  margin-bottom: 14px;
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color), transparent 92%),
+    color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%)
+  );
+  border: 1px solid color-mix(in srgb, var(--border-color), transparent 0%);
+}
+
+.contact .contact-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--heading-color);
+  letter-spacing: -0.02em;
+}
+
+.contact .contact-panel__title i {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+.contact .contact-panel__subtitle {
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Map wrapper with consistent styling */
+.contact .contact-map-wrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
+  background: var(--surface-color);
+}
+
+.contact .contact-map-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 380px;
+}
+
+@media (max-width: 575px) {
+  .contact .contact-map-wrap iframe {
+    height: 320px;
+  }
+}
+
+.contact .contact-map-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 12px;
+  font-weight: 800;
+  text-decoration: none;
+
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 20%);
+  border-top: 1px solid var(--border-color);
+
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.contact .contact-map-link:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* Email link style inside info card */
+.contact .contact-email {
+  color: var(--accent-color);
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-color), transparent 65%);
+}
+
+.contact .contact-email:hover {
+  border-bottom-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+}
+
 
 /*--------------------------------------------------------------
 # Events Section
