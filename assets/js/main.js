@@ -2,6 +2,9 @@
 (() => {
   "use strict";
 
+  /**
+   * Safe helpers
+   */
   const select = (el, all = false) => {
     el = (el || "").trim();
     if (!el) return null;
@@ -13,28 +16,18 @@
     }
   };
 
-  const on = (type, el, listener, all = false) => {
+  const on = (type, el, listener, all = false, options) => {
     const items = select(el, all);
     if (!items) return;
-    if (all) items.forEach((i) => i.addEventListener(type, listener));
-    else items.addEventListener(type, listener);
-  };
-
-  const onscroll = (el, listener) => {
-    if (!el) return;
-    el.addEventListener("scroll", listener, { passive: true });
+    if (all) items.forEach((i) => i.addEventListener(type, listener, options));
+    else items.addEventListener(type, listener, options);
   };
 
   const clampPath = (pathname) => {
     let p = pathname || "/";
     if (!p.startsWith("/")) p = `/${p}`;
-
-    // Treat root as index.html
     if (p === "/") return "/index.html";
-
-    // Normalize directory paths to /index.html
     if (p.endsWith("/")) return `${p}index.html`;
-
     return p;
   };
 
@@ -51,6 +44,234 @@
     return p === "/" || p.endsWith("/index.html");
   };
 
+  /**
+   * Template-equivalent: Apply .scrolled class to body when header is sticky
+   * (matches original template logic, but guarded)
+   */
+  function toggleScrolled() {
+    const body = document.body;
+    const header = select("#header");
+    if (!header) return;
+
+    const headerIsSticky =
+      header.classList.contains("scroll-up-sticky") ||
+      header.classList.contains("sticky-top") ||
+      header.classList.contains("fixed-top");
+
+    if (!headerIsSticky) return;
+
+    body.classList.toggle("scrolled", window.scrollY > 100);
+  }
+
+  document.addEventListener("scroll", toggleScrolled, { passive: true });
+  window.addEventListener("load", toggleScrolled);
+
+  /**
+   * Preloader
+   */
+  const preloader = select("#preloader");
+  if (preloader) {
+    window.addEventListener("load", () => preloader.remove());
+  }
+
+  /**
+   * Scroll top button
+   * (original uses 100; keep it consistent)
+   */
+  const scrollTop = select(".scroll-top");
+  function toggleScrollTop() {
+    if (!scrollTop) return;
+    scrollTop.classList.toggle("active", window.scrollY > 100);
+  }
+
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop, { passive: true });
+
+  on("click", ".scroll-top", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /**
+   * Mobile nav toggle (original behavior, but guarded)
+   */
+  const mobileNavToggleBtn = select(".mobile-nav-toggle");
+
+  function mobileNavToogle() {
+    document.body.classList.toggle("mobile-nav-active");
+
+    if (mobileNavToggleBtn) {
+      mobileNavToggleBtn.classList.toggle("bi-list");
+      mobileNavToggleBtn.classList.toggle("bi-x");
+    }
+  }
+
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      mobileNavToogle();
+    });
+  }
+
+  /**
+   * Hide mobile nav on same-page/hash links (original: #navmenu a)
+   */
+  on(
+    "click",
+    "#navmenu a, .navmenu a, #navbar a, .navbar a",
+    () => {
+      if (document.body.classList.contains("mobile-nav-active")) {
+        mobileNavToogle();
+      }
+    },
+    true
+  );
+
+  /**
+   * Toggle mobile nav dropdowns
+   * - Original template uses ".navmenu .toggle-dropdown"
+   * - Also supports dropdown pattern where anchor itself is the toggle (common in templates)
+   */
+  on(
+    "click",
+    ".navmenu .toggle-dropdown, #navmenu .toggle-dropdown, .navbar .toggle-dropdown, #navbar .toggle-dropdown",
+    function (e) {
+      e.preventDefault();
+
+      // Original logic:
+      // this.parentNode.classList.toggle('active');
+      // this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+      const parent = this?.parentNode;
+      const next = parent?.nextElementSibling;
+
+      if (parent && parent.classList) parent.classList.toggle("active");
+      if (next && next.classList) next.classList.toggle("dropdown-active");
+
+      e.stopImmediatePropagation();
+    },
+    true
+  );
+
+  // Additional safe dropdown toggling for common structure: .dropdown > a + ul
+  on(
+    "click",
+    ".navmenu .dropdown > a, #navmenu .dropdown > a, .navbar .dropdown > a, #navbar .dropdown > a",
+    function (e) {
+      if (!document.body.classList.contains("mobile-nav-active")) return;
+
+      const parent = this?.parentElement;
+      const menu = parent ? parent.querySelector(":scope > ul") : null;
+      if (!menu) return;
+
+      e.preventDefault();
+      menu.classList.toggle("dropdown-active");
+      this.classList.toggle("active", menu.classList.contains("dropdown-active"));
+    },
+    true
+  );
+
+  /**
+   * Smooth scroll helper (used for hash scroll correction and in-page clicks)
+   */
+  const scrollto = (hash) => {
+    if (!hash || hash === "#") return;
+    const target = select(hash);
+    if (!target) return;
+
+    const scrollMarginTop = parseInt(getComputedStyle(target).scrollMarginTop || "0", 10);
+    const top = target.offsetTop - (Number.isFinite(scrollMarginTop) ? scrollMarginTop : 0);
+
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  /**
+   * Correct scrolling position upon page load for URLs containing hash links.
+   * (original behavior; guarded)
+   */
+  window.addEventListener("load", () => {
+    if (!window.location.hash) return;
+    const section = select(window.location.hash);
+    if (!section) return;
+
+    setTimeout(() => scrollto(window.location.hash), 100);
+  });
+
+  /**
+   * FAQ toggle
+   */
+  on(
+    "click",
+    ".faq-item h3, .faq-item .faq-toggle",
+    function () {
+      const parent = this?.parentNode;
+      if (parent && parent.classList) parent.classList.toggle("faq-active");
+    },
+    true
+  );
+
+  /**
+   * Initiate AOS (guarded)
+   */
+  function aosInit() {
+    if (!window.AOS || typeof window.AOS.init !== "function") return;
+    window.AOS.init({
+      duration: 600,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false,
+    });
+  }
+  window.addEventListener("load", aosInit);
+
+  /**
+   * Initiate GLightbox (guarded)
+   */
+  window.addEventListener("load", () => {
+    if (!window.GLightbox) return;
+    window.GLightbox({ selector: ".glightbox" });
+  });
+
+  /**
+   * Init swiper sliders (guarded + matches original pattern)
+   * - Reads JSON from .swiper-config inside each .init-swiper
+   * - Supports swiper-tab + optional initSwiperWithCustomPagination if present
+   */
+  function initSwiper() {
+    if (!window.Swiper) return;
+
+    const swiperRoots = select(".init-swiper", true) || [];
+    swiperRoots.forEach((swiperElement) => {
+      const configEl = swiperElement.querySelector(".swiper-config");
+      if (!configEl) return;
+
+      let config = null;
+      try {
+        config = JSON.parse((configEl.innerHTML || "").trim());
+      } catch {
+        return;
+      }
+
+      if (swiperElement.classList.contains("swiper-tab")) {
+        if (typeof window.initSwiperWithCustomPagination === "function") {
+          window.initSwiperWithCustomPagination(swiperElement, config);
+        } else {
+          // fallback
+          // eslint-disable-next-line no-new
+          new window.Swiper(swiperElement, config);
+        }
+      } else {
+        // eslint-disable-next-line no-new
+        new window.Swiper(swiperElement, config);
+      }
+    });
+  }
+
+  window.addEventListener("load", initSwiper);
+
+  /**
+   * Navmenu active state (URL + ScrollSpy)
+   * - Keeps your safer logic, but aligned with template behavior
+   */
   const getNavLinks = () => {
     const links = [
       ...document.querySelectorAll(".navmenu a[href], #navmenu a[href], .navbar a[href], #navbar a[href]"),
@@ -65,13 +286,11 @@
   };
 
   const clearActive = () => {
-    const links = getNavLinks();
-    links.forEach((a) => a.classList.remove("active"));
+    getNavLinks().forEach((a) => a.classList.remove("active"));
   };
 
   const activateLink = (link) => {
     if (!link) return;
-
     clearActive();
     link.classList.add("active");
 
@@ -113,16 +332,11 @@
       const url = safeURL(rawHref);
       if (!url) continue;
 
-      // Ignore pure hash links when deciding page-based active state
       const isPureHash = rawHref.startsWith("#");
       const linkPath = clampPath(url.pathname);
-
       if (linkPath !== currentPath) continue;
 
-      // Prefer links without hash (Home should win over index.html#something)
       const score = isPureHash ? 0 : url.hash ? 1 : 2;
-
-      // Prefer exact page link (no hash)
       const exact = clampPath(url.pathname) === currentPath && !url.hash ? 3 : score;
 
       if (exact > bestScore) {
@@ -138,13 +352,11 @@
     const links = getNavLinks();
     if (!links.length) return;
 
-    // Only for in-page anchors that exist (either "#id" or "samepage#id")
     const anchorLinks = links
       .map((a) => {
         const href = (a.getAttribute("href") || "").trim();
         if (!href) return null;
 
-        // Pure anchor
         if (href.startsWith("#")) {
           if (href === "#") return null;
           const section = select(href);
@@ -169,9 +381,8 @@
     if (!anchorLinks.length) return;
 
     const y = window.scrollY || 0;
-    const position = y + 140;
+    const position = y + 200; // closer to original
 
-    // At the very top: keep "Home" highlighted in a predictable way
     if (isHomePage() && y < 10) {
       activateFirstTopLink();
       return;
@@ -184,8 +395,7 @@
       const top = item.section.offsetTop;
       const bottom = top + item.section.offsetHeight;
 
-      if (position >= top && position < bottom) {
-        // choose the section with the greatest top (most specific)
+      if (position >= top && position <= bottom) {
         if (top >= currentTop) {
           current = item;
           currentTop = top;
@@ -196,158 +406,46 @@
     if (current) activateLink(current.a);
   };
 
-  // Preloader (if exists)
-  const preloader = select("#preloader");
-  if (preloader) {
-    window.addEventListener("load", () => {
-      preloader.remove();
-    });
-  }
+  /**
+   * In-page link click handling (keeps your safe behavior)
+   */
+  on(
+    "click",
+    ".navmenu a[href], #navmenu a[href], .navbar a[href], #navbar a[href]",
+    function (e) {
+      const href = (this.getAttribute("href") || "").trim();
+      if (!href || href === "#") return;
 
-  // Sticky header scrolled class (if template uses it)
-  const toggleScrolled = () => {
-    const body = document.body;
-    const header = select("#header");
-    if (!header) return;
+      // Pure in-page links
+      if (href.startsWith("#")) {
+        const target = select(href);
+        if (!target) return;
 
-    const isScrolled = window.scrollY > 50;
-    body.classList.toggle("scrolled", isScrolled);
-    header.classList.toggle("scrolled", isScrolled);
-  };
-  window.addEventListener("load", toggleScrolled);
-  window.addEventListener("scroll", toggleScrolled, { passive: true });
+        e.preventDefault();
+        activateLink(this);
+        scrollto(href);
+        return;
+      }
 
-  // Scroll top button
-  const scrollTop = select(".scroll-top");
-  const toggleScrollTop = () => {
-    if (!scrollTop) return;
-    scrollTop.classList.toggle("active", window.scrollY > 200);
-  };
-  window.addEventListener("load", toggleScrollTop);
-  window.addEventListener("scroll", toggleScrollTop, { passive: true });
+      // Same page + hash
+      const url = safeURL(href);
+      if (!url || !url.hash || url.hash === "#") return;
 
-  on("click", ".scroll-top", (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+      const currentPath = clampPath(window.location.pathname);
+      const linkPath = clampPath(url.pathname);
 
-  // Mobile nav toggle (BootstrapMade navmenu patterns)
-  on("click", ".mobile-nav-toggle", function (e) {
-    e.preventDefault();
-    document.body.classList.toggle("mobile-nav-active");
-    this.classList.toggle("bi-list");
-    this.classList.toggle("bi-x");
-  });
+      if (linkPath === currentPath && select(url.hash)) {
+        e.preventDefault();
+        activateLink(this);
+        scrollto(url.hash);
+      }
+    },
+    true
+  );
 
-  const closeMobileNavIfOpen = () => {
-    if (!document.body.classList.contains("mobile-nav-active")) return;
-
-    document.body.classList.remove("mobile-nav-active");
-
-    const toggle = select(".mobile-nav-toggle");
-    if (toggle) {
-      toggle.classList.add("bi-list");
-      toggle.classList.remove("bi-x");
-    }
-
-    // close any opened dropdown ULs
-    const opened = select(".navmenu .dropdown > ul.dropdown-active, #navmenu .dropdown > ul.dropdown-active", true);
-    if (opened) opened.forEach((ul) => ul.classList.remove("dropdown-active"));
-  };
-
-  // Close mobile nav when clicking outside (overlay area)
-  document.addEventListener("click", (e) => {
-    if (!document.body.classList.contains("mobile-nav-active")) return;
-    const insideNav = e.target.closest(".navmenu, #navmenu, .navbar, #navbar");
-    const isToggle = e.target.closest(".mobile-nav-toggle");
-    if (!insideNav && !isToggle) closeMobileNavIfOpen();
-  });
-
-  // ✅ Mobile dropdown toggle (FIXED: toggle .dropdown-active on the UL, not the LI)
-  on("click", ".navmenu .dropdown > a, #navmenu .dropdown > a, .navbar .dropdown > a, #navbar .dropdown > a", function (e) {
-    if (!document.body.classList.contains("mobile-nav-active")) return;
-
-    const parent = this.parentElement;
-    if (!parent) return;
-
-    const menu = parent.querySelector(":scope > ul");
-    if (!menu) return; // if it's not a real dropdown, do nothing
-
-    e.preventDefault();
-
-    // close sibling dropdowns (same level) for cleaner UX
-    const siblings = parent.parentElement
-      ? Array.from(parent.parentElement.children).filter((li) => li !== parent && li.classList && li.classList.contains("dropdown"))
-      : [];
-
-    siblings.forEach((sib) => {
-      const sibMenu = sib.querySelector(":scope > ul");
-      const sibToggle = sib.querySelector(":scope > a");
-      if (sibMenu) sibMenu.classList.remove("dropdown-active");
-      if (sibToggle) sibToggle.classList.remove("active");
-    });
-
-    menu.classList.toggle("dropdown-active");
-    this.classList.toggle("active", menu.classList.contains("dropdown-active"));
-  });
-
-  // Smooth scroll for in-page anchors
-  const scrollto = (hash) => {
-    if (!hash || hash === "#") return;
-
-    const target = select(hash);
-    if (!target) return;
-
-    const header = select("#header");
-    const headerHeight = header ? header.offsetHeight : 0;
-    const offset = header ? headerHeight + 12 : 80;
-
-    const elementPos = target.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: "smooth",
-    });
-  };
-
-  on("click", ".navmenu a[href], #navmenu a[href], .navbar a[href], #navbar a[href]", function (e) {
-    const href = (this.getAttribute("href") || "").trim();
-    if (!href || href === "#") return;
-
-    // If mobile + dropdown toggle, let the dropdown handler handle it
-    if (document.body.classList.contains("mobile-nav-active")) {
-      const li = this.parentElement;
-      const hasDirectSubmenu = !!(li && li.classList && li.classList.contains("dropdown") && li.querySelector(":scope > ul"));
-      if (hasDirectSubmenu) return;
-    }
-
-    // Handle pure in-page links
-    if (href.startsWith("#")) {
-      const target = select(href);
-      if (!target) return;
-
-      e.preventDefault();
-      closeMobileNavIfOpen();
-      activateLink(this);
-      scrollto(href);
-      return;
-    }
-
-    // Handle "same page + hash"
-    const url = safeURL(href);
-    if (!url || !url.hash || url.hash === "#") return;
-
-    const currentPath = clampPath(window.location.pathname);
-    const linkPath = clampPath(url.pathname);
-
-    if (linkPath === currentPath && select(url.hash)) {
-      e.preventDefault();
-      closeMobileNavIfOpen();
-      activateLink(this);
-      scrollto(url.hash);
-    }
-  });
-
-  // Init active state early + on load (prevents wrong item being stuck active)
+  /**
+   * Init active state early + on navigation
+   */
   document.addEventListener("DOMContentLoaded", () => {
     setActiveByURL();
     setActiveByScroll();
@@ -363,31 +461,21 @@
     setActiveByScroll();
   });
 
-  onscroll(window, () => {
-    setActiveByScroll();
-  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      setActiveByScroll();
+    },
+    { passive: true }
+  );
 
-  // Optional libs (guarded so it never crashes if a lib is missing)
+  /**
+   * Optional libs: PureCounter (guarded)
+   */
   window.addEventListener("load", () => {
-    // AOS
-    if (window.AOS && typeof window.AOS.init === "function") {
-      window.AOS.init({
-        duration: 600,
-        easing: "ease-out",
-        once: true,
-        mirror: false,
-      });
-    }
-
-    // PureCounter
     if (window.PureCounter) {
       // eslint-disable-next-line no-new
       new window.PureCounter();
-    }
-
-    // GLightbox
-    if (window.GLightbox) {
-      window.GLightbox({ selector: ".glightbox" });
     }
   });
 })();

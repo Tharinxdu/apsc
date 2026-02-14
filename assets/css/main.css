@@ -2410,32 +2410,37 @@ section.dark-background,
 }
 
 /*--------------------------------------------------------------
-# Faq Section
+# Faq Section (Fixed header height / clean expand)
 --------------------------------------------------------------*/
 .faq .faq-container .faq-item {
   background-color: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
   position: relative;
-  padding: 20px;
   margin-bottom: 15px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-xs);
+
+  /* ✅ key change: don't pad the whole card */
+  padding: 0;
 }
 
 .faq .faq-container .faq-item:last-child {
   margin-bottom: 0;
 }
 
+/* ✅ Header (question row) gets its own padding */
 .faq .faq-container .faq-item h3 {
   font-weight: 750;
   font-size: 16px;
   line-height: 24px;
-  margin: 0 30px 0 0;
-  transition: color var(--transition-fast);
+  margin: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  /* left/right padding with space for the toggle icon */
+  padding: 20px 56px 20px 20px;
 }
 
 .faq .faq-container .faq-item h3 .num {
@@ -2448,24 +2453,13 @@ section.dark-background,
   color: var(--accent-color);
 }
 
-.faq .faq-container .faq-item .faq-content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: 0.3s ease-in-out;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.faq .faq-container .faq-item .faq-content p {
-  margin-bottom: 0;
-  overflow: hidden;
-  color: color-mix(in srgb, var(--default-color), transparent 18%);
-}
-
+/* ✅ Toggle icon stays aligned with header only */
 .faq .faq-container .faq-item .faq-toggle {
   position: absolute;
-  top: 20px;
   right: 20px;
+  top: 32px;                 /* fallback */
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 16px;
   line-height: 0;
   transition: 0.3s;
@@ -2476,6 +2470,26 @@ section.dark-background,
   color: var(--accent-color);
 }
 
+/* ✅ Content collapses cleanly without affecting header padding */
+.faq .faq-container .faq-item .faq-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+/* Inner content padding (so header doesn't “grow”) */
+.faq .faq-container .faq-item .faq-content > * {
+  padding: 0 20px 20px 20px;
+}
+
+.faq .faq-container .faq-item .faq-content p {
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
+}
+
+/* Active state */
 .faq .faq-container .faq-active {
   background-color: color-mix(in srgb, var(--accent-color), transparent 96%);
   border-color: color-mix(in srgb, var(--accent-color), transparent 75%);
@@ -2485,17 +2499,19 @@ section.dark-background,
   color: var(--accent-color);
 }
 
+/* ✅ Expand answer area */
 .faq .faq-container .faq-active .faq-content {
-  grid-template-rows: 1fr;
-  visibility: visible;
+  max-height: 800px; /* increase if your answers are longer */
   opacity: 1;
-  padding-top: 10px;
+  visibility: visible;
 }
 
+/* Rotate chevron */
 .faq .faq-container .faq-active .faq-toggle {
-  transform: rotate(90deg);
+  transform: translateY(-50%) rotate(90deg);
   color: var(--accent-color);
 }
+
 
 /*--------------------------------------------------------------
 # Buy Tickets Section
@@ -3560,5 +3576,185 @@ section.dark-background,
     top: 18px !important;
     right: 18px !important;
     z-index: 9999 !important;
+  }
+}
+
+/* =========================================================
+   Committees Page (simple + modern)
+   Add to END of assets/css/main.css
+========================================================= */
+
+.committees-section {
+  padding-top: 54px;
+  padding-bottom: 70px;
+}
+
+.committees-hero {
+  margin-bottom: 26px;
+}
+
+.committees-hero__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.committee-lead-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.committee-lead-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-strong);
+}
+
+.committee-lead-card__img {
+  background: color-mix(in srgb, var(--alt-background-color), white 40%);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.committee-lead-card__img img {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 4px solid color-mix(in srgb, var(--accent-color), white 8%);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+.committee-lead-card__body {
+  padding: 16px 16px 18px;
+  text-align: center;
+}
+
+.committee-lead-card__role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  font-weight: 850;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 78%);
+}
+
+.committee-lead-card__name {
+  margin-top: 12px;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--heading-color);
+  letter-spacing: -0.02em;
+}
+
+.committees-lists {
+  margin-top: 18px;
+}
+
+.committee-list-card {
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 8%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  height: 100%;
+}
+
+@media (min-width: 992px) {
+  .committee-list-card {
+    padding: 22px;
+  }
+}
+
+.committee-list-card__head {
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color), transparent 92%),
+    color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%)
+  );
+  border: 1px solid color-mix(in srgb, var(--border-color), transparent 0%);
+  margin-bottom: 14px;
+}
+
+.committee-list-card__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--heading-color);
+  letter-spacing: -0.02em;
+}
+
+.committee-list-card__title i {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+.committee-list-card__sub {
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.committee-list {
+  margin: 0;
+  padding-left: 18px;
+  color: color-mix(in srgb, var(--default-color), transparent 12%);
+  line-height: 1.75;
+  font-size: 15.5px;
+}
+
+.committee-list li {
+  padding: 6px 0;
+}
+
+.committees-note {
+  margin-top: 18px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 12%);
+  color: color-mix(in srgb, var(--default-color), transparent 18%);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .committees-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .committee-lead-card__img img {
+    max-width: 320px;
   }
 }
