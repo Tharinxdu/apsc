@@ -45,80 +45,55 @@
 
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/APSO Logo.png" alt="">
-        <!-- <img src="assets/img/ASN Logo.png" alt=""> -->
-        <img src="assets/img/NSASL Logo.png" alt="">
-        <!-- Uncomment the line below if you also wish to use an text logo -->
-        <!-- <h1 class="sitename">TheEvent</h1>  -->
-      </a>
+    <!-- Left (Organized by + 2 main logos) -->
+    <a href="index.html" class="logo logo--primary d-flex align-items-center me-auto">
+      <span class="logo__label">Organized by</span>
+      <img src="assets/img/APSO Logo.png" alt="APSO Logo">
+      <img src="assets/img/NSASL Logo.png" alt="NSASL Logo">
+    </a>
 
-      <a href="" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/ASN Logo.png" alt="">
-        <img src="assets/img/AON.jpeg" alt="">
-        <img src="assets/img/SLCEP Logo.png" alt="">
-        <img src="assets/img/CCP Logo.jpeg" alt="">
-        <img src="assets/img/SSOS Logo.png" alt="">
-        <!-- Uncomment the line below if you also wish to use an text logo -->
-        <!-- <h1 class="sitename">TheEvent</h1>  -->
-      </a>
+    <!-- Nav -->
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="./registration-guidelines.html">Registration</a></li>
+        <li><a href="./abstract-guidelines.html">Abstract</a></li>
+        <li><a href="#program">Scientific Program</a></li>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home<br></a></li>
-          <li><a href="./registration-guidelines.html">Registration<br></a></li>
-          <li><a href="./abstract-guidelines.html">Abstract<br></a></li>
-          <li><a href="#program" class="active">Scientific Program<br></a></li>
-          <li class="dropdown">
-            <a href="#"><span>General Information</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
+        <li class="dropdown">
+          <a href="#"><span>General Information</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            <li><a href="travel.html">Travel Information</a></li>
+            <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
+            <li><a href="committees.html">Committees</a></li>
+            <li><a href="venue.html">Venue</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </li>
 
-              <li><a href="travel.html">Travel Information</a></li>
-              <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
-              <li><a href="committees.html">Committees</a></li>
-              <li><a href="venue.html">Venue</a></li>
-              <li><a href="faq.html">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-              <!-- <li class="dropdown">
-                <a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
-                </ul>
-              </li> -->
+      <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Toggle navigation"></i>
+    </nav>
 
-            </ul>
-          </li>
-          <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                    class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li> -->
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+    <!-- Right (Partner logos) -->
+    <a href="index.html" class="logo logo--partners d-flex align-items-center ms-auto" aria-label="Partner logos">
+      <span class="logo__strip">
+        <img src="assets/img/ASN Logo.png" alt="ASN Logo">
+        <img src="assets/img/AON.jpeg" alt="AON Logo">
+        <img src="assets/img/SLCEP Logo.png" alt="SLCEP Logo">
+        <img src="assets/img/CCP Logo.jpeg" alt="CCP Logo">
+        <img src="assets/img/SSOS Logo.png" alt="SSOS Logo">
+        <img src="assets/img/CSRRSL Logo.png" alt="CSRRSL Logo">
+      </span>
+    </a>
 
-      <!-- <a class="cta-btn d-none d-sm-block" href="https://portal.apsc2026.lk/registration" target="_blank">Register
-        now</a> -->
-
-    </div>
-  </header>
+  </div>
+</header>
 
   <main class="main">
 
@@ -136,7 +111,7 @@
         <h2 data-aos="fade-up" data-aos-delay="100" class="hero-title-long">
           THE ASIA PACIFIC<br>STROKE CONFERENCE
         </h2>
-        <br>
+        <br><br>
 
         <p data-aos="fade-up" data-aos-delay="200" class="hero-venue-name">Venue: BMICH</p>
         <p data-aos="fade-up" data-aos-delay="200" class="hero-venue-name">
@@ -346,9 +321,9 @@
               <div class="icon mb-3">
                 <i class="bi bi-geo-alt"></i>
               </div>
-              <h4>Explore Sri Lanka</h4>
-              <p>Plan your trip, discover destinations, and travel tips for Sri Lanka.</p>
-              <a href="https://www.sltda.gov.lk/en" class="btn-read-more" target="_blank" rel="noopener noreferrer">
+              <h4>Special Airfare for APSC 2026 Delegates</h4>
+              <p>Enjoy exclusive airfare discounts for APSC 2026 delegates flying to Colombo.</p>
+              <a href="https://www.srilankan.com/en_uk/special-offers/promotion/apsc-2026" class="btn-read-more" target="_blank" rel="noopener noreferrer">
                 More
               </a>
             </div>

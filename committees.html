@@ -24,46 +24,56 @@
 
   <!-- Header -->
   <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/APSO Logo.png" alt="APSO">
-        <img src="assets/img/NSASL Logo.png" alt="NSASL">
-      </a>
+            <!-- Left (Organized by + 2 main logos) -->
+            <a href="index.html" class="logo logo--primary d-flex align-items-center me-auto">
+                <span class="logo__label">Organized by</span>
+                <img src="assets/img/APSO Logo.png" alt="APSO Logo">
+                <img src="assets/img/NSASL Logo.png" alt="NSASL Logo">
+            </a>
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/ASN Logo.png" alt="ASN">
-        <img src="assets/img/AON.jpeg" alt="AON">
-        <img src="assets/img/SLCEP Logo.png" alt="SLCEP">
-        <img src="assets/img/CCP Logo.jpeg" alt="CCP">
-        <img src="assets/img/SSOS Logo.png" alt="SSOS">
-      </a>
+            <!-- Nav -->
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="./registration-guidelines.html">Registration</a></li>
+                    <li><a href="./abstract-guidelines.html">Abstract</a></li>
+                    <li><a href="#program">Scientific Program</a></li>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="registration-guidelines.html">Registration</a></li>
-          <li><a href="abstract-guidelines.html">Abstract</a></li>
-          <li><a href="index.html#scientific-program">Scientific Program</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>General Information</span> <i
+                                class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="travel.html">Travel Information</a></li>
+                            <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
+                            <li><a href="committees.html">Committees</a></li>
+                            <li><a href="venue.html">Venue</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
 
-          <li class="dropdown">
-            <a href="#"><span>General Information</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="travel.html">Travel Information</a></li>
-              <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
-              <li><a href="committees.html">Committees</a></li>
-              <li><a href="venue.html">Venue</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-            </ul>
-          </li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
 
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Toggle navigation"></i>
+            </nav>
 
-    </div>
-  </header>
+            <!-- Right (Partner logos) -->
+            <a href="index.html" class="logo logo--partners d-flex align-items-center ms-auto"
+                aria-label="Partner logos">
+                <span class="logo__strip">
+                    <img src="assets/img/ASN Logo.png" alt="ASN Logo">
+                    <img src="assets/img/AON.jpeg" alt="AON Logo">
+                    <img src="assets/img/SLCEP Logo.png" alt="SLCEP Logo">
+                    <img src="assets/img/CCP Logo.jpeg" alt="CCP Logo">
+                    <img src="assets/img/SSOS Logo.png" alt="SSOS Logo">
+                    <img src="assets/img/CSRRSL Logo.png" alt="CSRRSL Logo">
+                </span>
+            </a>
+
+        </div>
+    </header>
 
   <main class="main">
 

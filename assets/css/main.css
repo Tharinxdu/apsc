@@ -328,7 +328,7 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Global Header (UPDATED for 2 logos + mobile burger overlap fix)
+# Global Header (UPDATED: Organized-by label + partner logos kept visible)
 --------------------------------------------------------------*/
 .header {
   --background-color: rgba(1, 8, 33, 0.18);
@@ -336,7 +336,8 @@ p {
 
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 18px 0;
+  padding: 14px 0;
+  /* slightly tighter */
   transition: all var(--transition);
   z-index: 997;
 
@@ -345,16 +346,18 @@ p {
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
-/* Ensure header inner layout keeps logos + toggle from overlapping */
+/* Main header row */
 .header .container,
 .header .container-fluid {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* Logo Area */
+/*--------------------------------------------------------------
+# Logo blocks (left + right)
+--------------------------------------------------------------*/
 .header .logo {
   line-height: 1;
   display: inline-flex;
@@ -364,30 +367,59 @@ p {
   background: linear-gradient(to right,
       rgba(255, 255, 255, 0.96) 70%,
       rgba(255, 255, 255, 0.72) 100%);
-  border-radius: 12px;
-  padding: 10px 14px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+  border-radius: 14px;
+  padding: 10px 12px;
 
-  flex: 0 1 auto;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  flex: 0 0 auto;
   min-width: 0;
+  text-decoration: none;
 }
 
-/* Both logos */
+/* ✅ “Organized by” label INSIDE left logo block */
+.header .logo .logo__label {
+  font-family: var(--nav-font);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(11, 27, 58, 0.70);
+  white-space: nowrap;
+
+  /* subtle separator, not a separate section */
+  padding-right: 10px;
+  margin-right: 2px;
+  border-right: 1px solid rgba(11, 27, 58, 0.14);
+}
+
+/* Logo images */
 .header .logo img {
-  max-height: 56px;
   width: auto;
   height: auto;
-  margin-right: 0;
-  /* use gap instead */
-  transition: transform var(--transition-fast);
   display: block;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* Slightly size down the 2nd logo (if present) */
-.header .logo img+img {
-  max-height: 50px;
+/* ✅ Left (main) logos should be more prominent */
+.header .logo--primary img {
+  max-height: 52px;
+  opacity: 1;
+}
+
+.header .logo--primary img+img {
+  max-height: 46px;
   opacity: 0.98;
+}
+
+/* ✅ Right (partner) logos smaller */
+.header .logo--partners img {
+  max-height: 28px;
+  opacity: 0.92;
 }
 
 /* Hover */
@@ -395,15 +427,61 @@ p {
   transform: scale(1.04);
 }
 
-.header .logo h1 {
-  font-size: 30px;
-  margin: 0;
-  font-weight: 800;
-  color: var(--heading-color);
-  letter-spacing: -0.03em;
+/*--------------------------------------------------------------
+# Nav: keep it centered + allow side logos to exist
+--------------------------------------------------------------*/
+@media (min-width: 1200px) {
+  .header .navmenu {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    /* center nav between logo groups */
+  }
 }
 
-/* CTA Button */
+/*--------------------------------------------------------------
+# Right logos: keep visible without pushing nav
+# Use “logo strip” that can scroll horizontally when needed
+--------------------------------------------------------------*/
+.header .logo--partners {
+  padding: 10px 12px;
+
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.96) 70%,
+      rgba(255, 255, 255, 0.72) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Wrap the partner images in a scrollable strip (no wrap/overflow issues) */
+.header .logo--partners .logo__strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  max-width: 380px;
+  /* prevents nav from being crushed */
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.header .logo--partners .logo__strip::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
+}
+
+/*--------------------------------------------------------------
+# CTA Button (unchanged)
+--------------------------------------------------------------*/
 .header .cta-btn,
 .header .cta-btn:focus {
   color: var(--contrast-color);
@@ -424,7 +502,9 @@ p {
   box-shadow: 0 14px 34px rgba(30, 99, 214, 0.34);
 }
 
-/* Mobile menu toggle (BootstrapMade commonly uses .mobile-nav-toggle) */
+/*--------------------------------------------------------------
+# Mobile nav toggle
+--------------------------------------------------------------*/
 .header .mobile-nav-toggle {
   flex: 0 0 auto;
   margin-left: auto;
@@ -438,59 +518,9 @@ p {
   justify-content: center;
 }
 
-/* Responsive Ordering */
-@media (max-width: 1200px) {
-  .header .logo {
-    order: 1;
-    padding: 8px 10px;
-
-    /* KEY: reserve room for burger so logos don't collide */
-    max-width: calc(100% - 58px);
-    overflow: hidden;
-  }
-
-  .header .btn-getstarted {
-    order: 2;
-    margin: 0 15px 0 0;
-    padding: 6px 15px;
-    flex: 0 0 auto;
-  }
-
-  .header .navmenu {
-    order: 3;
-  }
-
-  .header .logo img {
-    max-height: 44px;
-  }
-
-  .header .logo img+img {
-    max-height: 40px;
-  }
-
-  .header .mobile-nav-toggle {
-    order: 4;
-    margin-left: 8px;
-  }
-}
-
-/* Small phones: shrink more */
-@media (max-width: 576px) {
-  .header .logo {
-    gap: 3px;
-    max-width: calc(100% - 62px);
-  }
-
-  .header .logo img {
-    max-height: 36px;
-  }
-
-  .header .logo img+img {
-    max-height: 32px;
-  }
-}
-
-/* Header Shadow + Background on Scroll */
+/*--------------------------------------------------------------
+# Header Shadow + Background on Scroll
+--------------------------------------------------------------*/
 .scrolled .header {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   --background-color: rgba(1, 8, 33, 0.86);
@@ -498,8 +528,9 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Navigation Menu
+# Navigation Menu (kept same behavior, slight tightening)
 --------------------------------------------------------------*/
+
 /* Desktop Navigation */
 @media (min-width: 1200px) {
   .navmenu {
@@ -513,6 +544,7 @@ p {
     list-style: none;
     align-items: center;
     gap: 6px;
+    flex-wrap: nowrap;
   }
 
   .navmenu li {
@@ -524,10 +556,6 @@ p {
     padding: 0;
   }
 
-  .navmenu>ul>li:last-child {
-    padding-right: 0;
-  }
-
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
@@ -535,34 +563,27 @@ p {
     padding: 10px 14px;
     font-family: var(--nav-font);
     font-weight: 650;
+
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
+
     transition: background-color var(--transition-fast), color var(--transition-fast),
       box-shadow var(--transition-fast), transform var(--transition-fast);
-    position: relative;
-    letter-spacing: -0.01em;
+
     border-radius: 999px;
     text-decoration: none;
     border-bottom: 0;
     background: transparent;
   }
 
-  /* Remove underline indicator (fixes double-line hover bug) */
+  /* Remove underline indicator */
   .navmenu>ul>li>a:before,
   .navmenu a:before,
   .navmenu a:after {
     content: none !important;
     display: none !important;
-  }
-
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 6px;
-    transition: transform var(--transition-fast);
   }
 
   .navmenu a:hover,
@@ -577,11 +598,6 @@ p {
     background: color-mix(in srgb, var(--accent-color), transparent 78%);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
     transform: translateY(-0.5px);
-  }
-
-  .navmenu a:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--accent-color), white 35%);
-    outline-offset: 2px;
   }
 
   /* Dropdown */
@@ -619,7 +635,6 @@ p {
   }
 
   .navmenu .dropdown ul a:hover,
-  .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
     color: var(--nav-dropdown-hover-color);
     background: color-mix(in srgb, var(--accent-color), transparent 92%);
@@ -630,30 +645,40 @@ p {
     top: 100%;
     visibility: visible;
   }
-
-  .navmenu .dropdown .dropdown ul {
-    top: 0;
-    left: -90%;
-    visibility: hidden;
-  }
-
-  .navmenu .dropdown .dropdown:hover>ul {
-    opacity: 1;
-    top: 0;
-    left: -100%;
-    visibility: visible;
-  }
 }
 
 /* Mobile Navigation */
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
-    color: var(--nav-color);
+    /* make it look like a real button */
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     font-size: 28px;
     line-height: 0;
-    margin-right: 10px;
+
     cursor: pointer;
-    transition: color var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+
+    /* ✅ high contrast */
+    color: #fff;
+    background: rgba(1, 8, 33, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .mobile-nav-toggle:hover {
+    transform: translateY(-1px);
+    background: rgba(1, 8, 33, 0.70);
   }
 
   .navmenu {
@@ -704,34 +729,6 @@ p {
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
   }
 
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    transition: var(--transition-fast);
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-  }
-
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-  }
-
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-    transform: rotate(180deg);
-  }
-
   .navmenu .dropdown ul {
     position: static;
     display: none;
@@ -744,13 +741,8 @@ p {
     border: 1px solid var(--border-color);
   }
 
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.06);
-  }
-
   .navmenu .dropdown>.dropdown-active {
     display: block;
-    background-color: rgba(33, 37, 41, 0.03);
   }
 
   .mobile-nav-active {
@@ -758,13 +750,26 @@ p {
   }
 
   .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
-    margin-right: 0;
+    position: fixed;
+    top: 16px;
+    right: 16px;
     z-index: 9999;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+    line-height: 0;
+
+    color: #fff;
+    background: rgba(2, 6, 23, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   }
 
   .mobile-nav-active .navmenu {
@@ -777,6 +782,43 @@ p {
 
   .mobile-nav-active .navmenu>ul {
     display: block;
+  }
+
+  /* ✅ Tablet/mobile: keep partner logos visible but smaller */
+  .header .logo--partners .logo__strip {
+    max-width: 220px;
+  }
+
+  .header .logo--partners img {
+    max-height: 24px;
+  }
+
+  .header .logo--primary img {
+    max-height: 42px;
+  }
+
+  .header .logo--primary img+img {
+    max-height: 38px;
+  }
+
+  .header .logo .logo__label {
+    font-size: 10px;
+  }
+}
+
+/* Very small phones: hide partner logos to avoid breaking header */
+@media (max-width: 575px) {
+  .header .logo--partners {
+    display: none;
+  }
+
+  .header .logo--primary {
+    padding: 8px 10px;
+  }
+
+  .header .logo .logo__label {
+    display: none;
+    /* save space on tiny screens */
   }
 }
 
@@ -1290,6 +1332,7 @@ section.dark-background,
   font-weight: 900;
   line-height: 1.05;
   max-width: 18ch;
+  color: #a3c7ff;
 
   text-shadow:
     /* outline ring */
@@ -2457,7 +2500,8 @@ section.dark-background,
 .faq .faq-container .faq-item .faq-toggle {
   position: absolute;
   right: 20px;
-  top: 32px;                 /* fallback */
+  top: 32px;
+  /* fallback */
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
@@ -2480,7 +2524,7 @@ section.dark-background,
 }
 
 /* Inner content padding (so header doesn't “grow”) */
-.faq .faq-container .faq-item .faq-content > * {
+.faq .faq-container .faq-item .faq-content>* {
   padding: 0 20px 20px 20px;
 }
 
@@ -2501,7 +2545,8 @@ section.dark-background,
 
 /* ✅ Expand answer area */
 .faq .faq-container .faq-active .faq-content {
-  max-height: 800px; /* increase if your answers are longer */
+  max-height: 800px;
+  /* increase if your answers are longer */
   opacity: 1;
   visibility: visible;
 }
@@ -2752,11 +2797,9 @@ section.dark-background,
   margin-bottom: 14px;
   padding: 14px 14px 12px;
   border-radius: 16px;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color), transparent 92%),
-    color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--accent-color), transparent 92%),
+      color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%));
   border: 1px solid color-mix(in srgb, var(--border-color), transparent 0%);
 }
 
@@ -3684,11 +3727,9 @@ section.dark-background,
 .committee-list-card__head {
   padding: 14px 14px 12px;
   border-radius: 16px;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color), transparent 92%),
-    color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--accent-color), transparent 92%),
+      color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%));
   border: 1px solid color-mix(in srgb, var(--border-color), transparent 0%);
   margin-bottom: 14px;
 }

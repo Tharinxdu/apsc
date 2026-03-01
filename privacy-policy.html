@@ -26,30 +26,20 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/APSO Logo.png" alt="">
-        <!-- <img src="assets/img/ASN Logo.png" alt=""> -->
-        <img src="assets/img/NSASL Logo.png" alt="">
-        <!-- Uncomment the line below if you also wish to use an text logo -->
-        <!-- <h1 class="sitename">TheEvent</h1>  -->
-      </a>
+            <!-- Left (Organized by + 2 main logos) -->
+            <a href="index.html" class="logo logo--primary d-flex align-items-center me-auto">
+                <span class="logo__label">Organized by</span>
+                <img src="assets/img/APSO Logo.png" alt="APSO Logo">
+                <img src="assets/img/NSASL Logo.png" alt="NSASL Logo">
+            </a>
 
-      <a href="" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/ASN Logo.png" alt="">
-        <img src="assets/img/AON.jpeg" alt="">
-        <img src="assets/img/SLCEP Logo.png" alt="">
-        <img src="assets/img/CCP Logo.jpeg" alt="">
-        <img src="assets/img/SSOS Logo.png" alt="">
-        <!-- Uncomment the line below if you also wish to use an text logo -->
-        <!-- <h1 class="sitename">TheEvent</h1>  -->
-      </a>
-
+            <!-- Nav -->
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="registration-guidelines.html">Registration</a></li>
-                    <li><a href="abstract-guidelines.html">Abstract</a></li>
-                    <li><a href="index.html#scientific-program">Scientific Program</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="./registration-guidelines.html">Registration</a></li>
+                    <li><a href="./abstract-guidelines.html">Abstract</a></li>
+                    <li><a href="#program">Scientific Program</a></li>
 
                     <li class="dropdown">
                         <a href="#"><span>General Information</span> <i
@@ -58,18 +48,29 @@
                             <li><a href="travel.html">Travel Information</a></li>
                             <li><a href="privacy-policy.html">Privacy & Data Protection Policy</a></li>
                             <li><a href="committees.html">Committees</a></li>
-                            <li><a href="venue.html" >Venue</a></li>
-                            <li><a href="faq.html" >FAQ</a></li>
-
+                            <li><a href="venue.html">Venue</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
                         </ul>
                     </li>
+
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+
+                <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Toggle navigation"></i>
             </nav>
 
-            <!-- <a class="cta-btn d-none d-sm-block" href="https://portal.apsc2026.lk/registration" target="_blank">Register
-                now</a> -->
+            <!-- Right (Partner logos) -->
+            <a href="index.html" class="logo logo--partners d-flex align-items-center ms-auto"
+                aria-label="Partner logos">
+                <span class="logo__strip">
+                    <img src="assets/img/ASN Logo.png" alt="ASN Logo">
+                    <img src="assets/img/AON.jpeg" alt="AON Logo">
+                    <img src="assets/img/SLCEP Logo.png" alt="SLCEP Logo">
+                    <img src="assets/img/CCP Logo.jpeg" alt="CCP Logo">
+                    <img src="assets/img/SSOS Logo.png" alt="SSOS Logo">
+                    <img src="assets/img/CSRRSL Logo.png" alt="CSRRSL Logo">
+                </span>
+            </a>
 
         </div>
     </header>
@@ -248,73 +249,73 @@
     <!-- Footer -->
     <footer id="footer" class="footer dark-background">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-6 footer-about">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <span class="sitename">APSC 2026</span>
-            </a>
-            <div class="footer-contact pt-3">
-              <p> Venue: BMICH <br>(Bandaranaike Memorial International Conference Hall)</p>
-              <p>26th - 28th November 2026</p>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6 footer-about">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">APSC 2026</span>
+                        </a>
+                        <div class="footer-contact pt-3">
+                            <p> Venue: BMICH <br>(Bandaranaike Memorial International Conference Hall)</p>
+                            <p>26th - 28th November 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html#hero">Home</a></li>
+                            <li><a href="index.html#key-info">Key Information</a></li>
+                            <li><a href="index.html#culture-gallery">Gallery</a></li>
+                            <li><a href="index.html#highlights">Highlights</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="bi bi-geo-alt me-2"></i>Wijerama House,
+                            06. Wijerama Mawatha,
+                            Colombo 7 Sri Lanka</p>
+                        <p><i class="bi bi-envelope me-2"></i>apsc2026.secretariat@gmail.com</p>
+                    </div>
+
+
+                </div>
             </div>
-          </div>
-
-          <!-- Quick Links -->
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="index.html#hero">Home</a></li>
-              <li><a href="index.html#key-info">Key Information</a></li>
-              <li><a href="index.html#culture-gallery">Gallery</a></li>
-              <li><a href="index.html#highlights">Highlights</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <!-- Contact -->
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p><i class="bi bi-geo-alt me-2"></i>Wijerama House,
-              06. Wijerama Mawatha,
-              Colombo 7 Sri Lanka</p>
-            <p><i class="bi bi-envelope me-2"></i>apsc2026.secretariat@gmail.com</p>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-
-    <div class="copyright text-center">
-      <div
-        class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-        <div class="d-flex flex-column align-items-center align-items-lg-start">
-          <div>
-            © Copyright <strong><span>apsc2026</span></strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-            Designed by <a href="https://portfolio-rouge-six-72.vercel.app/" target="_blank">Tharinxdu</a>
-          </div>
         </div>
 
-        <!-- <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+        <div class="copyright text-center">
+            <div
+                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+                <div class="d-flex flex-column align-items-center align-items-lg-start">
+                    <div>
+                        © Copyright <strong><span>apsc2026</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        <!-- All the links in the footer should remain intact. -->
+                        <!-- You can delete the links only if you purchased the pro version. -->
+                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+                        Designed by <a href="https://portfolio-rouge-six-72.vercel.app/" target="_blank">Tharinxdu</a>
+                    </div>
+                </div>
+
+                <!-- <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
           <a href=""><i class="bi bi-twitter-x"></i></a>
           <a href=""><i class="bi bi-facebook"></i></a>
           <a href=""><i class="bi bi-instagram"></i></a>
           <a href=""><i class="bi bi-linkedin"></i></a>
         </div> -->
 
-      </div>
-    </div>
+            </div>
+        </div>
 
-  </footer>
+    </footer>
 
     <!-- Scripts -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
