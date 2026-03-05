@@ -26,23 +26,59 @@ function infoRow(label, valueHtml) {
   `;
 }
 
+function isValidEmail(v) {
+  return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(v || "").trim());
+}
+
+/**
+ * Accepts:
+ * - "a@x.com"
+ * - "a@x.com, b@y.com"
+ * - ["a@x.com", "b@y.com"]
+ * Returns an array of valid emails.
+ */
+function parseEmailList(input) {
+  if (!input) return [];
+
+  const arr = Array.isArray(input)
+    ? input
+    : String(input)
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+  // validate + dedupe
+  const out = [];
+  const seen = new Set();
+  for (const e of arr) {
+    const email = String(e).trim();
+    if (!email) continue;
+    if (!isValidEmail(email)) continue;
+    const key = email.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(email);
+  }
+  return out;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return json(res, 405, { ok: false, message: "Method not allowed" });
   }
 
-  const { name, email, subject, message } = req.body || {};
+  const { name, email, subject, message, bcc } = req.body || {};
 
   // Validate input
   if (!name || !email || !subject || !message) {
     return json(res, 400, { ok: false, message: "Please fill in all fields." });
   }
 
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(email))) {
+  if (!isValidEmail(email)) {
     return json(res, 400, { ok: false, message: "Please enter a valid email address." });
   }
 
-  // ENV vars
+  // ENV vars (Brevo SMTP)
   const SMTP_HOST = process.env.SMTP_HOST;
   const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
   const SMTP_USER = process.env.SMTP_USER;
@@ -50,12 +86,25 @@ export default async function handler(req, res) {
   const SMTP_FROM = process.env.SMTP_FROM;
   const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL;
 
+  // Optional default BCC(s) from env:
+  // e.g. CONTACT_BCC_EMAILS="a@x.com,b@y.com"
+  const CONTACT_BCC_EMAILS = process.env.CONTACT_BCC_EMAILS || "";
+
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !SMTP_FROM || !CONTACT_TO_EMAIL) {
     return json(res, 500, {
       ok: false,
       message: "Server email configuration is missing. Please contact support.",
     });
   }
+
+  // Build BCC list: (env defaults) + (user-provided bcc)
+  const envBccList = parseEmailList(CONTACT_BCC_EMAILS);
+  const userBccList = parseEmailList(bcc);
+
+  const bccList = [...envBccList, ...userBccList]
+    .filter(Boolean)
+    // dedupe again after merge
+    .filter((v, i, a) => a.findIndex((x) => x.toLowerCase() === v.toLowerCase()) === i);
 
   // Sanitized values for HTML
   const safeName = escapeHtml(name);
@@ -200,6 +249,8 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: `APSC 2026 Website <${SMTP_FROM}>`,
       to: CONTACT_TO_EMAIL,
+      // ✅ optional BCC list (array is supported by nodemailer)
+      ...(bccList.length ? { bcc: bccList } : {}),
       replyTo: email,
       subject: `[APSC 2026] ${subject}`,
       html,
