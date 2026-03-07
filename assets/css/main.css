@@ -1332,7 +1332,7 @@ section.dark-background,
   font-weight: 900;
   line-height: 1.05;
   max-width: 18ch;
-  color: #a3c7ff;
+  color: #6fd2ff;
 
   text-shadow:
     /* outline ring */
@@ -1382,7 +1382,7 @@ section.dark-background,
 .hero .hero-venue-name,
 .hero .hero-date {
   font-family: var(--hero-font-body);
-  color: color-mix(in srgb, #070fff, #c8e4f3 100%);
+  color: color-mix(in srgb, #070fff, #fefdea 100%);
   letter-spacing: 0.012em;
   line-height: 1.2;
   max-width: min(72ch, 92vw);
@@ -1410,7 +1410,7 @@ section.dark-background,
 /* Venue line 1 (primary) */
 .hero .hero-venue-name {
   margin: 16px 0 0 0;
-  font-size: clamp(1.12rem, 2.6vw, 2.9rem);
+  font-size: clamp(2.12rem, 3.6vw, 3.9rem);
   font-weight: 900;
 }
 
