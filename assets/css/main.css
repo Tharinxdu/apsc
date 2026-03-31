@@ -461,7 +461,7 @@ p {
 .header .logo--partners .logo__strip {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 
   max-width: 380px;
   /* prevents nav from being crushed */
