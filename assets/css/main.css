@@ -328,7 +328,7 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Global Header (UPDATED: Organized-by label + partner logos kept visible)
+# Global Header
 --------------------------------------------------------------*/
 .header {
   --background-color: rgba(1, 8, 33, 0.18);
@@ -337,7 +337,6 @@ p {
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 14px 0;
-  /* slightly tighter */
   transition: all var(--transition);
   z-index: 997;
 
@@ -352,11 +351,12 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 18px;
+  flex-wrap: nowrap;
 }
 
 /*--------------------------------------------------------------
-# Logo blocks (left + right)
+# Logo blocks
 --------------------------------------------------------------*/
 .header .logo {
   line-height: 1;
@@ -376,12 +376,24 @@ p {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
   border: 1px solid rgba(255, 255, 255, 0.22);
 
-  flex: 0 0 auto;
   min-width: 0;
   text-decoration: none;
 }
 
-/* ✅ “Organized by” label INSIDE left logo block */
+/* Left logo block */
+.header .logo--primary {
+  flex: 0 0 auto;
+  max-width: 320px;
+}
+
+/* Right logo block */
+.header .logo--partners {
+  flex: 0 1 330px;
+  max-width: 330px;
+  padding: 10px 12px;
+}
+
+/* Organized by label */
 .header .logo .logo__label {
   font-family: var(--nav-font);
   font-size: 11px;
@@ -390,8 +402,6 @@ p {
   text-transform: uppercase;
   color: rgba(11, 27, 58, 0.70);
   white-space: nowrap;
-
-  /* subtle separator, not a separate section */
   padding-right: 10px;
   margin-right: 2px;
   border-right: 1px solid rgba(11, 27, 58, 0.14);
@@ -405,7 +415,6 @@ p {
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* ✅ Left (main) logos should be more prominent */
 .header .logo--primary img {
   max-height: 52px;
   opacity: 1;
@@ -416,19 +425,18 @@ p {
   opacity: 0.98;
 }
 
-/* ✅ Right (partner) logos smaller */
 .header .logo--partners img {
   max-height: 28px;
   opacity: 0.92;
+  flex: 0 0 auto;
 }
 
-/* Hover */
 .header .logo img:hover {
   transform: scale(1.04);
 }
 
 /*--------------------------------------------------------------
-# Nav: keep it centered + allow side logos to exist
+# Nav
 --------------------------------------------------------------*/
 @media (min-width: 1200px) {
   .header .navmenu {
@@ -436,47 +444,124 @@ p {
     min-width: 0;
     display: flex;
     justify-content: center;
-    /* center nav between logo groups */
+  }
+
+  .header .navmenu>ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .header .navmenu>ul>li {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .header .navmenu a,
+  .header .navmenu a:focus {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
 /*--------------------------------------------------------------
-# Right logos: keep visible without pushing nav
-# Use “logo strip” that can scroll horizontally when needed
+# Partner logos strip
 --------------------------------------------------------------*/
-.header .logo--partners {
-  padding: 10px 12px;
-
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0.96) 70%,
-      rgba(255, 255, 255, 0.72) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-/* Wrap the partner images in a scrollable strip (no wrap/overflow issues) */
 .header .logo--partners .logo__strip {
   display: inline-flex;
   align-items: center;
   gap: 11px;
 
-  max-width: 380px;
-  /* prevents nav from being crushed */
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
 
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .header .logo--partners .logo__strip::-webkit-scrollbar {
   display: none;
-  /* Chrome/Safari */
+}
+
+/*--------------------------------------------------------------
+# Large desktop tuning
+--------------------------------------------------------------*/
+@media (min-width: 1400px) {
+  .header .logo--primary {
+    max-width: 360px;
+  }
+
+  .header .logo--partners {
+    max-width: 380px;
+    flex-basis: 380px;
+  }
+
+  .header .navmenu a,
+  .header .navmenu a:focus {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Mid desktop: reduce crowding before mobile breakpoint
+--------------------------------------------------------------*/
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+
+  .header .container,
+  .header .container-fluid {
+    gap: 12px;
+  }
+
+  .header .logo--primary {
+    max-width: 280px;
+  }
+
+  .header .logo--partners {
+    max-width: 280px;
+    flex-basis: 280px;
+  }
+
+  .header .logo--primary img {
+    max-height: 46px;
+  }
+
+  .header .logo--primary img+img {
+    max-height: 40px;
+  }
+
+  .header .logo--partners img {
+    max-height: 24px;
+  }
+
+  .header .navmenu a,
+  .header .navmenu a:focus {
+    font-size: 0.9rem;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .header .logo .logo__label {
+    font-size: 10px;
+    padding-right: 8px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Optional: if screen gets tight, hide right partner block earlier
+--------------------------------------------------------------*/
+@media (max-width: 1270px) {
+  .header .logo--partners {
+    display: none;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -1770,6 +1855,29 @@ section.dark-background,
 
 .speakers .member:hover .member-info {
   bottom: 0;
+}
+
+.member .speaker-image-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  /* all cards same image area */
+  background: #f5f7fb;
+  /* soft background behind smaller images */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+}
+
+.member .speaker-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* shows full image, no zoom crop */
+  object-position: center;
+  display: block;
 }
 
 /*--------------------------------------------------------------
