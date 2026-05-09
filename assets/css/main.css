@@ -2184,6 +2184,21 @@ section.dark-background,
   transform: translateX(4px);
 }
 
+/*--------------------------------------------------------------
+# Key Info: Gala Dinner Ticket Card (distinct style)
+--------------------------------------------------------------*/
+.key-info .info-card--gala {
+  background: linear-gradient(180deg, color-mix(in srgb, #d61e37, #fff04af2 92%), color-mix(in srgb, var(--surface-color), var(--alt-background-color) 18%));
+  border-color: color-mix(in srgb, var(--accent-color), transparent 72%);
+  box-shadow: 0 14px 34px rgba(30, 99, 214, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.key-info .info-card--gala p {
+  min-height: 0; /* avoid forced height for this CTA card */
+}
+
 @media (max-width: 768px) {
   .key-info .info-card {
     padding: 25px 18px;
