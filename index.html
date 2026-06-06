@@ -329,7 +329,8 @@
               </div>
               <h4>Purchase tickets for Gala Dinner</h4>
               <p>At the Sapphire Banquet Hall at BMICH on 26th November 2026</p>
-              <a href="https://portal.apsc2026.lk/gala-dinner" class="btn-read-more btn-read-more--gala" target="_blank">Buy Tickets</a>
+              <a href="https://portal.apsc2026.lk/gala-dinner" class="btn-read-more btn-read-more--gala"
+                target="_blank">Buy Tickets</a>
             </div>
           </div>
 
@@ -1256,7 +1257,8 @@
               <p>26th - 28th November 2026</p>
             </div>
             <div class="footer-contact pt-3">
-              <p><a href="https://portal.apsc2026.lk/gala-dinner" class="btn-read-more btn-read-more--gala" target="_blank">Purchase tickets for Gala Dinner</a></p>
+              <p><a href="https://portal.apsc2026.lk/gala-dinner" class="btn-read-more btn-read-more--gala"
+                  target="_blank">Purchase tickets for Gala Dinner</a></p>
             </div>
           </div>
 
@@ -1322,6 +1324,76 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
+  <!-- Whats New Floating Button (above scroll-top) -->
+  <button id="whatsNewFab" class="whats-new-fab" type="button" aria-label="What’s New">
+    <span class="whats-new-fab__icon" aria-hidden="true">
+      <i class="bi bi-bell-fill"></i>
+    </span>
+
+    <span class="whats-new-fab__text">What’s New</span>
+
+    <!-- badge is shown only when there are unseen updates -->
+    <span class="whats-new-fab__badge" aria-hidden="true">
+      <span class="whats-new-fab__dot"></span>
+    </span>
+  </button>
+
+  <!-- Whats New Modal (minimal, clickable items with arrow) -->
+  <div class="modal fade whats-new-modal" id="whatsNewModal" tabindex="-1" aria-labelledby="whatsNewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content whats-new-modal__content">
+        <div class="modal-header whats-new-modal__header border-0">
+          <div class="d-flex align-items-center gap-2">
+            <span class="whats-new-modal__title-icon"><i class="bi bi-bell-fill"></i></span>
+            <h5 class="modal-title m-0" id="whatsNewModalLabel">What’s New</h5>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body whats-new-modal__body">
+          <p class="whats-new-modal__subtitle mb-3">
+            Latest updates for APSC 2026.
+          </p>
+
+          <!-- Update items: each row is a link (arrow leads to relevant page) -->
+          <div class="whats-new-list" id="whatsNewList">
+
+            <!-- 03/06/2026 - Abstract winner award (Abstract Page) -->
+            <a class="whats-new-link" href="abstract-guidelines.html" rel="noopener">
+              <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+              <span class="whats-new-link__text">
+                03/06/2026 - Abstract winner award
+                <span class="whats-new-link__meta">View details on the Abstract page</span>
+              </span>
+            </a>
+
+            <!-- 03/06/2026 - Travel grant (FAQ page) -->
+            <a class="whats-new-link" href="faq.html" rel="noopener">
+              <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+              <span class="whats-new-link__text">
+                03/06/2026 - Travel grant
+                <span class="whats-new-link__meta">More information on the FAQ page</span>
+              </span>
+            </a>
+
+            <!-- 10/05/2026 - Gala Dinner tickets (Home, FAQ pages) -->
+            <a class="whats-new-link" href="#key-info" target="_blank" rel="noopener">
+              <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+              <span class="whats-new-link__text">
+                10/05/2026 - Gala Dinner tickets
+                <span class="whats-new-link__meta">More information on the Key Information Section & FAQ page</span>
+              </span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- no footer / no buttons (minimal design) -->
+      </div>
+    </div>
+  </div>
+
   <!-- Preloader -->
   <div id="preloader"></div>
 
@@ -1335,6 +1407,7 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/contact.js"></script>
+  <script src="assets/js/whats-new.js"></script>
 
 </body>
 
