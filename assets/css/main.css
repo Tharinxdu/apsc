@@ -2197,7 +2197,8 @@ section.dark-background,
 }
 
 .key-info .info-card--gala p {
-  min-height: 0; /* avoid forced height for this CTA card */
+  min-height: 0;
+  /* avoid forced height for this CTA card */
 }
 
 @media (max-width: 768px) {
@@ -3939,8 +3940,8 @@ section.dark-background,
 ========================================================= */
 
 :root {
-  --wn-red-1: #ef4444;   /* red-500 */
-  --wn-red-2: #b91c1c;   /* red-700 */
+  --wn-red-1: #ef4444;
+  --wn-red-2: #b91c1c;
   --wn-red-3: rgba(239, 68, 68, 0.18);
 }
 
@@ -3948,7 +3949,7 @@ section.dark-background,
 .whats-new-fab {
   position: fixed;
   right: 15px;
-  bottom: 74px; /* above scroll-top */
+  bottom: 74px;
   z-index: 99998;
 
   display: inline-flex;
@@ -4023,7 +4024,7 @@ section.dark-background,
   position: absolute;
   inset: 2px;
   border-radius: 999px;
-  background: #22c55e; /* green dot = "new" */
+  background: #22c55e;
   box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.15);
   animation: wnPing 1.6s ease-out infinite;
 }
@@ -4033,14 +4034,22 @@ section.dark-background,
 }
 
 @keyframes wnPing {
-  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.20); }
-  70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0.0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.20);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
 
 /* Modal look */
 .whats-new-modal .modal-dialog {
-  transform-origin: 100% 100%; /* feels like it comes from bottom-right */
+  transform-origin: 100% 100%;
 }
 
 .whats-new-modal__content {
@@ -4056,7 +4065,8 @@ section.dark-background,
   padding: 16px 18px;
 
   background:
-    radial-gradient(900px 420px at 20% 0%, rgb(247 47 47 / 42%), transparent 60%), linear-gradient(180deg, rgb(120 146 255 / 83%), rgb(2 6 23 / 50%));
+    radial-gradient(900px 420px at 20% 0%, rgb(247 47 47 / 42%), transparent 60%),
+    linear-gradient(180deg, rgb(120 146 255 / 83%), rgb(2 6 23 / 50%));
 }
 
 .whats-new-modal__title-icon {
@@ -4074,6 +4084,9 @@ section.dark-background,
 
 .whats-new-modal__body {
   padding: 16px 18px 18px;
+
+  /* Important: stop inherited modal justify text */
+  text-align: left !important;
 }
 
 .whats-new-modal__subtitle {
@@ -4081,6 +4094,7 @@ section.dark-background,
   color: color-mix(in srgb, var(--default-color), transparent 28%);
   font-size: 14px;
   line-height: 1.55;
+  text-align: left !important;
 }
 
 /* Update list */
@@ -4090,12 +4104,15 @@ section.dark-background,
 }
 
 .whats-new-link {
-  display: flex;
+  display: grid;
+  grid-template-columns: 22px 1fr;
   align-items: flex-start;
-  gap: 12px;
-  text-decoration: none;
+  gap: 10px;
 
-  padding: 12px 12px;
+  text-decoration: none;
+  text-align: left !important;
+
+  padding: 13px 13px;
   border-radius: 16px;
 
   background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 10%);
@@ -4109,10 +4126,10 @@ section.dark-background,
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
   border-color: color-mix(in srgb, var(--wn-red-1), transparent 70%);
+  text-decoration: none;
 }
 
 .whats-new-link__arrow {
-  flex: 0 0 auto;
   color: var(--wn-red-1);
   font-size: 18px;
   line-height: 1;
@@ -4122,16 +4139,33 @@ section.dark-background,
 .whats-new-link__text {
   color: var(--heading-color);
   font-weight: 850;
-  line-height: 1.25;
+  line-height: 1.35;
   letter-spacing: -0.01em;
+
+  /* Fix stretched text */
+  display: block;
+  text-align: left !important;
+  white-space: normal;
+  word-spacing: normal;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .whats-new-link__meta {
   display: block;
-  margin-top: 4px;
+  margin-top: 5px;
   font-weight: 600;
   font-size: 13.5px;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
+  line-height: 1.45;
+  text-align: left !important;
+  word-spacing: normal;
+}
+
+/* Optional: make first line cleaner if you use date + title */
+.whats-new-link__text strong,
+.whats-new-link__text b {
+  font-weight: 900;
 }
 
 /* Minimizer animation chip (created by JS) */
@@ -4152,7 +4186,7 @@ section.dark-background,
   pointer-events: none;
 }
 
-/* Mobile: icon-only FAB */
+/* Mobile */
 @media (max-width: 575px) {
   .whats-new-fab {
     bottom: 68px;
@@ -4162,5 +4196,23 @@ section.dark-background,
 
   .whats-new-fab__text {
     display: none;
+  }
+
+  .whats-new-modal .modal-dialog {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .whats-new-link {
+    padding: 12px;
+    grid-template-columns: 20px 1fr;
+  }
+
+  .whats-new-link__text {
+    font-size: 15px;
+  }
+
+  .whats-new-link__meta {
+    font-size: 13px;
   }
 }
