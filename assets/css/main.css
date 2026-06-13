@@ -3121,6 +3121,16 @@ section.dark-background,
   font-weight: 850;
 }
 
+/* Simple old deadline strike-through */
+.abstract-dates-table .date-old td {
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+}
+
+.abstract-dates-table .date-old td:last-child {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
 .dates-table {
   margin-top: 20px;
   border-radius: var(--radius-lg);
