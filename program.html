@@ -19,141 +19,8 @@
   <!-- Main CSS -->
   <link href="assets/css/main.css" rel="stylesheet" />
 
-  <style>
-    .program-page .page-title h1 {
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    /* Match venue.html container/card style */
-    .program-card {
-      background: var(--surface-color);
-      border-radius: var(--radius-lg);
-      padding: 30px 22px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-color);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition-fast);
-    }
-
-    .program-section h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
-
-    .program-subtitle {
-      margin: 6px 0 0;
-      opacity: .85;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .program-divider {
-      height: 1px;
-      background: rgba(148, 163, 184, 0.25);
-      margin: 18px 0;
-    }
-
-    /* Modern list */
-    .program-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .program-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      background: rgba(255, 255, 255, 0.02);
-      box-shadow: var(--shadow-sm);
-      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-    }
-
-    .program-item:hover {
-      transform: translateY(-1px);
-      border-color: rgba(56, 189, 248, 0.40);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
-    }
-
-    .program-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      margin-top: 8px;
-      flex: 0 0 auto;
-      background: radial-gradient(circle at top left, #22d3ee 0, #0ea5e9 35%, #0284c7 100%);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.14);
-    }
-
-    .program-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .program-title {
-      margin: 0;
-      font-weight: 850;
-      letter-spacing: -0.01em;
-      font-size: 15.5px;
-      line-height: 1.55;
-    }
-
-    /* Sub-points */
-    .program-subpoints {
-      margin: 8px 0 0;
-      padding-left: 18px;
-    }
-
-    .program-subpoints li {
-      margin: 4px 0;
-      font-size: 15px;
-      line-height: 1.7;
-      opacity: 0.95;
-    }
-
-    .program-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 14px;
-      border-radius: 14px;
-      background: rgba(13, 110, 253, 0.08);
-      border: 1px solid rgba(13, 110, 253, 0.18);
-      margin-top: 18px;
-    }
-
-    .program-note .bi {
-      font-size: 18px;
-      margin-top: 2px;
-      opacity: .9;
-    }
-
-    .program-note__title {
-      font-weight: 800;
-      margin: 0 0 4px;
-      font-size: 14px;
-      letter-spacing: -0.01em;
-    }
-
-    .program-note__text {
-      margin: 0;
-      font-size: 14px;
-      opacity: .92;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-      .program-card {
-        padding: 22px 16px;
-      }
-    }
-  </style>
+  <!-- Program CSS -->
+  <link href="assets/css/program.css" rel="stylesheet" />
 </head>
 
 <body class="program-page">
@@ -209,7 +76,7 @@
           <img src="assets/img/CCP Logo.jpeg" alt="CCP Logo" />
           <img src="assets/img/SSOS Logo.png" alt="SSOS Logo" />
           <img src="assets/img/CSRRSL Logo.png" alt="CSRRSL Logo" />
-          <img src="assets/img/4CS logo.png" alt="4CS Logo">
+          <img src="assets/img/4CS logo.png" alt="4CS Logo" />
         </span>
       </a>
 
@@ -234,155 +101,337 @@
     <section class="section program-section light-background">
       <div class="container" data-aos="fade-up">
 
-        <div class="program-card p-4 p-md-5 shadow-sm rounded-3">
-          <h3>Programme Overview</h3>
-          <!-- <p class="program-subtitle">Main sections and key themes planned for APSC 2026.</p> -->
+        <!-- Registration Desk -->
+        <div class="sp-registration">
+          <div>
+            <h4><i class="bi bi-clock-history me-2"></i>Registration Desk Opening Hours</h4>
+            <p class="sp-registration__note">Conference registration counters will be open during the following times.</p>
+          </div>
 
-          <div class="program-divider"></div>
-
-          <ul class="program-list">
-            <!-- Opening Ceremony (no subpoints in PDF) -->
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Opening Ceremony</p>
-              </div>
-            </li>
-
-            <!-- Presidential Symposium (subpoints from PDF) -->
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Presidential Symposium</p>
-                <ul class="program-subpoints">
-                  <li>Stroke as a global health problem</li>
-                  <li>Stroke in the Asia Pacific</li>
-                  <li>Stroke in low and middle income countries</li>
-                  <li>Social determinants of stroke, inequalities in stroke</li>
-                </ul>
-              </div>
-            </li>
-
-            <!-- Plenary Sessions (subpoints from PDF) -->
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Plenary Sessions</p>
-                <ul class="program-subpoints">
-                  <li>Cutting edge therapies in stroke</li>
-                </ul>
-              </div>
-            </li>
-
-            <!-- Themed Symposia (subpoints from PDF) -->
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Themed Symposia</p>
-                <ul class="program-subpoints">
-                  <li>Acute Treatment Thrombosis</li>
-                  <li>Stroke in Asia Pacific</li>
-                  <li>Prevention</li>
-                  <li>Acute Treatment MT</li>
-                  <li>Heart and Stroke</li>
-                  <li>Stroke in special groups - children, old age, women</li>
-                  <li>Large artery disease</li>
-                  <li>ICH - new Rx, amyloid angiopathy, CMBs, etc</li>
-                  <li>Epidemiology</li>
-                  <li>Small vessel disease</li>
-                  <li>Current concepts - Frailty, Palliative Care</li>
-                  <li>Cognition, dementia, depression after stroke</li>
-                  <li>What’s new in Stroke 1</li>
-                  <li>Surgery in stroke, critical care</li>
-                  <li>Unusual causes - carotid web, ESUS, Genetic</li>
-                  <li>haematological</li>
-                  <li>What’s new in Stroke 2</li>
-                  <li>Neuroimaging - acute CTA, MRI, vessel wall</li>
-                  <li>New advances in stroke</li>
-                </ul>
-              </div>
-            </li>
-
-            <!-- Remaining main sections (no subpoints in PDF) -->
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Asia Pacific Region Country Perspectives on Stroke Care</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Breakfast Sessions</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Stroke Bytes</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Debate</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Stroke Quiz</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Late Breaking Abstracts</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Abstract Presentations - Oral and Poster</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Closing Ceremony</p>
-              </div>
-            </li>
-
-            <li class="program-item">
-              <span class="program-dot"></span>
-              <div class="program-content">
-                <p class="program-title">Stroke Rehabilitation Workshop</p>
-              </div>
-            </li>
-          </ul>
-          <!-- 
-          <div class="program-note">
-            <i class="bi bi-info-circle"></i>
-            <div>
-              <div class="program-note__title">Note</div>
-              <p class="program-note__text">
-                Detailed schedules, timing, and hall allocations will be announced closer to the conference dates.
-              </p>
-            </div>
-          </div> -->
-
+          <table>
+            <tbody>
+              <tr>
+                <td>26 November 2026</td>
+                <td>07:00 – 17:30</td>
+              </tr>
+              <tr>
+                <td>27 November 2026</td>
+                <td>07:00 – 17:30</td>
+              </tr>
+              <tr>
+                <td>28 November 2026</td>
+                <td>07:00 – 13:00</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <!-- <div class="sp-helper">
+          <i class="bi bi-info-circle"></i>
+          <span>Click programme item to view more details.</span>
+        </div> -->
+
+        <!-- =================== DAY 1 =================== -->
+        <div class="sp-day">
+          <h3 class="sp-day__title">Day 1</h3>
+          <span class="sp-day__date">26th November 2026</span>
+        </div>
+
+        <div class="sp-table-wrap">
+          <table class="sp-table" aria-label="Scientific Program Day 1">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Hall A</th>
+                <th>Hall B</th>
+                <th>Hall C</th>
+                <th>Hall D</th>
+                <th>Hall E</th>
+                <th>Hall F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sp-time">08:00 – 08:30</td>
+                <td class="sp-ceremony" colspan="1">Opening Ceremony</td>
+                <td class="sp-unused" colspan="5"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">08:30 – 10:30</td>
+                <td class="sp-symposium" colspan="1">Presidential Symposium &nbsp;•&nbsp; APSO Oration</td>
+                <td class="sp-unused" colspan="5"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">10:30 – 11:00</td>
+                <td class="sp-break" colspan="4">Tea</td>
+                <td class="sp-exhibition" rowspan="1">Exhibition opening</td>
+                <td class="sp-break"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">11:00 – 12:40</td>
+                <td class="sp-symposium">Reperfusion Without Delay: Optimising IV Thrombolysis Across Healthcare Settings</td>
+                <td class="sp-symposium">The Asia-Pacific Stroke Landscape: Burden, Diversity and Solutions</td>
+                <td class="sp-symposium">Heart–Brain Intersections in Stroke</td>
+                <td class="sp-freepaper">Free Paper Session 1</td>
+                <td class="sp-exhibition" rowspan="5">Trade Exhibition</td>
+              </tr>
+              <tr>
+                <td class="sp-time">12:40 – 13:40</td>
+                <td class="sp-break" colspan="4">Lunch</td>
+                <td class="sp-break"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">13:40 – 15:20</td>
+                <td class="sp-symposium">Surgical Frontiers in Stroke</td>
+                <td class="sp-symposium">Imaging at the Speed of Stroke</td>
+                <td class="sp-symposium">Stroke Across the Life Course</td>
+                <td class="sp-freepaper" rowspan="2">Free Paper Session 2</td>
+                <td class="sp-workshop" rowspan="2">Workshop 1<br>Neurosonology</td>
+              </tr>
+              <tr>
+                <td class="sp-time">15:20 – 16:30</td>
+                <td class="sp-unused"></td>
+                <td class="sp-symposium">Extracranial Artery Disease: Stenosis and Beyond</td>
+                <td class="sp-symposium">Asia Pacific Research Collaboration</td>
+              </tr>
+              <tr>
+                <td class="sp-time">16:30 – 17:00</td>
+                <td class="sp-break" colspan="4">Tea</td>
+                <td class="sp-break"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">17:00 onwards</td>
+                <td class="sp-dinner" colspan="1">Welcome Reception</td>
+                <td class="sp-unused" colspan="5"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =================== DAY 2 =================== -->
+        <div class="sp-day">
+          <h3 class="sp-day__title">Day 2</h3>
+          <span class="sp-day__date">27th November 2026</span>
+        </div>
+
+        <div class="sp-table-wrap">
+          <table class="sp-table" aria-label="Scientific Program Day 2">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Hall A</th>
+                <th>Hall B</th>
+                <th>Hall C</th>
+                <th>Hall D</th>
+                <th>Hall E</th>
+                <th>Hall F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sp-time">07:30 – 08:30</td>
+                <td class="sp-breakfast">How to Do a Clinical Trial</td>
+                <td class="sp-breakfast">What Do Journal Editors Want</td>
+                <td class="sp-breakfast">Paediatric Strokes</td>
+                <td class="sp-unused"></td>
+                <td class="sp-unused"></td>
+                <td class="sp-unused"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">08:30 – 10:30</td>
+                <td class="sp-symposium" colspan="1">WSO Symposium</td>
+                <td class="sp-unused" colspan="2"></td>
+                <td class="sp-workshop">Workshop 2<br>Endovascular Treatment</td>
+                <td class="sp-exhibition" rowspan="7">Trade Exhibition</td>
+                <td class="sp-poster" rowspan="7">Posters</td>
+              </tr>
+              <tr>
+                <td class="sp-time">10:30 – 11:00</td>
+                <td class="sp-break" colspan="4">Tea / Poster Viewing</td>
+              </tr>
+              <tr>
+                <td class="sp-time">11:00 – 12:40</td>
+                <td class="sp-symposium">Next Generation Stroke Management</td>
+                <td class="sp-symposium">Evolving Concepts: New Frontiers in Stroke Biology</td>
+                <td class="sp-symposium">Stroke Burden &amp; Systems of Care in the Asia-Pacific — Country Updates</td>
+                <td class="sp-workshop">Workshop 2<br>Endovascular Treatment</td>
+              </tr>
+              <tr>
+                <td class="sp-time">12:40 – 13:40</td>
+                <td class="sp-break" colspan="4">Lunch Time Symposium / Poster Viewing</td>
+              </tr>
+              <tr>
+                <td class="sp-time">13:40 – 15:20</td>
+                <td class="sp-symposium">ICH in 2026: Bundles, Biomarkers &amp; New Approaches</td>
+                <td class="sp-unused"></td>
+                <td class="sp-symposium" rowspan="2">VasCog Asia</td>
+                <td class="sp-freepaper" rowspan="2">Free Paper Session 3</td>
+              </tr>
+              <tr>
+                <td class="sp-time">15:20 – 16:30</td>
+                <td class="sp-debate">Debates – Session 1</td>
+                <td class="sp-debate">Debates – Session 2</td>
+              </tr>
+              <tr>
+                <td class="sp-time">16:30 – 17:00</td>
+                <td class="sp-break" colspan="4">Tea</td>
+              </tr>
+              <tr>
+                <td class="sp-time">19:00 – 22:00</td>
+                <td class="sp-dinner" colspan="6">Faculty Dinner</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =================== DAY 3 =================== -->
+        <div class="sp-day">
+          <h3 class="sp-day__title">Day 3</h3>
+          <span class="sp-day__date">28th November 2026</span>
+        </div>
+
+        <div class="sp-table-wrap">
+          <table class="sp-table" aria-label="Scientific Program Day 3">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Hall A</th>
+                <th>Hall B</th>
+                <th>Hall C</th>
+                <th>Hall D</th>
+                <th>Hall E</th>
+                <th>Hall F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sp-time">07:30 – 08:30</td>
+                <td class="sp-breakfast" colspan="4">Breakfast Sessions</td>
+                <td class="sp-unused"></td>
+                <td class="sp-unused"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">08:30 – 10:00</td>
+                <td class="sp-symposium" colspan="1">Joint WSO – APSO Session</td>
+                <td class="sp-unused" colspan="2"></td>
+                <td class="sp-workshop">Workshop 3<br>Thrombolysis</td>
+                <td class="sp-rehab" rowspan="4">Rehab Program</td>
+                <td class="sp-poster" rowspan="6">Posters</td>
+              </tr>
+              <tr>
+                <td class="sp-time">10:00 – 10:30</td>
+                <td class="sp-latebreak">Late Breaking Abstracts – 1</td>
+                <td class="sp-latebreak">Late Breaking Abstracts – 2</td>
+                <td class="sp-latebreak">Late Breaking Abstracts – 3</td>
+                <td class="sp-unused"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">10:30 – 11:00</td>
+                <td class="sp-break" colspan="4">Tea / Poster Viewing</td>
+              </tr>
+              <tr>
+                <td class="sp-time">11:00 – 12:40</td>
+                <td class="sp-symposium">Endovascular Therapy at the Frontiers: New Windows, New Targets, New Evidence</td>
+                <td class="sp-symposium">Next-Generation Stroke Prevention: Closing the Recurrent Stroke Gap</td>
+                <td class="sp-symposium">Beyond the Usual Suspects: Expanding the Stroke Differential</td>
+                <td class="sp-workshop">Workshop 3<br>Thrombolysis</td>
+              </tr>
+              <tr>
+                <td class="sp-time">12:40 – 13:40</td>
+                <td class="sp-break" colspan="5">Lunch Time Symposium / Poster Viewing</td>
+              </tr>
+              <tr>
+                <td class="sp-time">13:40 – 15:20</td>
+                <td class="sp-symposium">Small Vessels, Big Impact</td>
+                <td class="sp-symposium">Intracranial Atherosclerosis: The Asia-Pacific Challenge</td>
+                <td class="sp-symposium">Neurocritical Care and Complications: Practical Priorities</td>
+                <td class="sp-unused"></td>
+                <td class="sp-rehab">Rehab Program</td>
+              </tr>
+              <tr>
+                <td class="sp-time">15:20 – 16:30</td>
+                <td class="sp-debate" colspan="1">Stroke Quiz</td>
+                <td class="sp-unused" colspan="5"></td>
+              </tr>
+              <tr>
+                <td class="sp-time">16:30 – 17:00</td>
+                <td class="sp-ceremony" colspan="6">Closing Ceremony</td>
+              </tr>
+              <tr>
+                <td class="sp-time">17:00 – 17:30</td>
+                <td class="sp-break" colspan="6">Tea</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =================== LEGEND =================== -->
+        <!-- <div class="sp-legend">
+          <h4><i class="bi bi-palette me-2"></i>Session Type Legend</h4>
+          <div class="sp-legend__grid">
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#2563EB"></span>Plenary Session</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#10B981"></span>Symposium</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#F59E0B"></span>Workshop</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#8B5CF6"></span>Free Papers</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#14B8A6"></span>Poster Session</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#FED7AA"></span>Tea / Lunch Break</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#4F46E5"></span>Opening / Closing</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#DBEAFE"></span>Exhibition</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#7F1D1D"></span>Dinners</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#FB7185"></span>Quiz &amp; Debates</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#FFF7D6"></span>Breakfast Sessions</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#C026D3"></span>Late Breaking Abstracts</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#0F766E"></span>Rehab Program</div>
+            <div class="sp-legend__item"><span class="sp-swatch" style="background:#F3F4F6"></span>Unused / No Session</div>
+          </div>
+        </div> -->
+
       </div>
     </section>
 
   </main>
+
+  <!-- Program Modal -->
+  <!-- <div class="modal fade sp-modal" id="programModal" tabindex="-1" aria-labelledby="programModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <div>
+            <span class="sp-modal__type" id="programModalType"></span>
+            <h5 class="modal-title" id="programModalTitle">Session Title</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="sp-modal__meta">
+            <div class="sp-modal__meta-item">
+              <i class="bi bi-calendar-event"></i>
+              <span id="programModalDay">Day</span>
+            </div>
+
+            <div class="sp-modal__meta-item">
+              <i class="bi bi-clock"></i>
+              <span id="programModalTime">Time</span>
+            </div>
+
+            <div class="sp-modal__meta-item">
+              <i class="bi bi-geo-alt"></i>
+              <span id="programModalHall">Hall</span>
+            </div>
+          </div>
+
+          <div class="sp-modal__details">
+            <p id="programModalDetails">
+              More information about this session will be available closer to the conference.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div> -->
 
   <!-- Footer -->
   <footer id="footer" class="footer dark-background">
@@ -429,8 +478,7 @@
     </div>
 
     <div class="copyright text-center">
-      <div
-        class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
 
         <div class="d-flex flex-column align-items-center align-items-lg-start">
           <div>
@@ -443,15 +491,13 @@
 
         <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
           <a href="https://x.com/APSC2026" target="_blank"><i class="bi bi-twitter-x"></i></a>
-          <a href="https://www.facebook.com/share/1DwcWmbmKR/?mibextid=wwXIfr" target="_blank"><i
-              class="bi bi-facebook"></i></a>
-          <a href="https://www.instagram.com/apsc2026.colombo?igsh=eDQzb3p3Ymk2ZG1q" target="_blank"><i
-              class="bi bi-instagram"></i></a>
-          <a href="https://youtube.com/@apsc2026-i4u?si=Qb9Y-LWihH40s0Yc" target="_blank"><i
-              class="bi bi-youtube"></i></a>
-
+          <a href="https://www.facebook.com/share/1DwcWmbmKR/?mibextid=wwXIfr" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/apsc2026.colombo?igsh=eDQzb3p3Ymk2ZG1q" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://youtube.com/@apsc2026-i4u?si=Qb9Y-LWihH40s0Yc" target="_blank"><i class="bi bi-youtube"></i></a>
         </div>
+
       </div>
+    </div>
 
   </footer>
 
@@ -461,6 +507,184 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <!-- Program Modal Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modalElement = document.getElementById("programModal");
+
+      if (!modalElement || typeof bootstrap === "undefined") {
+        return;
+      }
+
+      const programModal = new bootstrap.Modal(modalElement);
+
+      const titleEl = document.getElementById("programModalTitle");
+      const typeEl = document.getElementById("programModalType");
+      const dayEl = document.getElementById("programModalDay");
+      const timeEl = document.getElementById("programModalTime");
+      const hallEl = document.getElementById("programModalHall");
+      const detailsEl = document.getElementById("programModalDetails");
+
+      const sessionTypes = [
+        { className: "sp-plenary", label: "Plenary Session" },
+        { className: "sp-symposium", label: "Symposium" },
+        { className: "sp-workshop", label: "Workshop" },
+        { className: "sp-freepaper", label: "Free Paper Session" },
+        { className: "sp-poster", label: "Poster Session" },
+        { className: "sp-break", label: "Break" },
+        { className: "sp-ceremony", label: "Ceremony" },
+        { className: "sp-exhibition", label: "Exhibition" },
+        { className: "sp-dinner", label: "Dinner / Reception" },
+        { className: "sp-debate", label: "Debate / Quiz" },
+        { className: "sp-breakfast", label: "Breakfast Session" },
+        { className: "sp-latebreak", label: "Late Breaking Abstracts" },
+        { className: "sp-rehab", label: "Rehab Program" }
+      ];
+
+      function getSessionType(cell) {
+        const matchedType = sessionTypes.find(function (type) {
+          return cell.classList.contains(type.className);
+        });
+
+        return matchedType ? matchedType.label : "Programme Item";
+      }
+
+      function getDayInfo(table) {
+        let current = table.closest(".sp-table-wrap");
+
+        while (current) {
+          current = current.previousElementSibling;
+
+          if (current && current.classList.contains("sp-day")) {
+            const dayTitle = current.querySelector(".sp-day__title")?.textContent.trim() || "";
+            const dayDate = current.querySelector(".sp-day__date")?.textContent.trim() || "";
+
+            return [dayTitle, dayDate].filter(Boolean).join(" • ");
+          }
+        }
+
+        return "Scientific Program";
+      }
+
+      function mapTableColumns(table) {
+        const rows = Array.from(table.querySelectorAll("tbody tr"));
+        const grid = [];
+
+        rows.forEach(function (row, rowIndex) {
+          if (!grid[rowIndex]) {
+            grid[rowIndex] = [];
+          }
+
+          let colIndex = 0;
+
+          Array.from(row.cells).forEach(function (cell) {
+            while (grid[rowIndex][colIndex]) {
+              colIndex++;
+            }
+
+            const rowSpan = Number(cell.getAttribute("rowspan")) || 1;
+            const colSpan = Number(cell.getAttribute("colspan")) || 1;
+
+            cell.dataset.startCol = colIndex;
+            cell.dataset.endCol = colIndex + colSpan - 1;
+
+            for (let r = 0; r < rowSpan; r++) {
+              if (!grid[rowIndex + r]) {
+                grid[rowIndex + r] = [];
+              }
+
+              for (let c = 0; c < colSpan; c++) {
+                grid[rowIndex + r][colIndex + c] = true;
+              }
+            }
+
+            colIndex += colSpan;
+          });
+        });
+      }
+
+      function getHallInfo(cell, table) {
+        const headers = Array.from(table.querySelectorAll("thead th")).map(function (header) {
+          return header.textContent.trim();
+        });
+
+        const startCol = Number(cell.dataset.startCol);
+        const endCol = Number(cell.dataset.endCol);
+
+        const startHall = headers[startCol] || "";
+        const endHall = headers[endCol] || "";
+
+        if (!startHall || startHall === "Time") {
+          return "Main Program Area";
+        }
+
+        if (startHall === endHall) {
+          return startHall;
+        }
+
+        return startHall + " – " + endHall;
+      }
+
+      function openModal(cell) {
+        const table = cell.closest(".sp-table");
+        const row = cell.closest("tr");
+
+        const eventTitle = cell.textContent.replace(/\s+/g, " ").trim();
+        const sessionType = getSessionType(cell);
+        const dayInfo = getDayInfo(table);
+        const timeInfo = row.querySelector(".sp-time")?.textContent.trim() || "Time TBC";
+        const hallInfo = getHallInfo(cell, table);
+
+        const customDetails = cell.getAttribute("data-details");
+        const details = customDetails || "This programme item is part of the Asia Pacific Stroke Conference 2026 scientific schedule. Further speaker and session details can be added here when confirmed.";
+
+        const computedStyle = window.getComputedStyle(cell);
+
+        titleEl.textContent = eventTitle;
+        // typeEl.textContent = sessionType;
+        dayEl.textContent = dayInfo;
+        timeEl.textContent = timeInfo;
+        hallEl.textContent = hallInfo;
+        detailsEl.textContent = details;
+
+        typeEl.style.backgroundColor = computedStyle.backgroundColor;
+        typeEl.style.color = computedStyle.color;
+
+        programModal.show();
+      }
+
+      document.querySelectorAll(".sp-table").forEach(function (table) {
+        mapTableColumns(table);
+
+        const clickableCells = table.querySelectorAll("tbody td:not(.sp-time):not(.sp-unused)");
+
+        clickableCells.forEach(function (cell) {
+          const text = cell.textContent.replace(/\s+/g, " ").trim();
+
+          if (!text) {
+            return;
+          }
+
+          cell.classList.add("sp-clickable");
+          cell.setAttribute("role", "button");
+          cell.setAttribute("tabindex", "0");
+          cell.setAttribute("aria-label", "View details for " + text);
+
+          cell.addEventListener("click", function () {
+            openModal(cell);
+          });
+
+          cell.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openModal(cell);
+            }
+          });
+        });
+      });
+    });
+  </script>
 
 </body>
 

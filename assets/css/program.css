@@ -1,0 +1,184 @@
+/* ==========================================================
+   Scientific Program - Modern Tabular Layout
+   Add this to your main.css or link separately AFTER main.css
+   ========================================================== */
+
+.program-page .page-title h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Session color tokens (from Excel legend) */
+:root {
+  --sc-plenary:      #2563EB;
+  --sc-symposium:    #10B981;
+  --sc-workshop:     #F59E0B;
+  --sc-freepaper:    #8B5CF6;
+  --sc-poster:       #14B8A6;
+  --sc-break:        #FED7AA;
+  --sc-ceremony:     #4F46E5;
+  --sc-exhibition:   #DBEAFE;
+  --sc-unused:       #F3F4F6;
+  --sc-dinner:       #7F1D1D;
+  --sc-debate:       #FB7185;
+  --sc-breakfast:    #FFF7D6;
+  --sc-latebreak:    #C026D3;
+  --sc-rehab:        #0F766E;
+  --sc-header:       #00B0F0;
+}
+
+/* Day header bar */
+.sp-day {
+  margin: 34px 0 14px;
+  padding: 16px 22px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #00B0F0 0%, #1e63d6 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.sp-day__title { margin: 0; font-weight: 800; font-size: 20px; letter-spacing: -0.01em; }
+.sp-day__date  { font-size: 14px; opacity: 0.92; font-weight: 600; }
+
+/* Registration desk block */
+.sp-registration {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 8px;
+}
+.sp-registration h4 { margin: 0 0 10px; font-weight: 800; font-size: 16px; }
+.sp-registration table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.sp-registration td { padding: 6px 10px; border-bottom: 1px dashed rgba(0,0,0,.08); }
+.sp-registration tr:last-child td { border-bottom: 0; }
+.sp-registration td:first-child { font-weight: 700; width: 220px; color: var(--heading-color); }
+
+/* Table container */
+.sp-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Program table */
+.sp-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--default-font);
+  font-size: 13.5px;
+  color: var(--heading-color);
+}
+
+.sp-table thead th {
+  background: var(--sc-header);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  padding: 14px 10px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.25);
+  position: sticky;
+  top: 0;
+}
+.sp-table thead th:last-child { border-right: 0; }
+.sp-table thead th:first-child { width: 130px; }
+
+.sp-table tbody td {
+  padding: 14px 12px;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 1px solid rgba(15,23,42,.06);
+  border-right: 1px solid rgba(15,23,42,.05);
+  line-height: 1.45;
+  font-weight: 600;
+  color: #0b1b3a;
+}
+.sp-table tbody tr:last-child td { border-bottom: 0; }
+.sp-table tbody td:last-child { border-right: 0; }
+
+.sp-time {
+  font-weight: 800;
+  font-size: 13px;
+  background: #f8fbff;
+  color: var(--heading-color);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.sp-cell {
+  border-radius: 8px;
+  transition: transform var(--transition-fast);
+}
+
+/* Session type coloured cells */
+.sp-plenary    { background: var(--sc-plenary);    color:#fff; }
+.sp-symposium  { background: var(--sc-symposium);  color:#fff; }
+.sp-workshop   { background: var(--sc-workshop);   color:#1f2937; }
+.sp-freepaper  { background: var(--sc-freepaper);  color:#fff; }
+.sp-poster     { background: var(--sc-poster);     color:#fff; }
+.sp-break      { background: var(--sc-break);      color:#7c2d12; font-weight:700; }
+.sp-ceremony   { background: var(--sc-ceremony);   color:#fff; }
+.sp-exhibition { background: var(--sc-exhibition); color:#0b1b3a; }
+.sp-unused     { background: var(--sc-unused);     color:#64748b; font-weight:500; }
+.sp-dinner     { background: var(--sc-dinner);     color:#fff; }
+.sp-debate     { background: var(--sc-debate);     color:#7f1d1d; }
+.sp-breakfast  { background: var(--sc-breakfast);  color:#78350f; }
+.sp-latebreak  { background: var(--sc-latebreak);  color:#fff; }
+.sp-rehab      { background: var(--sc-rehab);      color:#fff; }
+
+.sp-table tbody td[class*="sp-"]:not(.sp-time):hover {
+  filter: brightness(1.05);
+}
+
+/* Legend */
+.sp-legend {
+  margin-top: 28px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-xs);
+}
+.sp-legend h4 { margin: 0 0 14px; font-weight: 800; font-size: 16px; }
+.sp-legend__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+.sp-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f8fbff;
+  border: 1px solid rgba(15,23,42,.06);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+.sp-swatch {
+  width: 18px; height: 18px; border-radius: 6px; flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sp-table { font-size: 12.5px; }
+  .sp-table tbody td { padding: 12px 8px; }
+}
+@media (max-width: 768px) {
+  .sp-day { padding: 14px 16px; }
+  .sp-day__title { font-size: 17px; }
+}
