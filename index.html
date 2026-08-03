@@ -19,8 +19,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://apsc2026.lk/assets/img/caraousal4.png">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
   <!-- Favicons -->
@@ -30,7 +28,6 @@
   <link rel="manifest" href="assets/img/APSO Logo.png">
   <meta name="theme-color" content="#1e63d6">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -311,6 +308,39 @@
       </div>
     </div>
 
+
+
+    <!-- Shared President Video Modal -->
+    <div class="modal fade president-video-modal" id="presidentVideoModal" tabindex="-1"
+      aria-labelledby="presidentVideoModalLabel" aria-describedby="presidentVideoSpeaker" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <h5 class="modal-title" id="presidentVideoModalLabel">President's Video Message</h5>
+              <p class="president-video-speaker mb-0" id="presidentVideoSpeaker"></p>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+              aria-label="Close video"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="president-video-frame">
+              <video id="presidentVideoPlayer" class="president-video-player" controls playsinline preload="metadata">
+                Your browser does not support HTML5 video.
+              </video>
+              <iframe id="presidentVideoEmbed" class="president-video-embed d-none" title="President video message"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p class="president-video-error d-none" id="presidentVideoError" role="alert">
+              The video could not be loaded. Please check the video file path or try again later.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Key Information / Quick Facts Section -->
     <section id="key-info" class="key-info section">
       <div class="container section-title" data-aos="fade-up">
@@ -392,30 +422,94 @@
           <div class="col-lg-6">
             <div class="message-card d-flex flex-column align-items-center text-center p-4">
               <img src="assets/img/president.jpg" alt="President" class="img-fluid rounded-circle mb-3 message-img">
+
               <h4 class="fw-bold mb-1">Dr. Gamini Pathirana</h4>
-              <p class="position mb-3">President, National Stroke Association of Sri Lanka (NSASL) <br> Chair, Asia
-                Pacific Stroke Conference 2026</p>
+
+              <p class="position mb-3">
+                President, National Stroke Association of Sri Lanka (NSASL) <br>
+                Chair, Asia Pacific Stroke Conference 2026
+              </p>
+
               <p class="message-text">
                 It is a privilege to invite you to the Asia Pacific Stroke Conference (APSC) 2026, which will be held
                 26–28 November 2026 in the vibrant city of Colombo, Sri Lanka...
               </p>
-              <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#presidentModal">Read More</a>
+
+              <div class="message-actions" aria-label="Message options for Dr. Gamini Pathirana">
+
+                <button type="button" class="btn-watch-video js-president-video" data-bs-toggle="modal"
+                  data-bs-target="#presidentVideoModal" data-video-type="embed"
+                  data-video-src="https://www.youtube.com/embed/QVpXp4y5xS8"
+                  data-video-poster="assets/img/president.jpg"
+                  data-video-title="Video message from the President of NSASL"
+                  data-video-speaker="Dr. Gamini Pathirana">
+
+                  <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                  <span>Watch Video</span>
+
+                </button>
+
+
+                <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#presidentModal">
+                  Read Message
+                </a>
+
+              </div>
+
             </div>
           </div>
+
 
           <!-- Vice President Message -->
           <div class="col-lg-6">
             <div class="message-card d-flex flex-column align-items-center text-center p-4">
+
               <img src="assets/img/president2.jpg" alt="Vice President"
                 class="img-fluid rounded-circle mb-3 message-img">
-              <h4 class="fw-bold mb-1">Prof. Nijasri C. Suwanwela, M.D</h4>
-              <p class="position mb-3">President, Asia Pacific Stroke Organisation (APSO) <br> .</p>
+
+              <h4 class="fw-bold mb-1">
+                Prof. Nijasri C. Suwanwela, M.D
+              </h4>
+
+
+              <p class="position mb-3">
+                President, Asia Pacific Stroke Organisation (APSO)
+              </p>
+
+
               <p class="message-text">
                 On behalf of the Asia Pacific Stroke Organisation (APSO), it is my great pleasure to invite you to the
-                Asia
-                Pacific Stroke Conference (APSC) 2026, to be held in Colombo, Sri Lanka...
+                Asia Pacific Stroke Conference (APSC) 2026, to be held in Colombo, Sri Lanka...
               </p>
-              <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#vpModal">Read More</a>
+
+
+              <div class="message-actions" aria-label="Message options for Prof. Nijasri C. Suwanwela">
+
+
+                <button type="button" class="btn-watch-video js-president-video" data-bs-toggle="modal"
+                  data-bs-target="#presidentVideoModal" data-video-type="embed"
+                  data-video-src="https://www.youtube.com/embed/t6b4OPcliUI"
+                  data-video-poster="assets/img/president2.jpg"
+                  data-video-title="Video message from the President of APSO"
+                  data-video-speaker="Prof. Nijasri C. Suwanwela, M.D">
+
+
+                  <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                  <span>Watch Video</span>
+
+
+                </button>
+
+
+                <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#vpModal">
+
+                  Read Message
+
+                </a>
+
+
+              </div>
+
             </div>
           </div>
 
@@ -1359,6 +1453,15 @@
           <!-- Update items: each row is a link (arrow leads to relevant page) -->
           <div class="whats-new-list" id="whatsNewList">
 
+            <!-- 03/07/2026 - Tentative Scientific Program -->
+            <a class="whats-new-link" href="program.html" rel="noopener">
+              <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+              <span class="whats-new-link__text">
+                03/07/2026 - Tentative Scientific Program available
+                <span class="whats-new-link__meta">View details on the Program page</span>
+              </span>
+            </a>
+
             <!-- 13/06/2026 - Abstract winner award (Abstract Page) -->
             <a class="whats-new-link" href="abstract-guidelines.html" rel="noopener">
               <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
@@ -1417,6 +1520,172 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/contact.js"></script>
   <script src="assets/js/whats-new.js"></script>
+
+
+  <!-- President video modal controller -->
+  <script>
+    (() => {
+
+      const modalElement = document.getElementById('presidentVideoModal');
+      const player = document.getElementById('presidentVideoPlayer');
+      const embed = document.getElementById('presidentVideoEmbed');
+      const modalTitle = document.getElementById('presidentVideoModalLabel');
+      const speaker = document.getElementById('presidentVideoSpeaker');
+      const errorMessage = document.getElementById('presidentVideoError');
+
+      if (!modalElement || !player || !embed || !modalTitle || !speaker || !errorMessage) return;
+
+
+      let activeTrigger = null;
+
+
+      const resetPlayer = () => {
+
+        // Stop MP4 video
+        player.pause();
+        player.removeAttribute('src');
+        player.removeAttribute('poster');
+        player.load();
+        player.classList.remove('d-none');
+
+
+        // Stop YouTube iframe
+        embed.src = "";
+        embed.classList.add('d-none');
+
+
+        errorMessage.classList.add('d-none');
+
+      };
+
+
+      modalElement.addEventListener('show.bs.modal', (event) => {
+
+        activeTrigger = event.relatedTarget;
+
+        if (!activeTrigger) return;
+
+
+        const videoType = activeTrigger.dataset.videoType || 'file';
+        const videoSrc = activeTrigger.dataset.videoSrc || '';
+        const videoPoster = activeTrigger.dataset.videoPoster || '';
+
+
+        modalTitle.textContent =
+          activeTrigger.dataset.videoTitle || "President's Video Message";
+
+
+        speaker.textContent =
+          activeTrigger.dataset.videoSpeaker || "";
+
+
+        resetPlayer();
+
+
+        if (!videoSrc) {
+
+          errorMessage.classList.remove('d-none');
+          return;
+
+        }
+
+
+        // YouTube video
+        if (videoType === "embed") {
+
+
+          player.classList.add('d-none');
+
+          embed.classList.remove('d-none');
+
+
+          embed.title = modalTitle.textContent;
+
+
+          // Add autoplay and privacy settings
+          embed.src =
+            `${videoSrc}?autoplay=1&rel=0&modestbranding=1`;
+
+          return;
+
+        }
+
+
+
+        // Local MP4 fallback
+        player.src = videoSrc;
+
+
+        if (videoPoster) {
+
+          player.poster = videoPoster;
+
+        }
+
+
+        player.load();
+
+
+      });
+
+
+
+      // Play local video only
+      modalElement.addEventListener('shown.bs.modal', () => {
+
+
+        if (
+          !player.classList.contains('d-none') &&
+          player.getAttribute('src')
+        ) {
+
+
+          const playPromise = player.play();
+
+
+          if (playPromise) {
+
+            playPromise.catch(() => { });
+
+          }
+
+        }
+
+
+      });
+
+
+
+      player.addEventListener('error', () => {
+
+        errorMessage.classList.remove('d-none');
+
+      });
+
+
+
+      // Stop everything when modal closes
+      modalElement.addEventListener('hidden.bs.modal', () => {
+
+
+        resetPlayer();
+
+
+        if (activeTrigger) {
+
+          activeTrigger.focus();
+
+        }
+
+
+        activeTrigger = null;
+
+
+      });
+
+
+    })();
+  </script>
 
 </body>
 

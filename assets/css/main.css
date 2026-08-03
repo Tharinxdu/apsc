@@ -4216,3 +4216,173 @@ section.dark-background,
     font-size: 13px;
   }
 }
+
+/*--------------------------------------------------------------
+# President Message Video Experience
+# Add this block to the end of assets/css/main.css
+--------------------------------------------------------------*/
+.messages .message-card {
+  height: 100%;
+}
+
+.messages .message-actions {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.messages .btn-watch-video,
+.messages .message-actions .btn-read-more {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: var(--nav-font);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.messages .btn-watch-video {
+  border: 1px solid var(--accent-color);
+  color: var(--contrast-color);
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  box-shadow: 0 10px 24px rgba(30, 99, 214, 0.24);
+}
+
+.messages .btn-watch-video i {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.messages .btn-watch-video:hover,
+.messages .btn-watch-video:focus-visible {
+  color: var(--contrast-color);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(30, 99, 214, 0.32);
+}
+
+.messages .message-actions .btn-read-more:hover,
+.messages .message-actions .btn-read-more:focus-visible {
+  text-decoration: none;
+}
+
+.president-video-modal {
+  --bs-modal-width: 980px;
+}
+
+.president-video-modal .modal-dialog {
+  width: min(980px, calc(100% - 24px));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.president-video-modal .modal-content {
+  overflow: hidden;
+  color: #ffffff;
+  background: #050b1d;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.president-video-modal .modal-header {
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(12, 24, 51, 0.98), rgba(5, 11, 29, 0.98));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.president-video-modal .modal-title {
+  margin-bottom: 3px;
+  color: #ffffff;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.3;
+}
+
+.president-video-modal .president-video-speaker {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.president-video-modal .btn-close {
+  flex: 0 0 auto;
+  margin: 0;
+  opacity: 0.82;
+}
+
+.president-video-modal .btn-close:hover {
+  opacity: 1;
+}
+
+.president-video-modal .modal-body {
+  padding: 0;
+  color: #ffffff;
+  background: #000000;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.president-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000000;
+}
+
+.president-video-player,
+.president-video-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: min(72vh, 680px);
+  object-fit: contain;
+  background: #000000;
+  border: 0;
+}
+
+.president-video-error {
+  margin: 0;
+  padding: 14px 18px;
+  color: #ffffff;
+  background: #9f1d2d;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 575.98px) {
+  .messages .message-actions {
+    flex-direction: column;
+  }
+
+  .messages .btn-watch-video,
+  .messages .message-actions .btn-read-more {
+    width: 100%;
+  }
+
+  .president-video-modal .modal-dialog {
+    width: calc(100% - 16px);
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .president-video-modal .modal-header {
+    padding: 13px 14px;
+  }
+}
