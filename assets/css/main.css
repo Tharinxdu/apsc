@@ -3645,12 +3645,12 @@ section.dark-background,
   }
 
   .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(2) {
-    --fees-label: "Early Bird (Online)";
+    --fees-label: "Early Bird (To be Paid Online)";
     font-variant-numeric: tabular-nums;
   }
 
   .registration-page .fees-table tbody tr:not(.fees-group) td:nth-child(3) {
-    --fees-label: "Regular (Online)";
+    --fees-label: "Regular (To be Paid Online)";
     font-variant-numeric: tabular-nums;
   }
 
@@ -4221,168 +4221,556 @@ section.dark-background,
 # President Message Video Experience
 # Add this block to the end of assets/css/main.css
 --------------------------------------------------------------*/
-.messages .message-card {
-  height: 100%;
+/*--------------------------------------------------------------
+# President's Messages — video-first
+# REPLACES the old "President Message Video Experience" block at
+# the end of main.css, and the older .messages .message-card /
+# .message-img / .message-text / .president-video-* rules.
+--------------------------------------------------------------*/
+
+.messages .pm {
+  display: grid;
+  gap: 16px;
 }
 
-.messages .message-actions {
-  width: 100%;
-  margin-top: auto;
+/* ---------- Speaker switcher ---------- */
+
+.pm__switcher {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.messages .btn-watch-video,
-.messages .message-actions .btn-read-more {
-  min-height: 44px;
-  display: inline-flex;
+.pm__chip {
+  flex: 1 1 280px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
+  gap: 12px;
+
+  padding: 10px 16px 10px 10px;
   border-radius: 999px;
-  font-family: var(--nav-font);
-  font-size: 14px;
-  font-weight: 750;
-  line-height: 1;
-  text-decoration: none;
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 8%);
+  box-shadow: var(--shadow-xs);
+
+  text-align: left;
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.messages .btn-watch-video {
-  border: 1px solid var(--accent-color);
-  color: var(--contrast-color);
-  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
-  box-shadow: 0 10px 24px rgba(30, 99, 214, 0.24);
-}
-
-.messages .btn-watch-video i {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.messages .btn-watch-video:hover,
-.messages .btn-watch-video:focus-visible {
-  color: var(--contrast-color);
+.pm__chip:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 32px rgba(30, 99, 214, 0.32);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-color-strong);
 }
 
-.messages .message-actions .btn-read-more:hover,
-.messages .message-actions .btn-read-more:focus-visible {
-  text-decoration: none;
+.pm__chip.is-active {
+  border-color: color-mix(in srgb, var(--accent-color), transparent 55%);
+  background: color-mix(in srgb, var(--accent-color), transparent 93%);
+  box-shadow: 0 12px 30px rgba(30, 99, 214, 0.16);
 }
 
-.president-video-modal {
-  --bs-modal-width: 980px;
-}
-
-.president-video-modal .modal-dialog {
-  width: min(980px, calc(100% - 24px));
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.president-video-modal .modal-content {
-  overflow: hidden;
-  color: #ffffff;
-  background: #050b1d;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-}
-
-.president-video-modal .modal-header {
-  gap: 16px;
-  align-items: flex-start;
-  padding: 16px 18px;
-  background: linear-gradient(180deg, rgba(12, 24, 51, 0.98), rgba(5, 11, 29, 0.98));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.president-video-modal .modal-title {
-  margin-bottom: 3px;
-  color: #ffffff;
-  font-size: clamp(17px, 2vw, 21px);
-  line-height: 1.3;
-}
-
-.president-video-modal .president-video-speaker {
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.president-video-modal .btn-close {
+.pm__chip-avatar {
   flex: 0 0 auto;
-  margin: 0;
-  opacity: 0.82;
-}
-
-.president-video-modal .btn-close:hover {
-  opacity: 1;
-}
-
-.president-video-modal .modal-body {
-  padding: 0;
-  color: #ffffff;
-  background: #000000;
-  text-align: left;
-  line-height: 1.5;
-}
-
-.president-video-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  display: grid;
-  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
   overflow: hidden;
-  background: #000000;
+  background: var(--alt-background-color);
+  border: 2px solid var(--surface-color);
+  box-shadow: 0 4px 14px rgba(3, 10, 100, 0.14);
 }
 
-.president-video-player,
-.president-video-embed {
-  display: block;
+.pm__chip-avatar img {
   width: 100%;
   height: 100%;
-  max-height: min(72vh, 680px);
-  object-fit: contain;
-  background: #000000;
+  object-fit: cover;
+  display: block;
+}
+
+.pm__chip-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pm__chip-name {
+  font-family: var(--heading-font);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--heading-color);
+  line-height: 1.25;
+}
+
+.pm__chip-role {
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+}
+
+/* Play marker only on the speaker currently in the player */
+.pm__chip-mark {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.pm__chip.is-active .pm__chip-mark {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Layout ---------- */
+
+.pm__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* ---------- Stage ---------- */
+
+.pm__stage {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #050b1d;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 26px 64px rgba(3, 10, 100, 0.26);
+}
+
+.pm__player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #050b1d;
+  isolation: isolate;
+}
+
+.pm__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 400ms ease, transform 600ms ease;
+}
+
+.pm__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 420px at 50% 40%, rgba(2, 6, 23, 0.15), transparent 70%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.30) 0%, rgba(2, 6, 23, 0.10) 45%, rgba(2, 6, 23, 0.60) 100%);
+  transition: opacity 400ms ease;
+}
+
+.pm__frame,
+.pm__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: 0;
 }
 
-.president-video-error {
-  margin: 0;
-  padding: 14px 18px;
-  color: #ffffff;
-  background: #9f1d2d;
-  font-size: 14px;
+.pm__frame {
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+.pm__player.is-playing .pm__frame {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pm__player.is-playing .pm__poster,
+.pm__player.is-playing .pm__scrim {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Play affordance ---------- */
+
+.pm__play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.pm__player.is-playing .pm__play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pm__play-icon {
+  width: 74px;
+  height: 74px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  padding-left: 4px;
+
+  color: #fff;
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 18px 44px rgba(30, 99, 214, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.26);
+
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.pm__play:hover .pm__play-icon {
+  transform: scale(1.06);
+  box-shadow: 0 24px 56px rgba(30, 99, 214, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pm__play-label {
+  font-family: var(--heading-font);
+  font-weight: 750;
+  font-size: 14.5px;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  max-width: 26ch;
   text-align: center;
 }
 
+/* ---------- Loading ---------- */
+
+.pm__spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  margin: -21px 0 0 -21px;
+  z-index: 3;
+
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pm__player.is-loading .pm__spinner {
+  opacity: 1;
+  animation: pmSpin 800ms linear infinite;
+}
+
+.pm__player.is-loading .pm__play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes pmSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Sound bar (below the frame, never over YouTube's controls) ---------- */
+
+.pm__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 14px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.pm__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pm__status span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Three-bar level meter: still when muted, moving when sound is on */
+.pm__eq {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  width: 16px;
+  height: 14px;
+}
+
+.pm__eq i {
+  flex: 1;
+  height: 30%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color var(--transition-fast);
+}
+
+.pm--sound-on .pm__eq i {
+  background: var(--accent-color);
+  animation: pmEq 900ms ease-in-out infinite;
+}
+
+.pm--sound-on .pm__eq i:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.pm--sound-on .pm__eq i:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes pmEq {
+
+  0%,
+  100% {
+    height: 28%;
+  }
+
+  50% {
+    height: 100%;
+  }
+}
+
+.pm__sound {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 16px;
+  border-radius: 999px;
+
+  font-family: var(--nav-font);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+
+  color: #fff;
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-strong));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(30, 99, 214, 0.30);
+
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+.pm__sound:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 14px 32px rgba(30, 99, 214, 0.4);
+}
+
+/* Once sound is on, the button is a quiet secondary action */
+.pm--sound-on .pm__sound {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+/* No JS control over a fallback embed — hide the toggle rather than lie about it */
+.pm--native .pm__sound {
+  display: none;
+}
+
+/* ---------- Info panel ---------- */
+
+.pm__info {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 24px;
+
+  background: color-mix(in srgb, var(--surface-color), var(--alt-background-color) 8%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.pm__info-avatar {
+  width: 74px;
+  height: 74px;
+  border-radius: 999px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  border: 3px solid color-mix(in srgb, var(--accent-color), white 12%);
+  box-shadow: 0 10px 26px rgba(3, 10, 100, 0.14);
+}
+
+.pm__info-name {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: var(--heading-color);
+}
+
+.pm__info-role {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-weight: 650;
+  color: color-mix(in srgb, var(--default-color), transparent 32%);
+}
+
+.pm__info-text {
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--default-color), transparent 14%);
+  text-wrap: pretty;
+}
+
+.pm__info-link {
+  margin-top: auto;
+  align-self: flex-start;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 11px 20px;
+  border-radius: 999px;
+
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+
+  color: var(--accent-color);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 60%);
+
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.pm__info-link i {
+  transition: transform var(--transition-fast);
+}
+
+.pm__info-link:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(30, 99, 214, 0.24);
+  text-decoration: none;
+}
+
+.pm__info-link:hover i {
+  transform: translateX(3px);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 991.98px) {
+  .pm__main {
+    grid-template-columns: 1fr;
+  }
+
+  .pm__info {
+    padding: 22px 20px;
+  }
+}
+
 @media (max-width: 575.98px) {
-  .messages .message-actions {
+  .pm__chip {
+    flex: 1 1 100%;
+    padding: 8px 14px 8px 8px;
+  }
+
+  .pm__chip-avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .pm__play-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+  }
+
+  .pm__play-label {
+    font-size: 13px;
+  }
+
+  .pm__bar {
     flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 
-  .messages .btn-watch-video,
-  .messages .message-actions .btn-read-more {
-    width: 100%;
+  .pm__sound {
+    justify-content: center;
   }
 
-  .president-video-modal .modal-dialog {
-    width: calc(100% - 16px);
-    margin-top: 8px;
-    margin-bottom: 8px;
+  .pm__info-avatar {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .pm__poster,
+  .pm__scrim,
+  .pm__frame,
+  .pm__play-icon,
+  .pm__chip,
+  .pm__info-link,
+  .pm__sound {
+    transition: none;
   }
 
-  .president-video-modal .modal-header {
-    padding: 13px 14px;
+  .pm--sound-on .pm__eq i {
+    animation: none;
+    height: 60%;
+  }
+
+  .pm__player.is-loading .pm__spinner {
+    animation: none;
   }
 }

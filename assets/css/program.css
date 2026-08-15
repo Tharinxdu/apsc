@@ -1,33 +1,138 @@
 /* ==========================================================
-   Scientific Program - Modern Tabular Layout
-   Add this to your main.css or link separately AFTER main.css
+   Scientific Program — APSC 2026
+   Load AFTER main.css (it overrides Bootstrap + main.css rules).
+
+   Contains everything the programme page needs, including the
+   session-detail modal — so the inline <style> block in
+   program.html can now be deleted.
    ========================================================== */
+
+/* ----------------------------------------------------------
+   1. Tokens
+   Backgrounds are the client's Excel legend colours, unchanged.
+   Text colours are set per background to meet WCAG AA (4.5:1) —
+   see the note above each pair that changed.
+   ---------------------------------------------------------- */
+
+:root {
+  /* Session backgrounds (Excel legend) */
+  --sc-plenary: #2563EB;
+  --sc-symposium: #10B981;
+  --sc-workshop: #F59E0B;
+  --sc-freepaper: #8558EC;
+  /* was #8B5CF6 — darkened 4% so white text reaches 4.6:1 */
+  --sc-poster: #14B8A6;
+  --sc-break: #FED7AA;
+  --sc-ceremony: #4F46E5;
+  --sc-exhibition: #DBEAFE;
+  --sc-unused: #F3F4F6;
+  --sc-dinner: #7F1D1D;
+  --sc-debate: #FB7185;
+  --sc-breakfast: #FFF7D6;
+  --sc-latebreak: #C026D3;
+  --sc-rehab: #0F766E;
+  --sc-meeting: #E2E8F0;
+  --sc-header: #00B0F0;
+
+  /* Readable ink for the mid-tone backgrounds.
+     White on #10B981 / #14B8A6 / #00B0F0 measured 2.5:1 — well
+     under AA. These deep tints of the same hue read at 4.6–4.7:1
+     and keep the legend colours untouched. */
+  --sc-ink-symposium: #053F2C;
+  --sc-ink-poster: #07403A;
+  --sc-ink-header: #003E54;
+  --sc-ink-debate: #53252C;
+  --sc-ink-unused: #6D6E6F;
+
+  /* Grid chrome */
+  --sp-grid-line: rgba(15, 23, 42, .07);
+  --sp-time-bg: #F7FAFF;
+}
+
+/* ----------------------------------------------------------
+   2. Page title
+   ---------------------------------------------------------- */
 
 .program-page .page-title h1 {
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
-/* Session color tokens (from Excel legend) */
-:root {
-  --sc-plenary:      #2563EB;
-  --sc-symposium:    #10B981;
-  --sc-workshop:     #F59E0B;
-  --sc-freepaper:    #8B5CF6;
-  --sc-poster:       #14B8A6;
-  --sc-break:        #FED7AA;
-  --sc-ceremony:     #4F46E5;
-  --sc-exhibition:   #DBEAFE;
-  --sc-unused:       #F3F4F6;
-  --sc-dinner:       #7F1D1D;
-  --sc-debate:       #FB7185;
-  --sc-breakfast:    #FFF7D6;
-  --sc-latebreak:    #C026D3;
-  --sc-rehab:        #0F766E;
-  --sc-header:       #00B0F0;
+/* ----------------------------------------------------------
+   3. Registration desk block
+   ---------------------------------------------------------- */
+
+.sp-registration {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 18px;
 }
 
-/* Day header bar */
+.sp-registration h4 {
+  margin: 0 0 6px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.sp-registration__note {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--muted-color);
+}
+
+.sp-registration table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+
+.sp-registration td {
+  padding: 8px 10px;
+  border-bottom: 1px dashed rgba(0, 0, 0, .08);
+}
+
+.sp-registration tr:last-child td {
+  border-bottom: 0;
+}
+
+.sp-registration td:first-child {
+  width: 220px;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.sp-registration td:last-child {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------
+   4. "Click for details" helper strip
+   ---------------------------------------------------------- */
+
+.sp-helper {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent-color), transparent 94%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 86%);
+  font-size: 14px;
+  color: var(--default-color);
+}
+
+.sp-helper>i {
+  color: var(--accent-color);
+}
+
+/* ----------------------------------------------------------
+   5. Day header bar
+   ---------------------------------------------------------- */
+
 .sp-day {
   margin: 34px 0 14px;
   padding: 16px 22px;
@@ -41,34 +146,48 @@
   flex-wrap: wrap;
   gap: 10px;
 }
-.sp-day__title { margin: 0; font-weight: 800; font-size: 20px; letter-spacing: -0.01em; }
-.sp-day__date  { font-size: 14px; opacity: 0.92; font-weight: 600; }
 
-/* Registration desk block */
-.sp-registration {
-  background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  box-shadow: var(--shadow-xs);
-  margin-bottom: 8px;
+.sp-day__title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: #fff;
 }
-.sp-registration h4 { margin: 0 0 10px; font-weight: 800; font-size: 16px; }
-.sp-registration table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-.sp-registration td { padding: 6px 10px; border-bottom: 1px dashed rgba(0,0,0,.08); }
-.sp-registration tr:last-child td { border-bottom: 0; }
-.sp-registration td:first-child { font-weight: 700; width: 220px; color: var(--heading-color); }
 
-/* Table container */
+.sp-day__date {
+  font-size: 14px;
+  opacity: .92;
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   6. Programme table
+   ---------------------------------------------------------- */
+
 .sp-table-wrap {
+  position: relative;
   overflow-x: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   background: var(--surface-color);
   border: 1px solid var(--border-color);
+  scrollbar-width: thin;
 }
 
-/* Program table */
+.sp-table-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+
+.sp-table-wrap::-webkit-scrollbar-track {
+  background: rgba(3, 10, 100, .05);
+}
+
+.sp-table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(3, 10, 100, .22);
+  border-radius: 999px;
+}
+
 .sp-table {
   width: 100%;
   min-width: 980px;
@@ -81,67 +200,191 @@
 
 .sp-table thead th {
   background: var(--sc-header);
-  color: #ffffff;
+  color: var(--sc-ink-header);
   font-weight: 800;
   font-size: 13.5px;
-  letter-spacing: 0.02em;
+  letter-spacing: .02em;
   padding: 14px 10px;
   text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.25);
-  position: sticky;
-  top: 0;
+  border-right: 1px solid rgba(255, 255, 255, .35);
 }
-.sp-table thead th:last-child { border-right: 0; }
-.sp-table thead th:first-child { width: 130px; }
+
+.sp-table thead th:last-child {
+  border-right: 0;
+}
+
+.sp-table thead th:first-child {
+  width: 130px;
+}
 
 .sp-table tbody td {
   padding: 14px 12px;
   vertical-align: middle;
   text-align: center;
-  border-bottom: 1px solid rgba(15,23,42,.06);
-  border-right: 1px solid rgba(15,23,42,.05);
+  border-bottom: 1px solid var(--sp-grid-line);
+  border-right: 1px solid var(--sp-grid-line);
   line-height: 1.45;
   font-weight: 600;
   color: #0b1b3a;
 }
-.sp-table tbody tr:last-child td { border-bottom: 0; }
-.sp-table tbody td:last-child { border-right: 0; }
 
+.sp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sp-table tbody td:last-child {
+  border-right: 0;
+}
+
+/* Time column — sticky on narrow screens so the grid stays readable
+   while scrolling sideways. */
 .sp-time {
+  position: sticky;
+  left: 0;
+  z-index: 2;
   font-weight: 800;
   font-size: 13px;
-  background: #f8fbff;
+  background: var(--sp-time-bg);
   color: var(--heading-color);
   white-space: nowrap;
-  letter-spacing: 0.01em;
+  letter-spacing: .01em;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 1px 0 0 var(--sp-grid-line);
 }
 
-.sp-cell {
-  border-radius: 8px;
-  transition: transform var(--transition-fast);
+.sp-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
 }
 
-/* Session type coloured cells */
-.sp-plenary    { background: var(--sc-plenary);    color:#fff; }
-.sp-symposium  { background: var(--sc-symposium);  color:#fff; }
-.sp-workshop   { background: var(--sc-workshop);   color:#1f2937; }
-.sp-freepaper  { background: var(--sc-freepaper);  color:#fff; }
-.sp-poster     { background: var(--sc-poster);     color:#fff; }
-.sp-break      { background: var(--sc-break);      color:#7c2d12; font-weight:700; }
-.sp-ceremony   { background: var(--sc-ceremony);   color:#fff; }
-.sp-exhibition { background: var(--sc-exhibition); color:#0b1b3a; }
-.sp-unused     { background: var(--sc-unused);     color:#64748b; font-weight:500; }
-.sp-dinner     { background: var(--sc-dinner);     color:#fff; }
-.sp-debate     { background: var(--sc-debate);     color:#7f1d1d; }
-.sp-breakfast  { background: var(--sc-breakfast);  color:#78350f; }
-.sp-latebreak  { background: var(--sc-latebreak);  color:#fff; }
-.sp-rehab      { background: var(--sc-rehab);      color:#fff; }
+/* ----------------------------------------------------------
+   7. Session type cells
+   ---------------------------------------------------------- */
 
-.sp-table tbody td[class*="sp-"]:not(.sp-time):hover {
-  filter: brightness(1.05);
+.sp-plenary {
+  background: var(--sc-plenary);
+  color: #fff;
 }
 
-/* Legend */
+.sp-symposium {
+  background: var(--sc-symposium);
+  color: var(--sc-ink-symposium);
+}
+
+.sp-workshop {
+  background: var(--sc-workshop);
+  color: #1f2937;
+}
+
+.sp-freepaper {
+  background: var(--sc-freepaper);
+  color: #fff;
+}
+
+.sp-poster {
+  background: var(--sc-poster);
+  color: var(--sc-ink-poster);
+}
+
+.sp-break {
+  background: var(--sc-break);
+  color: #7c2d12;
+  font-weight: 700;
+}
+
+.sp-ceremony {
+  background: var(--sc-ceremony);
+  color: #fff;
+}
+
+.sp-exhibition {
+  background: var(--sc-exhibition);
+  color: #0b1b3a;
+}
+
+.sp-unused {
+  background: var(--sc-unused);
+  color: var(--sc-ink-unused);
+  font-weight: 500;
+}
+
+.sp-dinner {
+  background: var(--sc-dinner);
+  color: #fff;
+}
+
+.sp-debate {
+  background: var(--sc-debate);
+  color: var(--sc-ink-debate);
+}
+
+.sp-breakfast {
+  background: var(--sc-breakfast);
+  color: #78350f;
+}
+
+.sp-latebreak {
+  background: var(--sc-latebreak);
+  color: #fff;
+}
+
+.sp-rehab {
+  background: var(--sc-rehab);
+  color: #fff;
+}
+
+.sp-meeting {
+  background: var(--sc-meeting);
+  color: #0F172A;
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   8. Clickable cells
+   Only cells with a session agenda are interactive, so only
+   those get a hover state. (The old rule lit up Tea, Lunch and
+   empty slots too, which promised a click that never came.)
+   ---------------------------------------------------------- */
+
+.sp-table td.sp-clickable {
+  position: relative;
+  cursor: pointer;
+  transition: filter var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.sp-table td.sp-clickable:hover {
+  filter: brightness(1.06);
+  box-shadow: inset 0 0 0 2px rgba(15, 23, 42, .28);
+}
+
+.sp-table td.sp-clickable:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+  box-shadow: inset 0 0 0 3px var(--heading-color);
+  filter: brightness(1.06);
+}
+
+/* Small info glyph so the affordance is visible without hovering
+   (touch users never see a hover state). */
+.sp-table td.sp-clickable::after {
+  content: "\f431";
+  /* bootstrap-icons: info-circle */
+  font-family: "bootstrap-icons";
+  font-size: .72rem;
+  line-height: 1;
+  opacity: .6;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   9. Legend (markup currently commented out — kept so the block
+   can be restored without restyling)
+   ---------------------------------------------------------- */
+
 .sp-legend {
   margin-top: 28px;
   background: var(--surface-color);
@@ -150,35 +393,564 @@
   padding: 22px;
   box-shadow: var(--shadow-xs);
 }
-.sp-legend h4 { margin: 0 0 14px; font-weight: 800; font-size: 16px; }
+
+.sp-legend h4 {
+  margin: 0 0 14px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
 .sp-legend__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 10px;
 }
+
 .sp-legend__item {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
   border-radius: 10px;
-  background: #f8fbff;
-  border: 1px solid rgba(15,23,42,.06);
+  background: var(--sp-time-bg);
+  border: 1px solid var(--sp-grid-line);
   font-size: 13.5px;
   font-weight: 600;
   color: var(--heading-color);
 }
+
 .sp-swatch {
-  width: 18px; height: 18px; border-radius: 6px; flex: 0 0 auto;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .sp-table { font-size: 12.5px; }
-  .sp-table tbody td { padding: 12px 8px; }
+/* ==========================================================
+   10. Session detail modal
+
+   The accent is taken from the colour of the cell that opened
+   the modal, so the grid's colour code carries through. JS sets
+   --sp-accent / --sp-accent-rgb / --sp-accent-ink inline on
+   #programModalContent.
+   ========================================================== */
+
+.sp-modal {
+  --sp-accent: var(--accent-color, #1e63d6);
+  --sp-accent-rgb: 30, 99, 214;
+  --sp-accent-ink: #0f3f8f;
+
+  --sp-ink: var(--heading-color, #0b1b3a);
+  --sp-body: var(--default-color, #1f2937);
+  --sp-muted: var(--muted-color, #5a677c);
+  --sp-line: rgba(12, 24, 51, .12);
+  --sp-mono: ui-monospace, "SFMono-Regular", "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
 }
+
+body.sp-modal-open .modal-backdrop.show {
+  opacity: .6;
+}
+
+.sp-modal .modal-dialog {
+  max-width: 660px;
+}
+
+.sp-modal .modal-content {
+  position: relative;
+  border: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 30px 70px -18px rgba(3, 10, 100, .38), 0 0 0 1px rgba(12, 24, 51, .07);
+}
+
+/* main.css justifies .modal-body and sets line-height 1.9 — both
+   wreck a two-column agenda, so reset them inside this modal. */
+.sp-modal .modal-header,
+.sp-modal .modal-body,
+.sp-modal .modal-footer {
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--sp-body);
+}
+
+.sp-modal p {
+  margin: 0;
+  color: inherit;
+}
+
+/* Accent rule — the one saturated element in the frame */
+.sp-modal__accent {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--sp-accent);
+  z-index: 2;
+}
+
+.sp-modal__grab {
+  display: none;
+}
+
+/* ---------- Header ---------- */
+
+.sp-modal .modal-header {
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.6rem 1.6rem 1.25rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(var(--sp-accent-rgb), .075), rgba(var(--sp-accent-rgb), 0));
+  transition: border-color .2s ease;
+}
+
+.sp-modal .modal-content.is-scrolled .modal-header {
+  border-bottom-color: var(--sp-line);
+}
+
+.sp-modal__headings {
+  min-width: 0;
+}
+
+.sp-modal__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 .55rem;
+  font-family: var(--nav-font);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--sp-accent-ink);
+}
+
+.sp-modal__swatch {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--sp-accent);
+}
+
+.sp-modal__eyebrow-sep,
+.sp-modal__meta-sep {
+  flex: none;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .4;
+}
+
+.sp-modal .modal-title {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: 1.32rem;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -.022em;
+  color: var(--sp-ink);
+  text-wrap: balance;
+}
+
+.sp-modal__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem .6rem;
+  margin: .8rem 0 0;
+  font-size: .82rem;
+  line-height: 1.4;
+  color: var(--sp-muted);
+}
+
+.sp-modal__meta b {
+  font-weight: 700;
+  color: var(--sp-body);
+}
+
+.sp-modal__meta .mono {
+  font-family: var(--sp-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+}
+
+.sp-modal__close {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--sp-line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .75);
+  color: var(--sp-muted);
+  font-size: .78rem;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.sp-modal__close:hover {
+  color: var(--sp-ink);
+  border-color: var(--border-color-strong);
+  background: #fff;
+}
+
+/* ---------- Body: the running order ---------- */
+
+.sp-modal .modal-body {
+  padding: 1.35rem 1.6rem 1.6rem;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.sp-modal .modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sp-modal .modal-body::-webkit-scrollbar-thumb {
+  background: rgba(12, 24, 51, .18);
+  border-radius: 999px;
+  border: 3px solid #fff;
+}
+
+.sp-agenda__group+.sp-agenda__group {
+  margin-top: 1.7rem;
+}
+
+.sp-agenda__group-title {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 0 0 .2rem;
+  font-family: var(--nav-font);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--sp-accent-ink);
+}
+
+.sp-agenda__group-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--sp-line);
+}
+
+.sp-agenda {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sp-agenda__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0 1.9rem;
+  padding: 1rem 0;
+}
+
+.sp-agenda__item+.sp-agenda__item {
+  border-top: 1px solid var(--sp-line);
+}
+
+/* Continuous rail — these slots run back to back */
+.sp-agenda__item::before {
+  content: "";
+  position: absolute;
+  left: 4.42rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--sp-line);
+}
+
+.sp-agenda__item:first-child::before {
+  top: 1.35rem;
+}
+
+.sp-agenda__item:last-child::before {
+  bottom: auto;
+  height: 1.35rem;
+}
+
+.sp-agenda__item::after {
+  content: "";
+  position: absolute;
+  left: calc(4.42rem - 3px);
+  top: 1.18rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--sp-accent);
+}
+
+.sp-agenda__time {
+  padding-top: .05rem;
+  text-align: right;
+  font-family: var(--sp-mono);
+  line-height: 1.2;
+}
+
+.sp-agenda__start {
+  display: block;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--sp-ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+
+.sp-agenda__end {
+  display: block;
+  margin-top: .18rem;
+  font-size: .72rem;
+  color: var(--sp-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+
+.sp-agenda__body {
+  min-width: 0;
+}
+
+.sp-agenda__title {
+  margin: 0;
+  font-size: .96rem;
+  line-height: 1.5;
+  font-weight: 650;
+  color: var(--sp-ink);
+  text-wrap: pretty;
+}
+
+.sp-agenda__speaker {
+  margin: .35rem 0 0;
+  font-size: .855rem;
+  line-height: 1.5;
+  color: var(--sp-muted);
+}
+
+.sp-agenda__name {
+  color: var(--sp-body);
+}
+
+.sp-agenda__country {
+  display: inline-block;
+  margin-left: .4rem;
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  font-size: .655rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--sp-accent-ink);
+  background: rgba(var(--sp-accent-rgb), .13);
+  vertical-align: 1.5px;
+  white-space: nowrap;
+}
+
+.sp-modal__empty {
+  padding: .75rem 0 1rem;
+  font-size: .92rem;
+  color: var(--sp-muted);
+}
+
+/* ---------- Footer ---------- */
+
+.sp-modal .modal-footer {
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 1.6rem;
+  border-top: 1px solid var(--sp-line);
+  background: #FAFBFD;
+}
+
+.sp-modal__note {
+  font-size: .76rem;
+  color: var(--sp-muted);
+}
+
+.sp-modal__btn {
+  border: 0;
+  border-radius: 999px;
+  padding: .55rem 1.3rem;
+  font-family: var(--nav-font);
+  font-size: .85rem;
+  font-weight: 750;
+  background: var(--sp-ink);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.sp-modal__btn:hover {
+  opacity: .9;
+  transform: translateY(-1px);
+}
+
+/* ---------- Mobile: bottom sheet ---------- */
+
+@media (max-width: 575.98px) {
+  .sp-modal .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+    /* overrides .modal-dialog-scrollable's calc(100% - margin*2),
+       which would otherwise leave a gap under the sheet */
+    height: 100%;
+    min-height: 100%;
+    align-items: flex-end;
+  }
+
+  .sp-modal .modal-content {
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .sp-modal.fade .modal-dialog {
+    transform: translateY(30px);
+  }
+
+  .sp-modal.show .modal-dialog {
+    transform: none;
+  }
+
+  .sp-modal__grab {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 4px;
+    border-radius: 99px;
+    background: #CBD5E1;
+    z-index: 2;
+  }
+
+  .sp-modal .modal-header {
+    padding: 1.75rem 1.15rem 1.1rem;
+  }
+
+  .sp-modal .modal-title {
+    font-size: 1.15rem;
+  }
+
+  .sp-modal .modal-body {
+    padding: 1.15rem 1.15rem 1.4rem;
+  }
+
+  .sp-modal .modal-footer {
+    padding: .75rem 1.15rem;
+  }
+
+  .sp-agenda__item {
+    grid-template-columns: 3.1rem 1fr;
+    gap: 0 1.5rem;
+  }
+
+  .sp-agenda__item::before {
+    left: 3.86rem;
+  }
+
+  .sp-agenda__item::after {
+    left: calc(3.86rem - 3px);
+  }
+}
+
+/* ----------------------------------------------------------
+   11. Responsive grid
+   ---------------------------------------------------------- */
+
+@media (max-width: 992px) {
+  .sp-table {
+    font-size: 12.5px;
+  }
+
+  .sp-table tbody td {
+    padding: 12px 8px;
+  }
+}
+
 @media (max-width: 768px) {
-  .sp-day { padding: 14px 16px; }
-  .sp-day__title { font-size: 17px; }
+  .sp-day {
+    padding: 14px 16px;
+  }
+
+  .sp-day__title {
+    font-size: 17px;
+  }
+
+  .sp-registration {
+    padding: 16px 18px;
+  }
+
+  .sp-registration td:first-child {
+    width: auto;
+  }
+}
+
+/* ----------------------------------------------------------
+   12. Print — delegates print the grid
+   ---------------------------------------------------------- */
+
+@media print {
+
+  .header,
+  .footer,
+  .sp-helper,
+  .scroll-top,
+  .whats-new-fab,
+  .page-title {
+    display: none !important;
+  }
+
+  .sp-table-wrap {
+    overflow: visible;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .sp-table {
+    min-width: 0;
+    font-size: 9pt;
+  }
+
+  .sp-table tbody td,
+  .sp-table thead th {
+    padding: 6px 5px;
+  }
+
+  .sp-day {
+    background: none !important;
+    color: #000;
+    border-bottom: 2px solid #000;
+    border-radius: 0;
+    padding: 8px 0;
+  }
+
+  .sp-day__title {
+    color: #000;
+  }
+
+  .sp-table td.sp-clickable::after {
+    content: none;
+  }
+
+  .sp-table {
+    page-break-inside: avoid;
+  }
+
+  /* Keep the session colours in print — they carry meaning */
+  .sp-table tbody td,
+  .sp-table thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

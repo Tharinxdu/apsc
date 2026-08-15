@@ -410,112 +410,100 @@
 
     <!-- Presidents Section -->
     <section id="messages" class="messages section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>President's Messages</h2>
-        <!-- <p>Welcome messages from the Presidents</p> -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>President's Messages</h2>
+    <p>A welcome from the conference and APSO presidents.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="pm" id="pmSection">
+
+      <!-- Speaker switcher -->
+      <div class="pm__switcher" role="tablist" aria-label="Choose a speaker">
+
+        <button type="button" class="pm__chip is-active" role="tab" id="pmTab1" aria-selected="true"
+          aria-controls="pmPanel" tabindex="0" data-video-id="QVpXp4y5xS8" data-photo="assets/img/president.jpg"
+          data-name="Dr. Gamini Pathirana" data-role="President, National Stroke Association of Sri Lanka · Chair, APSC 2026"
+          data-modal="#presidentModal"
+          data-excerpt="It is a great privilege to host APSC 2026 in Colombo. Our theme — enhancing stroke management, overcoming challenges and fostering regional synergies — reflects a shared commitment to advancing stroke care across the Asia–Pacific.">
+          <span class="pm__chip-avatar">
+            <img src="assets/img/president.jpg" alt="" loading="lazy">
+          </span>
+          <span class="pm__chip-text">
+            <span class="pm__chip-name">Dr. Gamini Pathirana</span>
+            <span class="pm__chip-role">President, NSASL</span>
+          </span>
+          <span class="pm__chip-mark" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+        </button>
+
+        <button type="button" class="pm__chip" role="tab" id="pmTab2" aria-selected="false" aria-controls="pmPanel"
+          tabindex="-1" data-video-id="t6b4OPcliUI" data-photo="assets/img/president2.jpg"
+          data-name="Prof. Nijasri C. Suwanwela, M.D" data-role="President, Asia Pacific Stroke Organisation"
+          data-modal="#vpModal"
+          data-excerpt="The Asia–Pacific is home to more than half the world's population and bears the greatest burden of stroke worldwide. It is also a region of tremendous innovation, diversity and resilience.">
+          <span class="pm__chip-avatar">
+            <img src="assets/img/president2.jpg" alt="" loading="lazy">
+          </span>
+          <span class="pm__chip-text">
+            <span class="pm__chip-name">Prof. Nijasri C. Suwanwela</span>
+            <span class="pm__chip-role">President, APSO</span>
+          </span>
+          <span class="pm__chip-mark" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+        </button>
+
       </div>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
+      <!-- Player + speaker details -->
+      <div class="pm__main" id="pmPanel" role="tabpanel" aria-labelledby="pmTab1">
 
-          <!-- President Message -->
-          <div class="col-lg-6">
-            <div class="message-card d-flex flex-column align-items-center text-center p-4">
-              <img src="assets/img/president.jpg" alt="President" class="img-fluid rounded-circle mb-3 message-img">
+        <div class="pm__stage">
+          <div class="pm__player" id="pmPlayer">
+            <img class="pm__poster" id="pmPoster" src="assets/img/president.jpg" alt="">
+            <span class="pm__scrim" aria-hidden="true"></span>
 
-              <h4 class="fw-bold mb-1">Dr. Gamini Pathirana</h4>
+            <!-- The YouTube iframe replaces this node when playback starts -->
+            <div class="pm__frame"><div id="pmMount"></div></div>
 
-              <p class="position mb-3">
-                President, National Stroke Association of Sri Lanka (NSASL) <br>
-                Chair, Asia Pacific Stroke Conference 2026
-              </p>
+            <button type="button" class="pm__play" id="pmPlay">
+              <span class="pm__play-icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span>
+              <span class="pm__play-label" id="pmPlayLabel">Play the welcome message</span>
+            </button>
 
-              <p class="message-text">
-                It is a privilege to invite you to the Asia Pacific Stroke Conference (APSC) 2026, which will be held
-                26–28 November 2026 in the vibrant city of Colombo, Sri Lanka...
-              </p>
-
-              <div class="message-actions" aria-label="Message options for Dr. Gamini Pathirana">
-
-                <button type="button" class="btn-watch-video js-president-video" data-bs-toggle="modal"
-                  data-bs-target="#presidentVideoModal" data-video-type="embed"
-                  data-video-src="https://www.youtube.com/embed/QVpXp4y5xS8"
-                  data-video-poster="assets/img/president.jpg"
-                  data-video-title="Video message from the President of NSASL"
-                  data-video-speaker="Dr. Gamini Pathirana">
-
-                  <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
-                  <span>Watch Video</span>
-
-                </button>
-
-
-                <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#presidentModal">
-                  Read Message
-                </a>
-
-              </div>
-
-            </div>
+            <span class="pm__spinner" id="pmSpinner" aria-hidden="true"></span>
           </div>
 
+          <!-- Sound control sits below the frame so it never covers YouTube's own controls -->
+          <div class="pm__bar">
+            <p class="pm__status" id="pmStatus">
+              <span class="pm__eq" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span id="pmStatusText">Starts muted when you scroll to it</span>
+            </p>
 
-          <!-- Vice President Message -->
-          <div class="col-lg-6">
-            <div class="message-card d-flex flex-column align-items-center text-center p-4">
-
-              <img src="assets/img/president2.jpg" alt="Vice President"
-                class="img-fluid rounded-circle mb-3 message-img">
-
-              <h4 class="fw-bold mb-1">
-                Prof. Nijasri C. Suwanwela, M.D
-              </h4>
-
-
-              <p class="position mb-3">
-                President, Asia Pacific Stroke Organisation (APSO)
-              </p>
-
-
-              <p class="message-text">
-                On behalf of the Asia Pacific Stroke Organisation (APSO), it is my great pleasure to invite you to the
-                Asia Pacific Stroke Conference (APSC) 2026, to be held in Colombo, Sri Lanka...
-              </p>
-
-
-              <div class="message-actions" aria-label="Message options for Prof. Nijasri C. Suwanwela">
-
-
-                <button type="button" class="btn-watch-video js-president-video" data-bs-toggle="modal"
-                  data-bs-target="#presidentVideoModal" data-video-type="embed"
-                  data-video-src="https://www.youtube.com/embed/t6b4OPcliUI"
-                  data-video-poster="assets/img/president2.jpg"
-                  data-video-title="Video message from the President of APSO"
-                  data-video-speaker="Prof. Nijasri C. Suwanwela, M.D">
-
-
-                  <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
-                  <span>Watch Video</span>
-
-
-                </button>
-
-
-                <a href="#" class="btn-read-more" data-bs-toggle="modal" data-bs-target="#vpModal">
-
-                  Read Message
-
-                </a>
-
-
-              </div>
-
-            </div>
+            <button type="button" class="pm__sound" id="pmSound" aria-pressed="false">
+              <i class="bi bi-volume-mute-fill" id="pmSoundIcon" aria-hidden="true"></i>
+              <span id="pmSoundLabel">Turn on sound</span>
+            </button>
           </div>
-
         </div>
+
+        <aside class="pm__info">
+          <img class="pm__info-avatar" id="pmInfoAvatar" src="assets/img/president.jpg" alt="Dr. Gamini Pathirana">
+          <h3 class="pm__info-name" id="pmInfoName">Dr. Gamini Pathirana</h3>
+          <p class="pm__info-role" id="pmInfoRole">
+            President, National Stroke Association of Sri Lanka · Chair, APSC 2026
+          </p>
+          <p class="pm__info-text" id="pmInfoText"></p>
+
+          <a class="pm__info-link" id="pmInfoLink" href="#" data-bs-toggle="modal" data-bs-target="#presidentModal">
+            Read the full message
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </a>
+        </aside>
+
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
 
 
@@ -1453,6 +1441,15 @@
           <!-- Update items: each row is a link (arrow leads to relevant page) -->
           <div class="whats-new-list" id="whatsNewList">
 
+            <!-- 15/08/2026 - Detailed Program Available -->
+            <a class="whats-new-link" href="program.html" rel="noopener">
+              <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+              <span class="whats-new-link__text">
+                15/08/2026 - Detailed Program Available
+                <span class="whats-new-link__meta">View details on the Program page</span>
+              </span>
+            </a>
+
             <!-- 03/07/2026 - Tentative Scientific Program -->
             <a class="whats-new-link" href="abstract-guidelines.html" rel="noopener">
               <span class="whats-new-link__arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
@@ -1532,169 +1529,309 @@
 
 
   <!-- President video modal controller -->
-  <script>
-    (() => {
+ <script>
+  (() => {
+    "use strict";
 
-      const modalElement = document.getElementById('presidentVideoModal');
-      const player = document.getElementById('presidentVideoPlayer');
-      const embed = document.getElementById('presidentVideoEmbed');
-      const modalTitle = document.getElementById('presidentVideoModalLabel');
-      const speaker = document.getElementById('presidentVideoSpeaker');
-      const errorMessage = document.getElementById('presidentVideoError');
+    const root = document.getElementById("pmSection");
+    if (!root) return;
 
-      if (!modalElement || !player || !embed || !modalTitle || !speaker || !errorMessage) return;
+    const chips = Array.from(root.querySelectorAll(".pm__chip"));
+    if (!chips.length) return;
 
+    const stage = root.querySelector("#pmPlayer");
+    const frame = root.querySelector(".pm__frame");
+    const poster = root.querySelector("#pmPoster");
+    const playBtn = root.querySelector("#pmPlay");
+    const playLabel = root.querySelector("#pmPlayLabel");
+    const soundBtn = root.querySelector("#pmSound");
+    const soundIcon = root.querySelector("#pmSoundIcon");
+    const soundLabel = root.querySelector("#pmSoundLabel");
+    const statusText = root.querySelector("#pmStatusText");
+    const panel = root.querySelector("#pmPanel");
 
-      let activeTrigger = null;
+    const info = {
+      avatar: root.querySelector("#pmInfoAvatar"),
+      name: root.querySelector("#pmInfoName"),
+      role: root.querySelector("#pmInfoRole"),
+      text: root.querySelector("#pmInfoText"),
+      link: root.querySelector("#pmInfoLink")
+    };
 
+    let index = 0;
+    let player = null;
+    let apiPromise = null;
+    let started = false;
+    let wantsSound = false;
+    let ended = false;
 
-      const resetPlayer = () => {
+    /* ---------- environment checks ----------
+       Muted autoplay is allowed by browsers; sound-on autoplay is not,
+       and would be hostile anyway. We also skip autoplay when the user
+       asked for reduced motion or is on a metered/slow connection. */
+    const prefersReducedMotion =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        // Stop MP4 video
-        player.pause();
-        player.removeAttribute('src');
-        player.removeAttribute('poster');
-        player.load();
-        player.classList.remove('d-none');
+    const connection = navigator.connection || {};
+    const savesData = connection.saveData === true || /(^|-)2g$/.test(connection.effectiveType || "");
+    const canAutoplay = !prefersReducedMotion && !savesData && "IntersectionObserver" in window;
 
+    const speaker = (i) => chips[i].dataset;
 
-        // Stop YouTube iframe
-        embed.src = "";
-        embed.classList.add('d-none');
+    /* ---------- view updates ---------- */
 
-
-        errorMessage.classList.add('d-none');
-
+    function setPoster(videoId, fallbackPhoto) {
+      poster.onerror = () => {
+        poster.onerror = () => { poster.onerror = null; poster.src = fallbackPhoto; };
+        poster.src = "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
       };
+      poster.src = "https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg";
+    }
 
+    function renderInfo(i) {
+      const data = speaker(i);
 
-      modalElement.addEventListener('show.bs.modal', (event) => {
+      info.avatar.src = data.photo;
+      info.avatar.alt = data.name;
+      info.name.textContent = data.name;
+      info.role.textContent = data.role;
+      info.text.textContent = data.excerpt;
+      info.link.setAttribute("data-bs-target", data.modal);
 
-        activeTrigger = event.relatedTarget;
+      playLabel.textContent = "Play the message from " + data.name;
+      panel.setAttribute("aria-labelledby", chips[i].id);
+      setPoster(data.videoId, data.photo);
+    }
 
-        if (!activeTrigger) return;
+    function setStatus(message) {
+      statusText.textContent = message;
+    }
 
+    function syncSound() {
+      soundBtn.setAttribute("aria-pressed", String(wantsSound));
+      soundIcon.className = wantsSound ? "bi bi-volume-up-fill" : "bi bi-volume-mute-fill";
+      soundLabel.textContent = wantsSound ? "Mute" : "Turn on sound";
+      root.classList.toggle("pm--sound-on", wantsSound);
 
-        const videoType = activeTrigger.dataset.videoType || 'file';
-        const videoSrc = activeTrigger.dataset.videoSrc || '';
-        const videoPoster = activeTrigger.dataset.videoPoster || '';
+      if (started) {
+        setStatus(wantsSound ? "Playing with sound" : "Playing without sound");
+      }
+    }
 
+    /* ---------- speaker switching ---------- */
 
-        modalTitle.textContent =
-          activeTrigger.dataset.videoTitle || "President's Video Message";
+    function select(i, { focus = false } = {}) {
+      if (i === index) return;
+      index = i;
 
-
-        speaker.textContent =
-          activeTrigger.dataset.videoSpeaker || "";
-
-
-        resetPlayer();
-
-
-        if (!videoSrc) {
-
-          errorMessage.classList.remove('d-none');
-          return;
-
-        }
-
-
-        // YouTube video
-        if (videoType === "embed") {
-
-
-          player.classList.add('d-none');
-
-          embed.classList.remove('d-none');
-
-
-          embed.title = modalTitle.textContent;
-
-
-          // Add autoplay and privacy settings
-          embed.src =
-            `${videoSrc}?autoplay=1&rel=0&modestbranding=1`;
-
-          return;
-
-        }
-
-
-
-        // Local MP4 fallback
-        player.src = videoSrc;
-
-
-        if (videoPoster) {
-
-          player.poster = videoPoster;
-
-        }
-
-
-        player.load();
-
-
+      chips.forEach((chip, n) => {
+        const active = n === i;
+        chip.classList.toggle("is-active", active);
+        chip.setAttribute("aria-selected", String(active));
+        chip.tabIndex = active ? 0 : -1;
       });
 
+      if (focus) chips[i].focus();
 
+      renderInfo(i);
+      ended = false;
 
-      // Play local video only
-      modalElement.addEventListener('shown.bs.modal', () => {
+      if (player && player.loadVideoById) {
+        // Already playing — switch the video and keep the user's sound choice.
+        player.loadVideoById(speaker(i).videoId);
+        if (wantsSound) player.unMute(); else player.mute();
+      } else {
+        stage.classList.remove("is-playing");
+      }
+    }
 
+    chips.forEach((chip, i) => {
+      chip.addEventListener("click", () => select(i));
 
-        if (
-          !player.classList.contains('d-none') &&
-          player.getAttribute('src')
-        ) {
+      chip.addEventListener("keydown", (event) => {
+        const keys = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 };
 
+        if (keys[event.key]) {
+          event.preventDefault();
+          select((i + keys[event.key] + chips.length) % chips.length, { focus: true });
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          select(0, { focus: true });
+        } else if (event.key === "End") {
+          event.preventDefault();
+          select(chips.length - 1, { focus: true });
+        }
+      });
+    });
 
-          const playPromise = player.play();
+    /* ---------- YouTube ---------- */
 
+    function loadApi() {
+      if (window.YT && window.YT.Player) return Promise.resolve();
+      if (apiPromise) return apiPromise;
 
-          if (playPromise) {
+      apiPromise = new Promise((resolve, reject) => {
+        const previous = window.onYouTubeIframeAPIReady;
 
-            playPromise.catch(() => { });
+        window.onYouTubeIframeAPIReady = function () {
+          if (typeof previous === "function") previous();
+          resolve();
+        };
 
+        const script = document.createElement("script");
+        script.src = "https://www.youtube.com/iframe_api";
+        script.async = true;
+        script.onerror = () => reject(new Error("YouTube API blocked"));
+        document.head.appendChild(script);
+      });
+
+      return apiPromise;
+    }
+
+    // If the API is blocked, fall back to a plain iframe with native controls.
+    function fallbackEmbed(withSound) {
+      const iframe = document.createElement("iframe");
+
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + speaker(index).videoId +
+        "?autoplay=1&mute=" + (withSound ? "0" : "1") + "&rel=0&playsinline=1&modestbranding=1";
+      iframe.title = "Video message from " + speaker(index).name;
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.allowFullscreen = true;
+
+      frame.textContent = "";
+      frame.appendChild(iframe);
+
+      stage.classList.add("is-playing");
+      root.classList.add("pm--native");
+      setStatus("Use the player controls for sound");
+    }
+
+    function start({ withSound = false } = {}) {
+      if (withSound) wantsSound = true;
+
+      if (started) {
+        if (player && player.playVideo) {
+          if (wantsSound && player.unMute) { player.unMute(); player.setVolume(100); }
+          player.playVideo();
+        }
+        syncSound();
+        return;
+      }
+
+      started = true;
+      stage.classList.add("is-loading");
+      setStatus("Loading…");
+
+      loadApi().then(() => {
+        const params = {
+          autoplay: 1,
+          mute: 1,
+          rel: 0,
+          playsinline: 1,
+          modestbranding: 1,
+          cc_load_policy: 1
+        };
+
+        if (location.protocol === "http:" || location.protocol === "https:") {
+          params.origin = location.origin;
+        }
+
+        player = new YT.Player("pmMount", {
+          videoId: speaker(index).videoId,
+          host: "https://www.youtube-nocookie.com",
+          playerVars: params,
+          events: {
+            onReady: (event) => {
+              if (wantsSound) { event.target.unMute(); event.target.setVolume(100); }
+              else event.target.mute();
+
+              event.target.playVideo();
+            },
+            onStateChange: (event) => {
+              const YTState = window.YT.PlayerState;
+
+              if (event.data === YTState.PLAYING) {
+                ended = false;
+                stage.classList.remove("is-loading");
+                stage.classList.add("is-playing");
+                syncSound();
+              }
+
+              if (event.data === YTState.ENDED) {
+                ended = true;
+                stage.classList.remove("is-playing");
+                playLabel.textContent = "Watch again";
+                setStatus("Message finished");
+              }
+            },
+            onError: () => {
+              stage.classList.remove("is-loading");
+              setStatus("This video is unavailable right now");
+            }
           }
-
-        }
-
-
+        });
+      }).catch(() => {
+        stage.classList.remove("is-loading");
+        fallbackEmbed(wantsSound);
       });
+    }
 
+    /* ---------- controls ---------- */
 
+    playBtn.addEventListener("click", () => {
+      // A deliberate press means they want to hear it.
+      if (ended && player && player.seekTo) {
+        ended = false;
+        wantsSound = true;
+        player.seekTo(0);
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+        syncSound();
+        return;
+      }
 
-      player.addEventListener('error', () => {
+      start({ withSound: true });
+    });
 
-        errorMessage.classList.remove('d-none');
+    soundBtn.addEventListener("click", () => {
+      wantsSound = !wantsSound;
 
-      });
+      if (!started) {
+        start({ withSound: wantsSound });
+        return;
+      }
 
+      if (player) {
+        if (wantsSound) { player.unMute(); player.setVolume(100); }
+        else player.mute();
+      }
 
+      syncSound();
+    });
 
-      // Stop everything when modal closes
-      modalElement.addEventListener('hidden.bs.modal', () => {
+    /* ---------- autoplay when the section is on screen ---------- */
 
+    if (canAutoplay) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            start();
+          } else if (player && player.pauseVideo) {
+            player.pauseVideo();
+          }
+        });
+      }, { threshold: 0.5 });
 
-        resetPlayer();
+      observer.observe(stage);
+    } else {
+      setStatus("Press play to watch");
+    }
 
-
-        if (activeTrigger) {
-
-          activeTrigger.focus();
-
-        }
-
-
-        activeTrigger = null;
-
-
-      });
-
-
-    })();
-  </script>
+    renderInfo(0);
+    syncSound();
+  })();
+</script>
 
 </body>
 
