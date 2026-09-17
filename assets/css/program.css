@@ -33,6 +33,7 @@
   --sc-rehab: #0F766E;
   --sc-meeting: #E2E8F0;
   --sc-header: #00B0F0;
+  --sc-gala: #6cabc2;
 
   /* Readable ink for the mid-tone backgrounds.
      White on #10B981 / #14B8A6 / #00B0F0 measured 2.5:1 — well
@@ -311,6 +312,11 @@
 
 .sp-dinner {
   background: var(--sc-dinner);
+  color: #fff;
+}
+
+.sp-gala {
+  background: var(--sc-gala);
   color: #fff;
 }
 
