@@ -2,7 +2,7 @@
   "use strict";
 
   // Change this when you publish major updates
-  const WHATS_NEW_VERSION = "2026-08-15";
+  const WHATS_NEW_VERSION = "2026-10-04";
   const STORAGE_KEY = "apsc_whatsnew_seen_version";
 
   const fab = document.getElementById("whatsNewFab");

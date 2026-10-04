@@ -3666,41 +3666,80 @@ section.dark-background,
 }
 
 /* =========================================================
-   FIX: Mobile burger menu panel is too small (pill shape)
-   Make the menu a proper full panel with scroll
+   FIX v2: Mobile burger menu - panel must grow with its content
+   REPLACES the old block that starts with
+   "FIX: Mobile burger menu panel is too small (pill shape)"
+
+   Why the old one failed:
+   .header uses backdrop-filter, which makes it the containing block
+   for every position:fixed child. top/bottom insets were therefore
+   measured against the ~70px header, collapsed, and only
+   min-height:240px was left. Expanding "Scientific Program" then
+   overflowed that 240px box.
+
+   What this does:
+   1. Removes the backdrop-filter from the header while the menu is open.
+   2. Sizes the overlay and panel with viewport units (not insets).
+   3. Uses "body.mobile-nav-active" so it beats the old rules even if
+      the old block is still in the file.
 ========================================================= */
 @media (max-width: 1199px) {
 
-  /* the container should cover viewport */
-  .mobile-nav-active .navmenu {
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: 9998 !important;
+  :root {
+    --mnav-top: 84px;   /* space for the logo bar - raise if "Home" is covered */
+    --mnav-gap: 14px;   /* side + bottom gap */
   }
 
-  /* the actual panel */
-  .mobile-nav-active .navmenu>ul {
+  /* 1. Stop the glass header trapping fixed children */
+  body.mobile-nav-active .header {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* lock the page behind the open menu */
+  body.mobile-nav-active {
+    overflow: hidden !important;
+  }
+
+  /* 2. Full-screen overlay */
+  body.mobile-nav-active .navmenu {
     position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    z-index: 9998 !important;
+    overflow: hidden !important;
+  }
 
-    /* give it real size */
-    top: 74px !important;
-    /* below header */
-    left: 14px !important;
-    right: 14px !important;
-    bottom: 14px !important;
+  /* 3. The panel: grows with content, scrolls only when it hits the screen edge */
+  body.mobile-nav-active .navmenu > ul {
+    position: absolute !important;
+    top: var(--mnav-top) !important;
+    left: var(--mnav-gap) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: calc(100vw - (var(--mnav-gap) * 2)) !important;
 
-    /* kill any “pill” sizing coming from template */
+    display: block !important;
     height: auto !important;
-    min-height: 240px !important;
-    max-height: none !important;
+    min-height: 0 !important;
+    max-height: calc(100vh - var(--mnav-top) - var(--mnav-gap)) !important;
+    max-height: calc(100dvh - var(--mnav-top) - var(--mnav-gap)) !important;
 
-    /* allow scrolling */
     overflow-y: auto !important;
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
 
-    /* make it look like a proper menu */
-    padding: 14px !important;
+    margin: 0 !important;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
     border-radius: 18px !important;
 
     background: rgba(15, 23, 42, 0.96) !important;
@@ -3708,47 +3747,56 @@ section.dark-background,
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
   }
 
-  /* make items readable and tappable */
-  .mobile-nav-active .navmenu a,
-  .mobile-nav-active .navmenu a:focus {
+  /* items never shrink or clip */
+  body.mobile-nav-active .navmenu li {
+    flex-shrink: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* readable, tappable links */
+  body.mobile-nav-active .navmenu a,
+  body.mobile-nav-active .navmenu a:focus {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-
     color: #fff !important;
     opacity: 1 !important;
-
     padding: 12px 12px !important;
+    margin: 2px 0 !important;
     border-radius: 12px !important;
     line-height: 1.2 !important;
     font-size: 16px !important;
     text-decoration: none !important;
+    white-space: normal !important;
   }
 
-  .mobile-nav-active .navmenu a:hover {
+  body.mobile-nav-active .navmenu a:hover {
     background: rgba(255, 255, 255, 0.08) !important;
   }
 
-  /* dropdown submenu should not be absolute on mobile */
-  .mobile-nav-active .navmenu .dropdown ul {
+  /* dropdown: normal flow, so it pushes the rest of the list down */
+  body.mobile-nav-active .navmenu .dropdown ul {
     position: static !important;
     display: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     margin: 8px 0 0 0 !important;
     padding: 8px !important;
-
     border-radius: 14px !important;
     background: rgba(255, 255, 255, 0.06) !important;
     border: 1px solid rgba(255, 255, 255, 0.10) !important;
-
     overflow: visible !important;
+    transition: none !important;
   }
 
-  /* when opened by JS */
-  .mobile-nav-active .navmenu .dropdown>.dropdown-active {
+  /* opened by main.js */
+  body.mobile-nav-active .navmenu .dropdown > .dropdown-active {
     display: block !important;
   }
 
-  /* keep the X button clickable */
+  /* keep the X button on top and clickable */
   .mobile-nav-toggle {
     position: fixed !important;
     top: 18px !important;

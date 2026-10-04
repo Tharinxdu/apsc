@@ -740,7 +740,7 @@
                 <td class="sp-symposium" data-session="d2-b-1100">Evolving Concepts: New Frontiers in Stroke Biology
                 </td>
                 <td class="sp-poster">Poster Viewing</td>
-                <td class="sp-symposium">Stroke Burden &amp; Systems of Care in the Asia-Pacific — Country Updates</td>
+                <td class="sp-symposium" data-session="d2-d-1100">Stroke Burden &amp; Systems of Care in the Asia-Pacific — Country Updates</td>
                 <td class="sp-workshop">Workshop 2<br />Endovascular Treatment</td>
               </tr>
               <tr>
@@ -754,12 +754,12 @@
                 <td class="sp-symposium" data-session="d2-b-1340">Beyond the Usual Suspects: Expanding the Stroke Risk
                   Factors</td>
                 <td class="sp-poster">Poster Viewing</td>
-                <td class="sp-symposium">VasCog Asia</td>
+                <td class="sp-symposium" data-session="d2-d-1340">VasCog Asia</td>
                 <td class="sp-freepaper" rowspan="2">Free Papers</td>
               </tr>
               <tr>
                 <td class="sp-time">15:20 – 16:50</td>
-                <td class="sp-debate">Debates</td>
+                <td class="sp-debate" data-session="d2-a-1520">Debates</td>
                 <td class="sp-unused" colspan="3"></td>
               </tr>
               <tr>
@@ -846,7 +846,7 @@
               </tr>
               <tr>
                 <td class="sp-time">15:20 – 16:30</td>
-                <td class="sp-debate">Stroke Quiz</td>
+                <td class="sp-debate" data-session="d3-a-1520">Stroke Quiz</td>
                 <td class="sp-unused" colspan="5"></td>
               </tr>
               <tr>
@@ -999,6 +999,9 @@
 
        Key convention: d<day>-<hall letter>-<start time, 24h, no colon>
 
+       Optional per-talk flag: noCount: true  -> the item is still shown in the
+       pop-up but is not included in the "N talks" count in the header.
+
        NOTE: assigned to window on purpose. A top-level `const` in a classic
        script lives in script scope and never becomes a window property, so
        `window.SESSION_DETAILS` would read as undefined in the script below.
@@ -1022,7 +1025,7 @@
           {
             heading: "APSO Oration",
             talks: [
-              { time: "09:50–10:30", title: "APSO Oration" }
+              { time: "09:50–10:30", title: "APSO Oration", speaker: "Shinichiro Uchiyama", noCount: true }
             ]
           }
         ]
@@ -1117,15 +1120,14 @@
         time: "13:40 – 17:00",
         groups: [{
           talks: [
-            { time: "13:40–13:45", title: "Welcome" },
-            { time: "13:45–14:00", title: "Overview of normal ultrasound and waveforms", speaker: "Aurama Chutinet (Thailand)" },
+            { time: "13:40–13:45", title: "Opening Remarks", speaker: "NV Ramani (Singapore)" },
+            { time: "13:45–14:00", title: "Overview of normal ultrasound and waveforms", speaker: "Aurauma Chutinet (Thailand)" },
             { time: "14:00–14:15", title: "Extracranial Triplex ultrasound", speaker: "Yohanna Kusuma (Indonesia)" },
             { time: "14:15–14:30", title: "Transcranial Doppler", speaker: "Arvind Sharma (India)" },
             { time: "14:30–14:45", title: "Transcranial Triplex ultrasound", speaker: "Hui Meng Chang (Singapore)" },
             { time: "14:45–15:00", title: "Brain parenchyma", speaker: "Fabienne Perren (Switzerland)" },
             { time: "15:00–15:15", title: "Right to Left shunting and emboli detection", speaker: "Yuji Ueno (Japan)" },
-            { time: "15:15–15:30", title: "Peripheral nerves", speaker: "Fabienne Perren (Switzerland)" },
-            { time: "15:30–17:00", title: "Hands on session" }
+            { time: "15:15–17:00", title: "Hands on session" }
           ]
         }]
       },
@@ -1141,7 +1143,7 @@
             { time: "09:10–09:30", title: "Stroke Genetics and Precision Medicine: From Risk Stratification to Personalized Treatment", speaker: "Hugh Markus (UK)" },
             { time: "09:30–09:50", title: "Precision Prevention in Stroke: Integrating Risk Factors, Genetics, and Population Strategies", speaker: "Valeria Caso (Italy)" },
             { time: "09:50–10:10", title: "From Recovery to Recognition: Rehabilitation, Outcomes, and the Role of WSO Stroke Center Certification", speaker: "Jeyaraj Pandian (India)" },
-            { time: "10:10–10:30", title: "Discussion" }
+            { time: "10:10–10:30", title: "Discussion", noCount: true }
           ]
         }]
       },
@@ -1170,6 +1172,17 @@
         }]
       },
 
+      "d2-a-1520": {
+        title: "Debates",
+        groups: [{
+          talks: [
+            { time: "15:20–15:50", title: "Do We Need More Aggressive Management of Asymptomatic Carotid Artery Disease?", speaker: "Yes – Adnan Qureshi (USA)  |  No – Richard Li (Hong Kong)" },
+            { time: "15:50–16:20", title: "Does CT scanning still have a place in modern day stroke management?", speaker: "Yes – PN Sylaja (India)  |  No – Henry Ma (Australia)" },
+            { time: "16:20–16:50", title: "Should we use pre-morbid mRS as gatekeeper to thrombectomy?", speaker: "Yes – Bernard Yan (Australia)  |  No – Mark Parsons (Australia)" }
+          ]
+        }]
+      },
+
       "d2-b-1100": {
         title: "Evolving Concepts: New Frontiers in Stroke Biology",
         groups: [{
@@ -1190,6 +1203,40 @@
             { time: "14:05–14:30", title: "When Infection Triggers Stroke: From Conventional to Emerging Pathogens", speaker: "Tissa Wijeratne (Australia)" },
             { time: "14:30–14:55", title: "Inflammation and Immune Mechanisms in Stroke: Biology to Bedside", speaker: "Yuji Ueno (Japan)" },
             { time: "14:55–15:20", title: "Climate, Environment and Stroke: The New Vascular Risk Landscape", speaker: "Mohammed Wasay (Pakistan)" }
+          ]
+        }]
+      },
+
+      "d2-d-1100": {
+        title: "Stroke Burden & Systems of Care in the Asia-Pacific — Country Updates",
+        groups: [{
+          talks: [
+            { time: "11:00–11:10", title: "Stroke Care in India: Country Update", speaker: "P. Vijaya" },
+            { time: "11:10–11:20", title: "Stroke Care in Pakistan: Country Update", speaker: "Abdul Malik" },
+            { time: "11:20–11:30", title: "Stroke Care in Bangladesh: Country Update", speaker: "Subash Kanti Dey" },
+            { time: "11:30–11:40", title: "Stroke Care in Vietnam: Country Update", speaker: "Ba-Thang Nguyen" },
+            { time: "11:40–11:50", title: "Stroke Care in Thailand: Country Update", speaker: "Aurauma Chutinet" },
+            { time: "11:50–12:00", title: "Stroke Care in Myanmar: Country Update", speaker: "Moe Moe Zaw" },
+            { time: "12:00–12:10", title: "Stroke Care in Philippines: Country Update", speaker: "Epifania Collantes" },
+            { time: "12:10–12:20", title: "Stroke Care in Indonesia: Country Update", speaker: "Mohammad Kurniawan" },
+            { time: "12:20–12:30", title: "Stroke Care in Laos: Country Update", speaker: "Saysavath Keosodsay" },
+            { time: "12:30–12:40", title: "Stroke Care in China: Country Update", speaker: "Yang Jie" }
+          ]
+        }]
+      },
+
+      "d2-d-1340": {
+        title: "VasCog Asia",
+        groups: [{
+          talks: [
+            { time: "13:40–13:45", title: "Welcome address", speaker: "Tsong-Hai Lee (Taiwan)" },
+            { time: "13:45–14:00", title: "Relationship Between Frontal Cerebral Perfusion on ASL-MRI and Cognitive Function in Patients with Post-Stroke Vascular Dementia", speaker: "Amelia Nur Vidyanti (Indonesia)" },
+            { time: "14:00–14:15", title: "Imaging of the Perivascular Spaces – Its Importance in Cognition", speaker: "Thanh G Phan (Australia)" },
+            { time: "14:15–14:30", title: "The changing landscape of vascular cognitive impairment", speaker: "Man Mohan Mehndiratta (India)" },
+            { time: "14:30–14:45", title: "Hemorrhagic MRI Phenotypes in CADASIL: Associations with Cognitive Impairment and Intracerebral Hemorrhage", speaker: "Jae-Sung Lim (Korea)" },
+            { time: "14:45–15:00", title: "Emerging therapies in vascular dementia", speaker: "Kay Sin Tan (Malaysia)" },
+            { time: "15:00–15:15", title: "Panel discussion", speaker: "Koji Abe (Japan), Vorapun Senanarong (Thailand)" },
+            { time: "15:15–15:20", title: "Closing Remarks", speaker: "Amelia Nur Vidyanti (Indonesia)" }
           ]
         }]
       },
@@ -1228,6 +1275,15 @@
             { time: "14:05–14:30", title: "EVT Beyond Large-Core Stroke: Who Benefits?", speaker: "Mark Parsons (Australia)" },
             { time: "14:30–14:55", title: "EVT Beyond 24 Hours: Imaging, Selection and Outcomes", speaker: "Bernard Yan (Australia)" },
             { time: "14:55–15:20", title: "Intra-arterial Thrombolysis Post EVT – The New Standard?", speaker: "Miao Zhongrong (China)" }
+          ]
+        }]
+      },
+
+      "d3-a-1520": {
+        title: "Stroke Quiz",
+        groups: [{
+          talks: [
+            { time: "15:20–16:30", title: "Stroke Quiz", speaker: "Saamir Mohideen (Sri Lanka)" }
           ]
         }]
       },
@@ -1730,9 +1786,12 @@
           });
         }
 
+        // Counts talks for the header; items flagged noCount are shown but not counted.
         function countTalks(session) {
           return (session.groups || []).reduce(function (total, group) {
-            return total + ((group.talks || []).length);
+            return total + (group.talks || []).filter(function (talk) {
+              return !talk.noCount;
+            }).length;
           }, 0);
         }
 
